@@ -15,9 +15,13 @@ section {
 .title {
   &__headline {
     font-family: 'Nerko_One';
+    color: styles.$primary-orange;
+    @include mx.font(100px, 400);
   }
 
   &__subline {
     font-family: 'Mulish';
+    color: #ffffff;
+    @include mx.font(24px, 600);
   }
 }
