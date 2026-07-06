@@ -13,15 +13,33 @@ section {
 }
 
 .title {
+  @include mx.d-flex($gap: 32px, $align-items: flex-start);
+
+  &__text-wrap {
+    @include mx.d-flex(
+      $flex-direction: column,
+      $align-items: flex-start,
+      $justify-content: flex-start,
+      $gap: 40px
+    );
+  }
+
   &__headline {
     font-family: 'Nerko_One';
     color: styles.$primary-orange;
     @include mx.font(100px, 400);
+    line-height: 89px;
   }
 
   &__subline {
     font-family: 'Mulish';
     color: #ffffff;
     @include mx.font(24px, 600);
+    line-height: 120%;
+  }
+
+  &__img {
+    width: 426px;
+    height: 420px;
   }
 }
