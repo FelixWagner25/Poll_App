@@ -1,6 +1,23 @@
 @use '../../styles.scss' as styles;
+@use '../../styles/abstract/mixins' as mx;
 
 section {
   height: 100vh;
-  background-color: styles.$primary-purple;
+  padding: 40px 110px;
+  @include mx.d-flex(
+    $flex-direction: column,
+    $justify-content: flex-start,
+    $align-items: flex-start,
+    $gap: 90px
+  );
+}
+
+.title {
+  &__headline {
+    font-family: 'Nerko_One';
+  }
+
+  &__subline {
+    font-family: 'Mulish';
+  }
 }

@@ -1,5 +1,6 @@
 @use './styles/abstract/main' as abs;
 @use './styles/base/main' as base;
+@use './styles/layout/main' as layout;
 
 * {
   box-sizing: border-box;
@@ -10,3 +11,11 @@ $primary-purple: #35273a;
 $primary-orange: #ffb770;
 $secondary-orange: #ffcfa1;
 $bg-card: #faf5fe;
+
+.bg-purple {
+  background-color: $primary-purple;
+}
+
+.bg-beige {
+  background-color: $bg-card;
+}
