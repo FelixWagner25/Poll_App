@@ -1,0 +1,24 @@
+@mixin d-flex(
+  $flex-direction: row,
+  $justify-content: center,
+  $align-items: center,
+  $gap: 8px
+) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  gap: $gap;
+}
+
+@mixin font(
+  $size: 16px,
+  $weight: 400,
+  $line-height: 100%,
+  $letter-spacing: 0%
+) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
