@@ -1,2 +1,12 @@
 @use './styles/abstract/main' as abs;
 @use './styles/base/main' as base;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+$primary-purple: #35273a;
+$primary-orange: #ffb770;
+$secondary-orange: #ffcfa1;
+$bg-card: #faf5fe;

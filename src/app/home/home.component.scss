@@ -1,0 +1,6 @@
+@use '../../styles.scss' as styles;
+
+section {
+  height: 100vh;
+  background-color: styles.$primary-purple;
+}
