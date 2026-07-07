@@ -7,6 +7,10 @@
   margin: 0;
 }
 
+body {
+  background-color: abs.$bg-default;
+}
+
 button {
   cursor: pointer;
   border: none;
@@ -57,5 +61,17 @@ h2 {
     color: #ffffff;
     font-size: 16px;
     background-color: abs.$primary-purple;
+  }
+}
+
+.status {
+  font-family: 'Mulish';
+  color: #221227;
+
+  &--secondary {
+    @include abs.font-size-wght(16px, 600);
+    background-color: abs.$secondary-orange;
+    padding: 3px 12px;
+    border-top-right-radius: 14px;
   }
 }

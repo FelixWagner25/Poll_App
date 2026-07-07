@@ -1,0 +1,34 @@
+@use '../../styles/abstract/colors' as col;
+@use '../../styles/abstract/mixins' as mx;
+
+section {
+  padding: 40px 54px;
+  border-radius: 5px;
+  border-top-right-radius: 100px;
+  background-color: col.$primary-purple;
+  width: min(100%, 1166px);
+  height: min(100vh, 844px);
+  @include mx.d-flex(
+    $flex-direction: column,
+    $align-items: flex-start,
+    $justify-content: flex-start,
+    $gap: 40px
+  );
+}
+
+h2 {
+  color: #ee9236;
+}
+
+.cancel-btn {
+  font-family: 'Nokora';
+  color: #fefdff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  @include mx.font-size-wght(16px, 700);
+  background-color: rgba(255, 183, 112, 0.3);
+
+  &:hover {
+    background-color: rgba(255, 183, 112, 0.6);
+  }
+}

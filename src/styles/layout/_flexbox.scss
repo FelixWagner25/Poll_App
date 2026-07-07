@@ -12,8 +12,24 @@
   justify-content: flex-start;
 }
 
+.align-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-row-space-between-flex-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
 .gap-8px {
   gap: 8px;
+}
+
+.gap-10px {
+  gap: 10px;
 }
 
 .gap-12px {
