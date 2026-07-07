@@ -1,4 +1,4 @@
-@use '../../styles.scss' as styles;
+@use '../../styles/abstract/colors' as col;
 @use '../../styles/abstract/mixins' as mx;
 
 section {
@@ -26,7 +26,7 @@ section {
 
   &__headline {
     font-family: 'Nerko_One';
-    color: styles.$primary-orange;
+    color: col.$primary-orange;
     @include mx.font(100px, 400);
     line-height: 89px;
   }
@@ -80,7 +80,7 @@ section {
     width: 321px;
     padding: 40px 40px 50px 40px;
     border-top-right-radius: 80px;
-    background-color: styles.$bg-card;
+    background-color: col.$bg-card;
     font-family: 'Mulish';
     @include mx.d-flex(
       $flex-direction: column,
@@ -90,15 +90,6 @@ section {
 
     &:hover {
       background-color: #f4e9fb;
-    }
-    > div {
-      width: 220px;
-      @include mx.d-flex(
-        $flex-direction: column,
-        $gap: 12px,
-        $align-items: flex-start,
-        $justify-content: flex-start
-      );
     }
 
     &--category {
@@ -111,8 +102,8 @@ section {
 
     &--days-left {
       @include mx.font(12px, 500);
-      color: styles.$primary-purple;
-      background-color: styles.$secondary-orange;
+      color: col.$primary-purple;
+      background-color: col.$secondary-orange;
       border-top-right-radius: 14px;
       padding: 3px 6px;
     }
@@ -141,20 +132,26 @@ section {
     background-color: #fee9d4;
     padding: 2px 10px;
     border-radius: 20px;
-    color: styles.$primary-purple;
+    color: col.$primary-purple;
 
     &:hover {
-      background-color: styles.$secondary-orange;
+      background-color: col.$secondary-orange;
     }
 
     &.active {
-      background-color: styles.$primary-orange;
+      background-color: col.$primary-orange;
     }
   }
 
   &__sort-dropdown {
     color: #ffffff;
     font-family: 'Mulish';
+  }
+
+  &__cards-wrap {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 16px;
   }
 
   &__card {
@@ -170,17 +167,28 @@ section {
       $justify-content: flex-start,
       $gap: 24px
     );
-    background-color: #d9d9d9;
-    opacity: 0.08;
+    background-color: rgba(217, 217, 217, 0.08);
 
     &:hover {
-      opacity: 0.16;
+      background-color: rgba(217, 217, 217, 0.16);
     }
 
     &--category {
-      color: styles.$secondary-orange;
-      @include mx.font(16px, 500);
-      opacity: 1;
+      color: col.$secondary-orange;
+      @include mx.font-size-wght(16px, 500);
+    }
+
+    &--title {
+      color: #ffffff;
+      @include mx.font-size-wght(24px, 700px);
+    }
+
+    &--days-left {
+      @include mx.font-size-wght(12px, 500);
+      color: col.$primary-purple;
+      background-color: col.$secondary-orange;
+      border-top-right-radius: 14px;
+      padding: 3px 6px;
     }
   }
 }

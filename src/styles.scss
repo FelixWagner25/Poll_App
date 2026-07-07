@@ -7,11 +7,6 @@
   margin: 0;
 }
 
-$primary-purple: #35273a;
-$primary-orange: #ffb770;
-$secondary-orange: #ffcfa1;
-$bg-card: #faf5fe;
-
 button {
   cursor: pointer;
   border: none;
@@ -20,15 +15,15 @@ button {
 h2 {
   font-family: 'Nerko_One';
   @include abs.font(72px, 400);
-  color: $primary-orange;
+  color: abs.$primary-orange;
 }
 
 .bg-purple {
-  background-color: $primary-purple;
+  background-color: abs.$primary-purple;
 }
 
 .bg-beige {
-  background-color: $bg-card;
+  background-color: abs.$bg-card;
 }
 
 .btn {
@@ -40,16 +35,16 @@ h2 {
 
   &--primary {
     color: #221227;
-    background-color: $secondary-orange;
+    background-color: abs.$secondary-orange;
 
     &:hover {
-      background-color: $primary-orange;
+      background-color: abs.$primary-orange;
     }
   }
 
   &--secondary {
     color: #ffffff;
-    background-color: $primary-orange;
+    background-color: abs.$primary-orange;
     opacity: 0.3;
     font-size: 16px;
 
@@ -61,6 +56,6 @@ h2 {
   &--tertiary {
     color: #ffffff;
     font-size: 16px;
-    background-color: $primary-purple;
+    background-color: abs.$primary-purple;
   }
 }
