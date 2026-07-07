@@ -2,7 +2,7 @@
 @use '../../styles/abstract/mixins' as mx;
 
 section {
-  height: 100vh;
+  min-height: 100vh;
   padding: 40px 110px;
   @include mx.d-flex(
     $flex-direction: column,
@@ -46,6 +46,7 @@ section {
 
 .surveys {
   width: 100%;
+  padding: 0 80px;
   @include mx.d-flex(
     $flex-direction: column,
     $justify-content: flex-start,
@@ -71,5 +72,45 @@ section {
 
   &__cards-wrap {
     @include mx.d-flex($gap: 32px);
+  }
+
+  &__card {
+    height: 310px;
+    width: 321px;
+    padding: 40px 40px 50px 40px;
+    border-top-right-radius: 80px;
+    background-color: styles.$bg-card;
+    font-family: 'Mulish';
+    @include mx.d-flex(
+      $flex-direction: column,
+      $justify-content: space-between,
+      $align-items: flex-start
+    );
+
+    > div {
+      width: 220px;
+      @include mx.d-flex(
+        $flex-direction: column,
+        $gap: 12px,
+        $align-items: flex-start,
+        $justify-content: flex-start
+      );
+    }
+
+    &--category {
+      @include mx.font(14px, 600);
+    }
+
+    &--title {
+      @include mx.font(26px, 700, $line-height: 120%);
+    }
+
+    &--days-left {
+      @include mx.font(12px, 500);
+      color: styles.$primary-purple;
+      background-color: styles.$secondary-orange;
+      border-top-right-radius: 14px;
+      padding: 3px 6px;
+    }
   }
 }
