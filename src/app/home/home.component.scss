@@ -27,14 +27,14 @@ section {
   &__headline {
     font-family: 'Nerko_One';
     color: col.$primary-orange;
-    @include mx.font(100px, 400);
+    @include mx.font-size-wght(100px, 400);
     line-height: 89px;
   }
 
   &__subline {
     font-family: 'Mulish';
     color: #ffffff;
-    @include mx.font(24px, 600);
+    @include mx.font-size-wght(24px, 600);
     line-height: 120%;
   }
 
@@ -67,7 +67,7 @@ section {
   &__ending-soon-text {
     color: #ffffff;
     font-family: 'Mulish';
-    @include mx.font(32px, 500);
+    @include mx.font-size-wght(32px, 500);
   }
 
   &__cards-wrap {
@@ -93,15 +93,16 @@ section {
     }
 
     &--category {
-      @include mx.font(14px, 600);
+      @include mx.font-size-wght(14px, 600);
     }
 
     &--title {
-      @include mx.font(26px, 700, $line-height: 120%);
+      @include mx.font-size-wght(26px, 700);
+      line-height: 120%;
     }
 
     &--days-left {
-      @include mx.font(12px, 500);
+      @include mx.font-size-wght(12px, 500);
       color: col.$primary-purple;
       background-color: col.$secondary-orange;
       border-top-right-radius: 14px;
