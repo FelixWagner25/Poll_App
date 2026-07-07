@@ -43,3 +43,33 @@ section {
     height: 420px;
   }
 }
+
+.surveys {
+  width: 100%;
+  @include mx.d-flex(
+    $flex-direction: column,
+    $justify-content: flex-start,
+    $align-items: center,
+    $gap: 32px
+  );
+
+  &__ending-soon-wrap {
+    width: 100%;
+    @include mx.d-flex(
+      $flex-direction: column,
+      $justify-content: flex-start,
+      $align-items: flex-start,
+      $gap: 32px
+    );
+  }
+
+  &__ending-soon-text {
+    color: #ffffff;
+    font-family: 'Mulish';
+    @include mx.font(32px, 500);
+  }
+
+  &__cards-wrap {
+    @include mx.d-flex($gap: 32px);
+  }
+}

@@ -17,6 +17,12 @@ button {
   border: none;
 }
 
+h2 {
+  font-family: 'Nerko_One';
+  @include abs.font(72px, 400);
+  color: $primary-orange;
+}
+
 .bg-purple {
   background-color: $primary-purple;
 }
