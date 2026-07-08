@@ -26,10 +26,19 @@
   align-items: center;
 }
 
+.align-row-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .align-row-space-between-flex-end {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+.gap-4px {
+  gap: 4px;
 }
 
 .gap-8px {
@@ -42,4 +51,8 @@
 
 .gap-12px {
   gap: 12px;
+}
+
+.gap-40px {
+  gap: 40px;
 }
