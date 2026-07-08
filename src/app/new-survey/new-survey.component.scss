@@ -32,3 +32,11 @@ h2 {
     background-color: rgba(255, 183, 112, 0.6);
   }
 }
+
+.form-input-wrap {
+  background-color: rgba(142, 112, 153, 0.16);
+  border-radius: 5px;
+  border-top-right-radius: 80px;
+  padding: 40px 32px;
+  @include mx.d-flex($flex-direction: column, $gap: 40px);
+}

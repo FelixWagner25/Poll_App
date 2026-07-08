@@ -1,4 +1,4 @@
-<div class="height-100vh align-row-center">
+<div class="height-100vh align-row-center-center">
   <section>
     <div class="align-row-space-between-flex-end width-100">
       <div class="align-col-left">
@@ -7,5 +7,44 @@
       </div>
       <button routerLink="" class="cancel-btn">Cancel</button>
     </div>
+    <form class="form">
+      <div class="form-input-wrap">
+        <div class="align-row-center">
+          <div class="head-input-wrap">
+            <div>
+              <label for="name">Survey name</label>
+              <div class="align-row-center">
+                <input type="text" id="name" />
+                <span class="btn-delete"></span>
+              </div>
+            </div>
+            <div class="align-row-center">
+              <div class="align-col-left">
+                <label for="date">Set end date (optional)</label>
+                <div class="align-row-center">
+                  <input type="date" id="date" />
+                  <span class="btn-delete"></span>
+                </div>
+              </div>
+              <div class="align-row">
+                <span>Choose category</span>
+                <span class="btn-dropdown"></span>
+              </div>
+            </div>
+          </div>
+          <div class="align-col-left">
+            <label for="description">Describing text (optional)</label>
+            <div class="align-row">
+              <input type="textarea" id="description" />
+              <span class="btn-delete"></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-questions"></div>
+      </div>
+      <div class="align-col-right width-100">
+        <button class="btn btn--primary" type="submit">Publish</button>
+      </div>
+    </form>
   </section>
 </div>
