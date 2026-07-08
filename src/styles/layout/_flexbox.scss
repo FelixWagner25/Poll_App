@@ -1,37 +1,36 @@
-.align-col-left {
+.fbox-col-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
 }
 
-.align-col-right {
+.fbox-col-right {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.align-row {
+.fbox-row {
   display: flex;
 }
 
-.align-row-center-center {
+.fbox-row-center-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.align-row-center {
+.fbox-row-center {
   display: flex;
   align-items: center;
 }
 
-.align-row-space-between {
+.fbox-row-space-between {
   display: flex;
   justify-content: space-between;
 }
 
-.align-row-space-between-flex-end {
+.fbox-row-space-between-flex-end {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
