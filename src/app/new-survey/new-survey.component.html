@@ -14,7 +14,7 @@
             <div class="fbox-col-left gap-4px">
               <label class="label" for="name">Survey name</label>
               <div class="fbox-row-center gap-8px">
-                <input class="input" type="text" id="name" />
+                <input class="input input__default" type="text" id="name" />
                 <span class="btn-delete"></span>
               </div>
             </div>
@@ -22,7 +22,7 @@
               <div class="fbox-col-left gap-4px">
                 <label class="label" for="date">Set end date (optional)</label>
                 <div class="fbox-row-center gap-8px">
-                  <input class="input input-date" id="date" />
+                  <input class="input input__date" id="date" />
                   <span class="btn-delete"></span>
                 </div>
               </div>
@@ -35,7 +35,7 @@
           <div class="fbox-col-left gap-4px">
             <label class="label" for="description">Describing text (optional)</label>
             <div class="fbox-row gap-8px">
-              <input class="input input-description" type="textarea" id="description" />
+              <input class="input input__default" type="textarea" id="description" />
               <span class="btn-delete"></span>
             </div>
           </div>
@@ -46,21 +46,44 @@
               <label for="quest-1" class="label">1. Question</label>
               <span class="btn-delete"></span>
             </div>
-            <div class="fbox-row-space-between">
+            <div class="fbox-row-space-between-center width-100">
               <span class="label">Answers</span>
-              <div class="fbox-row gap-4px">
-                <span class="checkbox">x</span>
+              <div class="checkbox">
+                <span class="checkbox__icon"></span>
                 <span class="checkbox__text">Allow multiple answers.</span>
               </div>
             </div>
-            <div>
-              <span>A</span>
-              <input class="input" type="text" />
+            <div class="fbox-row-center gap-8px">
+              <span class="answer-tag">A.</span>
+              <input class="input input__answer" type="text" />
               <span class="btn-delete"></span>
             </div>
-            <div>
-              <span>B</span>
-              <input class="input" type="text" />
+            <div class="fbox-row-center gap-8px">
+              <span class="answer-tag">B.</span>
+              <input class="input input__answer" type="text" />
+              <span class="btn-delete"></span>
+            </div>
+          </div>
+          <div class="fbox-col-left gap-8px">
+            <div class="fbox-row-space-between width-100">
+              <label for="quest-1" class="label">1. Question</label>
+              <span class="btn-delete"></span>
+            </div>
+            <div class="fbox-row-space-between-center width-100">
+              <span class="label">Answers</span>
+              <div class="checkbox">
+                <span class="checkbox__icon"></span>
+                <span class="checkbox__text">Allow multiple answers.</span>
+              </div>
+            </div>
+            <div class="fbox-row-center gap-8px">
+              <span class="answer-tag">A.</span>
+              <input class="input input__answer" type="text" />
+              <span class="btn-delete"></span>
+            </div>
+            <div class="fbox-row-center gap-8px">
+              <span class="answer-tag">B.</span>
+              <input class="input input__answer" type="text" />
               <span class="btn-delete"></span>
             </div>
           </div>

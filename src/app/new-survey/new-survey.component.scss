@@ -43,16 +43,42 @@ h2 {
   @include mx.d-flex($flex-direction: column, $gap: 40px);
 }
 
-.input-description {
-  height: 108px;
-}
-
-.input-date {
-  width: 222px;
-}
-
 .form-questions {
   display: grid;
   grid-template-columns: auto auto;
-  column-gap: calc(const.$form-input-width - const.$input_width - const.$input_width - 64px);
+  column-gap: calc(const.$form-input-width - const.$input-width - const.$input-width - 64px);
+}
+
+.answer-tag {
+  font-family: 'Mulish';
+  @include mx.font-size-wght(18px, 700);
+  color: col.$bg-default;
+}
+
+.checkbox {
+  @include mx.d-flex($justify-content: space-between, $gap: 8px, $align-items: flex-start);
+
+  &__icon {
+    content: url('../../../public/assets/img/checkbox_new_survery_default.svg');
+    width: 15px;
+    height: 15px;
+
+    &:hover {
+      cursor: pointer;
+      content: url('../../../public/assets/img/checkbox_hover.svg');
+    }
+
+    &.checked {
+      content: url('../../../public/assets/img/checkbox_checked.svg');
+      &:hover {
+        content: url('../../../public/assets/img/checkbox_hover.svg');
+      }
+    }
+  }
+
+  &__text {
+    font-family: 'Mulish';
+    @include mx.font-size-wght(12px, 400);
+    color: col.$bg-default;
+  }
 }

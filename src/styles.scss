@@ -80,13 +80,24 @@ h2 {
   padding: 7px 13px;
   border-radius: 5px;
   border-top-right-radius: 20px;
-  width: abs.$input_width;
   height: 37px;
   border: none;
   background-color: abs.$bg-default;
   color: abs.$primary-purple;
   font-family: 'Mulish';
   @include abs.font-size-wght(16px, 400);
+
+  &__default {
+    width: abs.$input-width;
+  }
+
+  &__answer {
+    width: abs.$input-answer-width;
+  }
+
+  &__date {
+    width: abs.$input-date-width;
+  }
 
   &:focus {
     outline: none;
