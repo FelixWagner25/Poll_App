@@ -1,5 +1,6 @@
 @use '../../styles/abstract/colors' as col;
 @use '../../styles/abstract/mixins' as mx;
+@use '../../styles/abstract/constants' as const;
 
 section {
   padding: 40px 54px;
@@ -35,22 +36,23 @@ h2 {
 
 .form-input-wrap {
   background-color: rgba(142, 112, 153, 0.16);
-  width: 1052px;
+  width: const.$form-input-width;
   border-radius: 5px;
   border-top-right-radius: 80px;
   padding: 40px 32px;
   @include mx.d-flex($flex-direction: column, $gap: 40px);
 }
 
-.input-name {
-  width: 429px;
-}
-
 .input-description {
-  width: 419px;
   height: 108px;
 }
 
 .input-date {
   width: 222px;
+}
+
+.form-questions {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: calc(const.$form-input-width - const.$input_width - const.$input_width - 64px);
 }

@@ -14,7 +14,7 @@
             <div class="fbox-col-left gap-4px">
               <label class="label" for="name">Survey name</label>
               <div class="fbox-row-center gap-8px">
-                <input class="input input-name" type="text" id="name" />
+                <input class="input" type="text" id="name" />
                 <span class="btn-delete"></span>
               </div>
             </div>
@@ -26,10 +26,10 @@
                   <span class="btn-delete"></span>
                 </div>
               </div>
-              <div class="dropdown-wrap">
+              <button class="btn-dropdown">
                 <span class="label">Choose category</span>
-                <span class="btn-dropdown"></span>
-              </div>
+                <span class="btn-dropdown-icon"></span>
+              </button>
             </div>
           </div>
           <div class="fbox-col-left gap-4px">
@@ -40,7 +40,31 @@
             </div>
           </div>
         </div>
-        <div class="form-questions"></div>
+        <div class="form-questions">
+          <div class="fbox-col-left gap-8px">
+            <div class="fbox-row-space-between width-100">
+              <label for="quest-1" class="label">1. Question</label>
+              <span class="btn-delete"></span>
+            </div>
+            <div class="fbox-row-space-between">
+              <span class="label">Answers</span>
+              <div class="fbox-row gap-4px">
+                <span class="checkbox">x</span>
+                <span class="checkbox__text">Allow multiple answers.</span>
+              </div>
+            </div>
+            <div>
+              <span>A</span>
+              <input class="input" type="text" />
+              <span class="btn-delete"></span>
+            </div>
+            <div>
+              <span>B</span>
+              <input class="input" type="text" />
+              <span class="btn-delete"></span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="fbox-col-right width-100">
         <button class="btn btn--primary" type="submit">Publish</button>
