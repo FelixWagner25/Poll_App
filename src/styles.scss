@@ -56,12 +56,6 @@ h2 {
       opacity: 0.6;
     }
   }
-
-  &--tertiary {
-    color: #ffffff;
-    font-size: 16px;
-    background-color: abs.$primary-purple;
-  }
 }
 
 .status {
@@ -155,4 +149,10 @@ h2 {
   content: url('../public/assets/img/arrow_drop_down_default.svg');
   width: 24px;
   height: 24px;
+}
+
+.small-note {
+  font-family: 'Mulish';
+  @include abs.font-size-wght(12px, 400);
+  color: abs.$bg-default;
 }
