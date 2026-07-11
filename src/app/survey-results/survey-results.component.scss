@@ -1,0 +1,43 @@
+@use '../../styles/abstract/colors' as col;
+@use '../../styles/abstract/mixins' as mx;
+@use '../../styles/abstract/constants' as const;
+
+section {
+  width: min(100%, 1218px);
+  padding: 40px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+}
+
+.survey {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  background-color: rgba(142, 112, 153, 0.1);
+  border-top-right-radius: 160px;
+  padding: 40px;
+
+  &__date-category-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__headline {
+    font-family: 'Nerko_One';
+    color: col.$h2-orange;
+    @include mx.font-size-wght(56px, 400);
+    line-height: 50px;
+  }
+
+  &__text {
+    color: col.$primary-purple;
+    @include mx.font-size-wght(16px, 500);
+    font-family: 'Mulish';
+  }
+}
