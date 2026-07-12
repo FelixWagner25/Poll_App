@@ -44,6 +44,47 @@ section {
 
 .survey-questions-wrap {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% 50%;
   gap: 24px;
+}
+
+.survey__question {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 4px;
+  font-family: 'Mulish';
+  color: col.$primary-purple;
+
+  &--headline {
+    @include mx.font-size-wght(18px, 700);
+  }
+
+  &--subline {
+    @include mx.font-size-wght(12px, 400);
+  }
+}
+
+.survey__answer {
+  padding-left: 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  font-family: 'Mulish';
+
+  &--checkbox {
+    content: url('../../../public/assets/img/checkbox_default.svg');
+    padding-top: 3px;
+    padding-right: 8px;
+  }
+
+  &--selector {
+    @include mx.font-size-wght(16px, 700);
+  }
+
+  &--text {
+    @include mx.font-size-wght(16px, 400);
+  }
 }
