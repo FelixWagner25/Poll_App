@@ -88,3 +88,48 @@ section {
     @include mx.font-size-wght(16px, 400);
   }
 }
+
+.results {
+  &__answer {
+    font-family: 'Mulish';
+    position: relative;
+    width: 100%;
+
+    &--selector {
+      @include mx.font-size-wght(12px, 700);
+      color: col.$primary-purple;
+      position: absolute;
+      left: 0;
+    }
+
+    &--number {
+      @include mx.font-size-wght(12px, 800);
+      color: #d79451;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__progress-bar {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 14px;
+    position: relative;
+
+    &--bg {
+      background-color: #ededed;
+      width: 255px;
+      position: absolute;
+      left: 16px;
+    }
+
+    &--progress {
+      background-color: col.$primary-orange;
+      width: 97px;
+      position: absolute;
+      top: 0;
+      left: 16px;
+    }
+  }
+}
