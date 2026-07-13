@@ -146,8 +146,9 @@ section {
   }
 
   &__sort-dropdown {
-    color: #ffffff;
+    color: col.$bg-default;
     font-family: 'Mulish';
+    @include mx.font-size-wght(18px, 700);
   }
 
   &__cards-wrap {

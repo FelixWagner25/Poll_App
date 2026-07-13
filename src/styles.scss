@@ -167,6 +167,24 @@ h2 {
   height: 24px;
 }
 
+.btn-dropdown-categories {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  width: 100%;
+  padding: 8px 4px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+  color: abs.$primary-purple;
+  font-family: 'Mulish';
+  @include abs.font-size-wght(14px, 400);
+  letter-spacing: 2%;
+  background-color: abs.$bg-default;
+}
+
 .small-note {
   font-family: 'Mulish';
   @include abs.font-size-wght(12px, 400);
