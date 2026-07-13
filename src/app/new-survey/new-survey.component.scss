@@ -21,16 +21,31 @@ h2 {
   color: #ee9236;
 }
 
-.cancel-btn {
+.form-action-btn {
   font-family: 'Nokora';
   color: #fefdff;
   padding: 8px 12px;
   border-radius: 10px;
   @include mx.font-size-wght(16px, 700);
   background-color: rgba(255, 183, 112, 0.3);
+  display: flex;
+  gap: 12px;
+  align-items: center;
 
   &:hover {
     background-color: rgba(255, 183, 112, 0.6);
+  }
+
+  &__close-icon {
+    width: 13px;
+    height: 13px;
+    content: url('../../../public/assets/img/close.svg');
+  }
+
+  &__circle-icon {
+    width: 24px;
+    height: 24px;
+    content: url('../../../public/assets/img/add_circle_white.svg');
   }
 }
 

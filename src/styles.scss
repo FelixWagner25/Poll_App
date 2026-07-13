@@ -90,7 +90,6 @@ h2 {
   padding: 7px 13px;
   border-radius: 5px;
   border-top-right-radius: 20px;
-  height: 37px;
   border: none;
   background-color: abs.$bg-default;
   color: abs.$primary-purple;
@@ -99,20 +98,35 @@ h2 {
 
   &__default {
     width: abs.$input-width;
+    height: 37px;
+    &:focus {
+      @include abs.font-size-wght(18px, 500);
+    }
   }
 
   &__answer {
     width: abs.$input-answer-width;
+    height: 37px;
+    &:focus {
+      @include abs.font-size-wght(18px, 500);
+    }
   }
 
   &__date {
     width: abs.$input-date-width;
+    height: 37px;
+    &:focus {
+      @include abs.font-size-wght(18px, 500);
+    }
+  }
+
+  &__textarea {
+    width: abs.$input-width;
   }
 
   &:focus {
     outline: none;
     background-color: #fee9d4;
-    @include abs.font-size-wght(18px, 500);
   }
 }
 
@@ -178,11 +192,21 @@ h2 {
   flex-direction: column;
   justify-content: flex-start;
   gap: 4px;
-  color: abs.$primary-purple;
-  font-family: 'Mulish';
-  @include abs.font-size-wght(14px, 400);
-  letter-spacing: 2%;
   background-color: abs.$bg-default;
+
+  &__text {
+    padding: 4px;
+    border-radius: 6px;
+    color: abs.$primary-purple;
+    font-family: 'Mulish';
+    @include abs.font-size-wght(14px, 400);
+    letter-spacing: 2%;
+
+    &:hover {
+      background-color: #f4e9fb;
+      cursor: pointer;
+    }
+  }
 }
 
 .small-note {
