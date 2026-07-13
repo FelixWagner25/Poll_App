@@ -14,6 +14,9 @@ section {
 .logo {
   width: 120px;
   height: 44px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .survey {
@@ -25,6 +28,7 @@ section {
   background-color: rgba(142, 112, 153, 0.1);
   border-top-right-radius: 160px;
   padding: 40px;
+  min-width: 702px;
 
   &__date-category-wrap {
     display: flex;
@@ -48,8 +52,9 @@ section {
 
 .survey-questions-wrap {
   display: grid;
-  grid-template-columns: 50% 50%;
-  gap: 24px;
+  grid-template-columns: auto auto;
+  column-gap: 40px;
+  row-gap: 24px;
 }
 
 .survey__question {
@@ -57,12 +62,14 @@ section {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 4px;
+  gap: 8px;
   font-family: 'Mulish';
   color: col.$primary-purple;
 
   &--headline {
     @include mx.font-size-wght(18px, 700);
+    display: flex;
+    gap: 4px;
   }
 
   &--subline {
@@ -77,11 +84,21 @@ section {
   justify-content: flex-start;
   gap: 8px;
   font-family: 'Mulish';
+  width: 100%;
+
+  &:hover {
+    background-color: col.$tertiary-orange;
+    cursor: pointer;
+  }
 
   &--checkbox {
     content: url('../../../public/assets/img/checkbox_default.svg');
     padding-top: 3px;
     padding-right: 8px;
+
+    &.checked {
+      content: url('../../../public/assets/img/checkbox_checked.svg');
+    }
   }
 
   &--selector {

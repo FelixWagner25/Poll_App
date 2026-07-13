@@ -36,7 +36,6 @@ h2 {
   @include abs.d-flex($gap: 10px);
   font-family: 'Nokora';
   @include abs.font(18px, 700);
-  line-height: 120%;
 
   &--primary {
     color: #221227;
