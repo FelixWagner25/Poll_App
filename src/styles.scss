@@ -37,9 +37,18 @@ h2 {
   font-family: 'Nokora';
   @include abs.font(18px, 700);
 
+  &:hover {
+    .btn__add-circle {
+      width: 20px;
+      height: 20px;
+      content: url('../public/assets/img/add_circle_purple.svg');
+    }
+  }
+
   &--primary {
     color: #221227;
     background-color: abs.$secondary-orange;
+    height: 48px;
 
     &:hover {
       background-color: abs.$primary-orange;
@@ -55,6 +64,13 @@ h2 {
     &:hover {
       opacity: 0.6;
     }
+  }
+
+  &__add-circle {
+    content: '';
+    width: 0;
+    height: 0;
+    transition: all 300ms ease-out;
   }
 }
 

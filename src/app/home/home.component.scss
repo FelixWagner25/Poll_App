@@ -90,6 +90,7 @@ section {
 
     &:hover {
       background-color: #f4e9fb;
+      cursor: pointer;
     }
 
     &--category {
@@ -153,6 +154,23 @@ section {
     display: grid;
     grid-template-columns: auto auto;
     gap: 16px;
+    max-height: 418px;
+    overflow-y: scroll;
+    padding-right: 16px; //for gap to scrollbar
+
+    scrollbar-color: col.$secondary-orange;
+    scrollbar-width: 10px;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 64px;
+      color: col.$secondary-orange;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: col.$secondary-orange;
+      border-radius: 10px;
+    }
   }
 
   &__card {
@@ -172,6 +190,7 @@ section {
 
     &:hover {
       background-color: rgba(217, 217, 217, 0.16);
+      cursor: pointer;
     }
 
     &--category {
