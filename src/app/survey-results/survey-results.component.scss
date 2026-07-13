@@ -48,6 +48,59 @@ section {
     @include mx.font-size-wght(16px, 500);
     font-family: 'Mulish';
   }
+
+  &__question {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    font-family: 'Mulish';
+    color: col.$primary-purple;
+
+    &--headline {
+      @include mx.font-size-wght(18px, 700);
+      display: flex;
+      gap: 4px;
+    }
+
+    &--subline {
+      @include mx.font-size-wght(12px, 400);
+    }
+  }
+
+  &__answer {
+    padding-left: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    font-family: 'Mulish';
+    width: 100%;
+
+    &:hover {
+      background-color: col.$tertiary-orange;
+      cursor: pointer;
+    }
+
+    &--checkbox {
+      content: url('../../../public/assets/img/checkbox_default.svg');
+      padding-top: 3px;
+      padding-right: 8px;
+
+      &.checked {
+        content: url('../../../public/assets/img/checkbox_checked.svg');
+      }
+    }
+
+    &--selector {
+      @include mx.font-size-wght(16px, 700);
+    }
+
+    &--text {
+      @include mx.font-size-wght(16px, 400);
+    }
+  }
 }
 
 .survey-questions-wrap {
@@ -55,59 +108,6 @@ section {
   grid-template-columns: auto auto;
   column-gap: 40px;
   row-gap: 24px;
-}
-
-.survey__question {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 8px;
-  font-family: 'Mulish';
-  color: col.$primary-purple;
-
-  &--headline {
-    @include mx.font-size-wght(18px, 700);
-    display: flex;
-    gap: 4px;
-  }
-
-  &--subline {
-    @include mx.font-size-wght(12px, 400);
-  }
-}
-
-.survey__answer {
-  padding-left: 8px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 8px;
-  font-family: 'Mulish';
-  width: 100%;
-
-  &:hover {
-    background-color: col.$tertiary-orange;
-    cursor: pointer;
-  }
-
-  &--checkbox {
-    content: url('../../../public/assets/img/checkbox_default.svg');
-    padding-top: 3px;
-    padding-right: 8px;
-
-    &.checked {
-      content: url('../../../public/assets/img/checkbox_checked.svg');
-    }
-  }
-
-  &--selector {
-    @include mx.font-size-wght(16px, 700);
-  }
-
-  &--text {
-    @include mx.font-size-wght(16px, 400);
-  }
 }
 
 .results {
