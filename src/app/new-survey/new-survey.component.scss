@@ -3,6 +3,7 @@
 @use '../../styles/abstract/constants' as const;
 
 section {
+  position: relative;
   padding: 40px 54px;
   border-radius: 5px;
   border-top-right-radius: 100px;
@@ -121,5 +122,42 @@ h2 {
   &__underline {
     border-bottom: 1px solid col.$bg-default;
     width: 100%;
+  }
+}
+
+.published-message {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  opacity: 0;
+  background-color: #fee9d4;
+  padding: 36px;
+  border-radius: 5px;
+  border-top-right-radius: 50px;
+  transform: translate(-50%, -50%);
+  transition: all 300ms ease-out;
+
+  &__text {
+    color: col.$primary-purple;
+    font-family: 'Nerko_One';
+    letter-spacing: 2%;
+    @include mx.font-size-wght(24px, 400);
+  }
+
+  &__icon {
+    width: 14px;
+    height: 14px;
+    content: url('../../../public/assets/img/close_purple.svg');
+
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+  }
+
+  &.show {
+    opacity: 1;
+    top: 50%;
+    left: 50%;
   }
 }

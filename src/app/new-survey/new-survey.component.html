@@ -10,7 +10,7 @@
         <span class="form-action-btn__close-icon"></span>
       </button>
     </div>
-    <form class="fbox-col-left gap-40px">
+    <form class="fbox-col-left gap-40px" (ngSubmit)="publishSurvey()">
       <div class="form-input-wrap">
         <div class="fbox-row width-100 gap-96px">
           <div class="fbox-col-left gap-8px">
@@ -157,8 +157,14 @@
         </div>
       </div>
       <div class="fbox-col-right width-100">
-        <button routerLink="/survey-results" class="btn btn--primary" type="submit">Publish</button>
+        <button class="btn btn--primary" type="submit">Publish</button>
       </div>
     </form>
+    <div class="published-message" [class.show]="published()">
+      <div class="fbox-row-space-between gap-64px">
+        <div class="published-message__text">Your survey is now published</div>
+        <div class="published-message__icon" (click)="publishSurvey()"></div>
+      </div>
+    </div>
   </section>
 </div>
