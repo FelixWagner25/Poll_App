@@ -1,170 +1,178 @@
-<div class="height-100vh fbox-row-center-center">
-  <section>
-    <div class="fbox-row-space-between-flex-end width-100">
-      <div class="fbox-col-left">
-        <p class="status status--secondary">Draft</p>
-        <h2>Create new survey</h2>
+<div class="p-relative height-100vh width-100">
+  <div class="height-100vh fbox-row-center-center section-wrap">
+    <section>
+      <div class="fbox-row-space-between-flex-end width-100">
+        <div class="fbox-col-left">
+          <p class="status status--secondary">Draft</p>
+          <h2>Create new survey</h2>
+        </div>
+        <button routerLink="" class="form-action-btn">
+          <span>Cancel</span>
+          <span class="form-action-btn__close-icon"></span>
+        </button>
       </div>
-      <button routerLink="" class="form-action-btn">
-        <span>Cancel</span>
-        <span class="form-action-btn__close-icon"></span>
-      </button>
-    </div>
-    <form class="fbox-col-left gap-40px" (ngSubmit)="publishSurvey()">
-      <div class="form-input-wrap">
-        <div class="fbox-row width-100 gap-96px">
-          <div class="fbox-col-left gap-8px">
-            <div class="fbox-col-left gap-4px">
-              <label class="label label--bold" for="name">Survey name</label>
-              <div class="fbox-row-center gap-8px">
-                <input class="input input__default" type="text" id="name" />
-                <span class="btn-delete"></span>
-              </div>
-            </div>
-            <div class="fbox-row-space-between width-100">
+      <form class="fbox-col-left gap-40px" (ngSubmit)="publishSurvey()">
+        <div class="form-input-wrap">
+          <div class="fbox-row width-100 gap-96px">
+            <div class="fbox-col-left gap-8px">
               <div class="fbox-col-left gap-4px">
-                <label class="label" for="date">
-                  <span class="label--bold">Set end date</span>
-                  <span class="label--normal"> (optional)</span>
-                </label>
+                <label class="label label--bold" for="name">Survey name</label>
                 <div class="fbox-row-center gap-8px">
-                  <input class="input input__date" id="date" />
+                  <input class="input input__default" type="text" id="name" />
                   <span class="btn-delete"></span>
                 </div>
               </div>
-              <div class="p-relative">
-                <button class="btn-dropdown" (click)="toggleDropdown()" type="button">
-                  <span class="label label--bold">Choose category</span>
-                  <span class="btn-dropdown-icon"></span>
-                </button>
-                <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
-                  <option class="btn-dropdown-categories__text">Team Activites</option>
-                  <option class="btn-dropdown-categories__text">Health & Wellness</option>
-                  <option class="btn-dropdown-categories__text">Gaming & Entertainment</option>
-                  <option class="btn-dropdown-categories__text">Education & Learning</option>
-                  <option class="btn-dropdown-categories__text">Lifestyle & Preferences</option>
-                  <option class="btn-dropdown-categories__text">Technology & Innovation</option>
+              <div class="fbox-row-space-between width-100">
+                <div class="fbox-col-left gap-4px">
+                  <label class="label" for="date">
+                    <span class="label--bold">Set end date</span>
+                    <span class="label--normal"> (optional)</span>
+                  </label>
+                  <div class="fbox-row-center gap-8px">
+                    <input class="input input__date" id="date" />
+                    <span class="btn-delete"></span>
+                  </div>
+                </div>
+                <div class="p-relative">
+                  <button class="btn-dropdown" (click)="toggleDropdown()" type="button">
+                    <span class="label label--bold">Choose category</span>
+                    <span class="btn-dropdown-icon"></span>
+                  </button>
+                  <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
+                    <option class="btn-dropdown-categories__text">Team Activites</option>
+                    <option class="btn-dropdown-categories__text">Health & Wellness</option>
+                    <option class="btn-dropdown-categories__text">Gaming & Entertainment</option>
+                    <option class="btn-dropdown-categories__text">Education & Learning</option>
+                    <option class="btn-dropdown-categories__text">Lifestyle & Preferences</option>
+                    <option class="btn-dropdown-categories__text">Technology & Innovation</option>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="fbox-col-left gap-4px">
+              <label class="label" for="description">
+                <span class="label--bold">Describing text</span>
+                <span class="label--normal"> (optional)</span>
+              </label>
+              <div class="fbox-row gap-8px">
+                <textarea
+                  class="input input__textarea"
+                  rows="8"
+                  id="description"
+                  rows="5"
+                ></textarea>
+                <span class="btn-delete"></span>
+              </div>
+            </div>
           </div>
-          <div class="fbox-col-left gap-4px">
-            <label class="label" for="description">
-              <span class="label--bold">Describing text</span>
-              <span class="label--normal"> (optional)</span>
-            </label>
-            <div class="fbox-row gap-8px">
-              <textarea class="input input__textarea" rows="8" id="description" rows="5"></textarea>
-              <span class="btn-delete"></span>
+          <div class="form-questions">
+            <div class="fbox-col-left gap-24px">
+              <div class="fbox-col-left gap-8px">
+                <div class="fbox-row-space-between width-100">
+                  <label for="quest-1" class="label label--bold">1. Question</label>
+                  <span class="btn-delete"></span>
+                </div>
+                <input type="text" class="input input__default" id="quest-1" />
+              </div>
+              <div>
+                <div class="fbox-col-left gap-16px">
+                  <div class="fbox-row-space-between-center width-100">
+                    <span class="label label--bold">Answers</span>
+                    <div class="checkbox">
+                      <span class="checkbox__icon"></span>
+                      <span class="checkbox__text">Allow multiple answers.</span>
+                    </div>
+                  </div>
+                  <div class="fbox-col-left gap-8px">
+                    <div class="fbox-row-center gap-8px">
+                      <span class="answer-tag">A.</span>
+                      <input class="input input__answer" type="text" />
+                      <span class="btn-delete"></span>
+                    </div>
+                    <div class="fbox-row-center gap-8px">
+                      <span class="answer-tag">B.</span>
+                      <input class="input input__answer" type="text" />
+                      <span class="btn-delete"></span>
+                    </div>
+                  </div>
+                  <div class="fbox-row-space-between-center width-100">
+                    <div class="btn-add-answer">
+                      <div class="fbox-col-left gap-4px">
+                        <div class="fbox-row-center gap-8px">
+                          <span>Add answer</span>
+                          <span class="btn-add-answer__icon"></span>
+                        </div>
+                        <div class="btn-add-answer__underline"></div>
+                      </div>
+                    </div>
+                    <span class="small-note">You can add up to 6 answer fields.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="fbox-col-left gap-24px">
+              <div class="fbox-col-left gap-8px">
+                <div class="fbox-row-space-between width-100">
+                  <label for="quest-1" class="label label--bold">1. Question</label>
+                  <span class="btn-delete"></span>
+                </div>
+                <input type="text" class="input input__default" id="quest-1" />
+              </div>
+              <div>
+                <div class="fbox-col-left gap-16px">
+                  <div class="fbox-row-space-between-center width-100">
+                    <span class="label label--bold">Answers</span>
+                    <div class="checkbox">
+                      <span class="checkbox__icon"></span>
+                      <span class="checkbox__text">Allow multiple answers.</span>
+                    </div>
+                  </div>
+                  <div class="fbox-col-left gap-8px">
+                    <div class="fbox-row-center gap-8px">
+                      <span class="answer-tag">A.</span>
+                      <input class="input input__answer" type="text" />
+                      <span class="btn-delete"></span>
+                    </div>
+                    <div class="fbox-row-center gap-8px">
+                      <span class="answer-tag">B.</span>
+                      <input class="input input__answer" type="text" />
+                      <span class="btn-delete"></span>
+                    </div>
+                  </div>
+                  <div class="fbox-row-space-between-center width-100">
+                    <div class="btn-add-answer">
+                      <div class="fbox-col-left gap-4px">
+                        <div class="fbox-row-center gap-8px">
+                          <span>Add answer</span>
+                          <span class="btn-add-answer__icon"></span>
+                        </div>
+                        <div class="btn-add-answer__underline"></div>
+                      </div>
+                    </div>
+                    <span class="small-note">You can add up to 6 answer fields.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button routerLink="" class="form-action-btn">
+                <span>Add next question</span>
+                <span class="form-action-btn__circle-icon"></span>
+              </button>
             </div>
           </div>
         </div>
-        <div class="form-questions">
-          <div class="fbox-col-left gap-24px">
-            <div class="fbox-col-left gap-8px">
-              <div class="fbox-row-space-between width-100">
-                <label for="quest-1" class="label label--bold">1. Question</label>
-                <span class="btn-delete"></span>
-              </div>
-              <input type="text" class="input input__default" id="quest-1" />
-            </div>
-            <div>
-              <div class="fbox-col-left gap-16px">
-                <div class="fbox-row-space-between-center width-100">
-                  <span class="label label--bold">Answers</span>
-                  <div class="checkbox">
-                    <span class="checkbox__icon"></span>
-                    <span class="checkbox__text">Allow multiple answers.</span>
-                  </div>
-                </div>
-                <div class="fbox-col-left gap-8px">
-                  <div class="fbox-row-center gap-8px">
-                    <span class="answer-tag">A.</span>
-                    <input class="input input__answer" type="text" />
-                    <span class="btn-delete"></span>
-                  </div>
-                  <div class="fbox-row-center gap-8px">
-                    <span class="answer-tag">B.</span>
-                    <input class="input input__answer" type="text" />
-                    <span class="btn-delete"></span>
-                  </div>
-                </div>
-                <div class="fbox-row-space-between-center width-100">
-                  <div class="btn-add-answer">
-                    <div class="fbox-col-left gap-4px">
-                      <div class="fbox-row-center gap-8px">
-                        <span>Add answer</span>
-                        <span class="btn-add-answer__icon"></span>
-                      </div>
-                      <div class="btn-add-answer__underline"></div>
-                    </div>
-                  </div>
-                  <span class="small-note">You can add up to 6 answer fields.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="fbox-col-left gap-24px">
-            <div class="fbox-col-left gap-8px">
-              <div class="fbox-row-space-between width-100">
-                <label for="quest-1" class="label label--bold">1. Question</label>
-                <span class="btn-delete"></span>
-              </div>
-              <input type="text" class="input input__default" id="quest-1" />
-            </div>
-            <div>
-              <div class="fbox-col-left gap-16px">
-                <div class="fbox-row-space-between-center width-100">
-                  <span class="label label--bold">Answers</span>
-                  <div class="checkbox">
-                    <span class="checkbox__icon"></span>
-                    <span class="checkbox__text">Allow multiple answers.</span>
-                  </div>
-                </div>
-                <div class="fbox-col-left gap-8px">
-                  <div class="fbox-row-center gap-8px">
-                    <span class="answer-tag">A.</span>
-                    <input class="input input__answer" type="text" />
-                    <span class="btn-delete"></span>
-                  </div>
-                  <div class="fbox-row-center gap-8px">
-                    <span class="answer-tag">B.</span>
-                    <input class="input input__answer" type="text" />
-                    <span class="btn-delete"></span>
-                  </div>
-                </div>
-                <div class="fbox-row-space-between-center width-100">
-                  <div class="btn-add-answer">
-                    <div class="fbox-col-left gap-4px">
-                      <div class="fbox-row-center gap-8px">
-                        <span>Add answer</span>
-                        <span class="btn-add-answer__icon"></span>
-                      </div>
-                      <div class="btn-add-answer__underline"></div>
-                    </div>
-                  </div>
-                  <span class="small-note">You can add up to 6 answer fields.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <button routerLink="" class="form-action-btn">
-              <span>Add next question</span>
-              <span class="form-action-btn__circle-icon"></span>
-            </button>
-          </div>
+        <div class="fbox-col-right width-100">
+          <button class="btn btn--primary" type="submit">Publish</button>
         </div>
-      </div>
-      <div class="fbox-col-right width-100">
-        <button class="btn btn--primary" type="submit">Publish</button>
-      </div>
-    </form>
-    <div class="published-message" [class.show]="published()">
-      <div class="fbox-row-space-between gap-64px">
-        <div class="published-message__text">Your survey is now published</div>
-        <div class="published-message__icon" (click)="publishSurvey()"></div>
-      </div>
+      </form>
+    </section>
+  </div>
+  <div class="published-message-bg" (click)="publishSurvey()" [class.show]="published()"></div>
+  <div class="published-message" [class.show]="published()">
+    <div class="fbox-row-space-between gap-64px">
+      <div class="published-message__text">Your survey is now published</div>
+      <div class="published-message__icon" (click)="publishSurvey()"></div>
     </div>
-  </section>
+  </div>
 </div>
