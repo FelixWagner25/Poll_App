@@ -33,11 +33,11 @@
                 </div>
               </div>
               <div class="p-relative">
-                <button class="btn-dropdown">
+                <button class="btn-dropdown" (click)="toggleDropdown()" type="button">
                   <span class="label label--bold">Choose category</span>
                   <span class="btn-dropdown-icon"></span>
                 </button>
-                <div class="btn-dropdown-categories">
+                <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
                   <option class="btn-dropdown-categories__text">Team Activites</option>
                   <option class="btn-dropdown-categories__text">Health & Wellness</option>
                   <option class="btn-dropdown-categories__text">Gaming & Entertainment</option>
@@ -157,7 +157,7 @@
         </div>
       </div>
       <div class="fbox-col-right width-100">
-        <button class="btn btn--primary" type="submit">Publish</button>
+        <button routerLink="/survey-results" class="btn btn--primary" type="submit">Publish</button>
       </div>
     </form>
   </section>

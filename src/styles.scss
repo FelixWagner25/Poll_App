@@ -200,6 +200,9 @@ h2 {
   justify-content: flex-start;
   gap: 4px;
   background-color: abs.$bg-default;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease-out;
 
   &__text {
     padding: 4px;
@@ -213,6 +216,11 @@ h2 {
       background-color: #f4e9fb;
       cursor: pointer;
     }
+  }
+
+  &.opened {
+    pointer-events: all;
+    opacity: 1;
   }
 }
 

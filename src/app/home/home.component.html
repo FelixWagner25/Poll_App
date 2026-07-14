@@ -57,11 +57,11 @@
               <button class="survey-list__filter-btn survey-list__filter-btn">Past survey</button>
             </div>
             <div class="p-relative">
-              <button class="btn-dropdown">
+              <button class="btn-dropdown" (click)="toggleDropdown()" type="button">
                 <span class="survey-list__sort-dropdown">Sort by categories</span>
                 <span class="btn-dropdown-icon"></span>
               </button>
-              <div class="btn-dropdown-categories">
+              <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
                 <option class="btn-dropdown-categories__text">Team Activites</option>
                 <option class="btn-dropdown-categories__text">Health & Wellness</option>
                 <option class="btn-dropdown-categories__text">Gaming & Entertainment</option>

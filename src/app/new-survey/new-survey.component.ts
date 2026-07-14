@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,4 +7,17 @@ import { RouterLink } from '@angular/router';
   templateUrl: './new-survey.component.html',
   styleUrl: './new-survey.component.scss',
 })
-export class NewSurveyComponent {}
+export class NewSurveyComponent {
+  dropdownOpened = signal<boolean>(false);
+
+  toggleDropdown() {
+    switch (this.dropdownOpened()) {
+      case true:
+        this.dropdownOpened.set(false);
+        break;
+      default:
+        this.dropdownOpened.set(true);
+        break;
+    }
+  }
+}
