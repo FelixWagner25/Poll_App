@@ -8,7 +8,7 @@ section {
   border-top-right-radius: 100px;
   background-color: col.$primary-purple;
   width: min(100%, 1166px);
-  height: min(100vh, 844px);
+  min-height: 844px;
   @include mx.d-flex(
     $flex-direction: column,
     $align-items: flex-start,
@@ -31,7 +31,6 @@ h2 {
   display: flex;
   gap: 12px;
   align-items: center;
-  width: auto;
 
   &:hover {
     background-color: rgba(255, 183, 112, 0.6);
@@ -56,14 +55,14 @@ h2 {
   border-radius: 5px;
   border-top-right-radius: 80px;
   padding: 40px 32px;
-  @include mx.d-flex($flex-direction: column, $gap: 40px);
+  @include mx.d-flex($flex-direction: column, $gap: 64px);
 }
 
 .form-questions {
   display: grid;
   grid-template-columns: auto auto;
-  column-gap: calc(const.$form-input-width - const.$input-width - const.$input-width - 64px);
-  row-gap: 16px;
+  row-gap: 24px;
+  column-gap: 96px;
 }
 
 .answer-tag {
