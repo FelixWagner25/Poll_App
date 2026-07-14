@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,8 +12,11 @@ export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
 
+  router = inject(Router);
+
   publishSurvey() {
     this.published.set(!this.published());
+    //this.router.navigate(['/survey-results']);
   }
 
   toggleDropdown() {

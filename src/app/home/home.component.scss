@@ -37,16 +37,79 @@ section {
     @include mx.font-size-wght(24px, 600);
     line-height: 120%;
   }
+}
 
-  &__img {
-    width: 426px;
+.title-img {
+  position: relative;
+
+  &:hover {
+    .title-img__checked {
+      right: 0;
+      bottom: 60px;
+    }
+
+    .title-img__question-bubble {
+      transform: scale(1.1);
+      left: 0;
+    }
+
+    .title-img__star {
+      bottom: 10px;
+      left: 20px;
+    }
+
+    .title-img__question-mark {
+      right: 40px;
+      transform: rotate(0) scale(0.8);
+    }
+  }
+
+  &__base {
+    position: relative;
+    z-index: 10;
+    width: 420px;
     height: 420px;
+  }
+
+  &__checked {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    z-index: 9;
+    transition: all 300ms ease-out;
+  }
+
+  &__question-bubble {
+    position: absolute;
+    left: 40px;
+    top: 100px;
+    z-index: 11;
+    transform: scale(0.6);
+    transition: all 300ms ease-out;
+  }
+
+  &__question-mark {
+    position: absolute;
+    z-index: 11;
+    right: 30px;
+    top: 0;
+    transform: rotate(20deg) scale(0.8);
+    transition: all 300ms ease-out;
+  }
+
+  &__star {
+    position: absolute;
+    left: 40px;
+    bottom: 20px;
+    z-index: 11;
+    transition: all 300ms ease-out;
+    transform: scale(0.8);
   }
 }
 
 .surveys {
   width: 100%;
-  padding: 0 80px;
+  padding-right: 40px;
   @include mx.d-flex(
     $flex-direction: column,
     $justify-content: flex-start,
