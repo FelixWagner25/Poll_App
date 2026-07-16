@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-survey',
@@ -13,6 +13,17 @@ export class NewSurveyComponent {
   published = signal<boolean>(false);
 
   router = inject(Router);
+
+  surveyForm = new FormGroup({
+    name: new FormControl('not assigned', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(3)],
+    }),
+    description: new FormControl('not assigned'),
+    date: new FormControl('99.99.9999'),
+    category: new FormControl('not assigned'),
+    questions: new FormControl([]),
+  });
 
   publishSurvey() {
     this.published.set(!this.published());
