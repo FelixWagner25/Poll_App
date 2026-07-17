@@ -15,12 +15,12 @@ export class NewSurveyComponent {
   router = inject(Router);
 
   surveyForm = new FormGroup({
-    name: new FormControl('not assigned', {
+    name: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3)],
     }),
-    description: new FormControl('not assigned'),
-    date: new FormControl('99.99.9999'),
+    description: new FormControl(''),
+    date: new FormControl('9999.12.31'),
     category: new FormControl('not assigned'),
     questions: new FormControl([]),
   });

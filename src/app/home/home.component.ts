@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SurveyService } from '../shared/services/survey.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,12 @@ import { RouterLink } from '@angular/router';
 })
 export class HomeComponent {
   dropdownOpened = signal<boolean>(false);
+
+  surveyService = inject(SurveyService);
+
+  constructor() {
+    this.surveyService.getAllSurveys();
+  }
 
   toggleDropdown() {
     switch (this.dropdownOpened()) {
