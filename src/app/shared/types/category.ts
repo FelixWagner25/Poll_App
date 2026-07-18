@@ -5,4 +5,4 @@ export type Category =
   | 'Education & Learning'
   | 'Lifestyle and Preferences'
   | 'Technonly & Innovation'
-  | 'not assigned';
+  | 'n/a';

@@ -4,6 +4,6 @@ export interface Survey {
   id: string;
   name: string;
   description: string;
+  endDate: string;
   category: Category;
-  questionIds: string[];
 }

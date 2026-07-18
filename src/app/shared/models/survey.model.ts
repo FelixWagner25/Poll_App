@@ -5,14 +5,23 @@ export class SurveyModel implements Survey {
   id: string;
   name: string;
   description: string;
+  endDate: string;
   category: Category;
-  questionIds: string[];
 
   constructor(data: Partial<Survey> = {}) {
     this.id = data.id ?? '0';
     this.name = data.name ?? '';
     this.description = data.description ?? '';
-    this.category = data.category ?? 'not assigned';
-    this.questionIds = data.questionIds ?? [];
+    this.endDate = data.endDate ?? '9999-12-31';
+    this.category = data.category ?? 'n/a';
+  }
+
+  getCleanAddJson() {
+    return {
+      name: this.name,
+      description: this.description,
+      endDate: this.endDate,
+      category: this.category,
+    };
   }
 }
