@@ -1,4 +1,4 @@
-import { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
+import { PostgrestError, RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
 
 export function createDBSubscriptionChannel(
   client: SupabaseClient,
@@ -17,4 +17,13 @@ export function createDBSubscriptionChannel(
 
 export function unsubscribeDBChannel(channel: RealtimeChannel, client: SupabaseClient): void {
   client.removeChannel(channel);
+}
+
+export function printPostgrestErrorMsg(error: PostgrestError): void {
+  console.error({
+    message: error.message,
+    details: error.details,
+    hint: error.hint,
+    code: error.code,
+  });
 }

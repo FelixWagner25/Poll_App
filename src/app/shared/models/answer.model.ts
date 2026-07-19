@@ -13,4 +13,12 @@ export class AnswerModel implements Answer {
     this.text = data.text ?? '';
     this.resultCount = data.resultCount ?? 0;
   }
+
+  getCleanAddJson() {
+    return {
+      selector: this.selector,
+      text: this.text,
+      resultCount: this.resultCount,
+    };
+  }
 }
