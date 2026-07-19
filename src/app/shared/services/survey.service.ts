@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
 import { Survey } from '../interfaces/survey';
 import { SurveyModel } from '../models/survey.model';
+import { createDBSubscriptionChannel, unsubscribeDBChannel } from '../utilities/utilities';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,31 @@ export class SurveyService {
   SUPABASE_URL = 'https://fkstlfwbnrkyxobmhzxe.supabase.co';
   supabase = createClient(this.SUPABASE_URL, this.SUPABASE_KEY);
 
+  surveyAllEventsChannel;
+
   private surveyList = signal<Survey[]>([]);
+
+  constructor() {
+    // this.surveyAllEventsChannel = this.supabase
+    //   .channel('custom-all-channel')
+    //   .on('postgres_changes', { event: '*', schema: 'public', table: 'surveys' }, (payload) => {
+    //     console.log('Change received!', payload);
+    //   })
+    //   .subscribe();
+
+    this.surveyAllEventsChannel = createDBSubscriptionChannel(
+      this.supabase,
+      'custom-all-channel',
+      '*',
+      'surveys',
+    );
+
+    this.getAllSurveys();
+  }
+
+  ngOnDestroy() {
+    unsubscribeDBChannel(this.surveyAllEventsChannel, this.supabase);
+  }
 
   async getAllSurveys() {
     let response = await this.supabase.from('surveys').select('*');

@@ -13,9 +13,7 @@ export class HomeComponent {
 
   surveyService = inject(SurveyService);
 
-  constructor() {
-    this.surveyService.getAllSurveys();
-  }
+  constructor() {}
 
   toggleDropdown() {
     switch (this.dropdownOpened()) {
