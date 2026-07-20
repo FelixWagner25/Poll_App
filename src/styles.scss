@@ -16,6 +16,10 @@ button {
   border: none;
 }
 
+.d-none {
+  display: none;
+}
+
 h2 {
   font-family: 'Nerko_One';
   @include abs.font(72px, 400);

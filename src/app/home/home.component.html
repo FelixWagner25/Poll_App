@@ -85,9 +85,10 @@
               </button>
               <div class="dropdown-selection">{{ selectedCategory }}</div>
               <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
+                <option ngValue="null" class="d-none"></option>
                 <option
                   class="btn-dropdown-categories__text"
-                  (click)="setSelectedCategory('Team Activites')"
+                  (click)="setSelectedCategory('Team Activities')"
                 >
                   Team Activites
                 </option>
@@ -111,13 +112,13 @@
                 </option>
                 <option
                   class="btn-dropdown-categories__text"
-                  (click)="setSelectedCategory('Lifestyle & Preferences')"
+                  (click)="setSelectedCategory('Lifestyle and Preferences')"
                 >
                   Lifestyle & Preferences
                 </option>
                 <option
                   class="btn-dropdown-categories__text"
-                  (click)="setSelectedCategory('Technology & Innovation')"
+                  (click)="setSelectedCategory('Technonly & Innovation')"
                 >
                   Technology & Innovation
                 </option>

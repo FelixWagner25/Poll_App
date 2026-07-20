@@ -10,7 +10,6 @@ import {
 import { SurveyModel } from '../shared/models/survey.model';
 import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
-import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-survey',
@@ -21,7 +20,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
-  selectedCategory: string = '';
+  selectedCategory: Category = null;
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -33,13 +32,14 @@ export class NewSurveyComponent {
     }),
     description: new FormControl('', { nonNullable: true }),
     endDate: new FormControl('', { nonNullable: true }),
-    category: new FormControl('n/a' as Category, { nonNullable: true }),
+    category: new FormControl(null, { validators: [Validators.required] }),
   });
 
   publishSurvey(): void {
     this.published.set(!this.published());
     let survey = new SurveyModel(this.surveyForm.value);
     this.surveyService.addSurvey(survey);
+
     //this.navigateToPublishedSurvey();
   }
 
@@ -51,7 +51,7 @@ export class NewSurveyComponent {
     this.dropdownOpened.update((value) => !value);
   }
 
-  setSelectedCategory(value: string): void {
+  setSelectedCategory(value: Category): void {
     this.selectedCategory = value;
     this.toggleDropdown();
   }

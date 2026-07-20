@@ -13,7 +13,7 @@ export class SurveyModel implements Survey {
     this.name = data.name ?? 'n/a';
     this.description = data.description ?? '';
     this.endDate = data.endDate ?? '9999-12-31';
-    this.category = data.category ?? 'n/a';
+    this.category = data.category ?? null;
   }
 
   getCleanAddJson() {
