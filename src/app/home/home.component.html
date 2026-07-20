@@ -79,7 +79,12 @@
               <button class="survey-list__filter-btn survey-list__filter-btn">Past survey</button>
             </div>
             <div class="p-relative">
-              <button class="btn-dropdown" (click)="toggleDropdown()" type="button">
+              <button
+                class="btn-dropdown"
+                (click)="toggleDropdown()"
+                [class.opened]="dropdownOpened()"
+                type="button"
+              >
                 <span class="survey-list__sort-dropdown">Sort by categories</span>
                 <span class="btn-dropdown-icon"></span>
               </button>

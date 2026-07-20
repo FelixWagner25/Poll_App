@@ -39,7 +39,12 @@
                   </div>
                 </div>
                 <div class="p-relative">
-                  <button class="btn-dropdown" (click)="toggleDropdown()" type="button">
+                  <button
+                    class="btn-dropdown"
+                    (click)="toggleDropdown()"
+                    [class.opened]="dropdownOpened()"
+                    type="button"
+                  >
                     <span class="label label--bold">Choose category</span>
                     <span class="btn-dropdown-icon"></span>
                   </button>
