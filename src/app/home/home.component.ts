@@ -10,19 +10,18 @@ import { SurveyService } from '../shared/services/survey.service';
 })
 export class HomeComponent {
   dropdownOpened = signal<boolean>(false);
+  selectedCategory: string = '';
 
   surveyService = inject(SurveyService);
 
   constructor() {}
 
   toggleDropdown() {
-    switch (this.dropdownOpened()) {
-      case true:
-        this.dropdownOpened.set(false);
-        break;
-      default:
-        this.dropdownOpened.set(true);
-        break;
-    }
+    this.dropdownOpened.update((value) => !value);
+  }
+
+  setSelectedCategory(value: string): void {
+    this.selectedCategory = value;
+    this.toggleDropdown();
   }
 }

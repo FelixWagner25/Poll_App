@@ -83,13 +83,44 @@
                 <span class="survey-list__sort-dropdown">Sort by categories</span>
                 <span class="btn-dropdown-icon"></span>
               </button>
+              <div class="dropdown-selection">{{ selectedCategory }}</div>
               <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
-                <option class="btn-dropdown-categories__text">Team Activites</option>
-                <option class="btn-dropdown-categories__text">Health & Wellness</option>
-                <option class="btn-dropdown-categories__text">Gaming & Entertainment</option>
-                <option class="btn-dropdown-categories__text">Education & Learning</option>
-                <option class="btn-dropdown-categories__text">Lifestyle & Preferences</option>
-                <option class="btn-dropdown-categories__text">Technology & Innovation</option>
+                <option
+                  class="btn-dropdown-categories__text"
+                  (click)="setSelectedCategory('Team Activites')"
+                >
+                  Team Activites
+                </option>
+                <option
+                  class="btn-dropdown-categories__text"
+                  (click)="setSelectedCategory('Health & Wellness')"
+                >
+                  Health & Wellness
+                </option>
+                <option
+                  class="btn-dropdown-categories__text"
+                  (click)="setSelectedCategory('Gaming & Entertainment')"
+                >
+                  Gaming & Entertainment
+                </option>
+                <option
+                  class="btn-dropdown-categories__text"
+                  (click)="setSelectedCategory('Education & Learning')"
+                >
+                  Education & Learning
+                </option>
+                <option
+                  class="btn-dropdown-categories__text"
+                  (click)="setSelectedCategory('Lifestyle & Preferences')"
+                >
+                  Lifestyle & Preferences
+                </option>
+                <option
+                  class="btn-dropdown-categories__text"
+                  (click)="setSelectedCategory('Technology & Innovation')"
+                >
+                  Technology & Innovation
+                </option>
               </div>
             </div>
           </div>
