@@ -112,13 +112,12 @@ section {
   padding-right: 40px;
   @include mx.d-flex(
     $flex-direction: column,
-    $justify-content: flex-start,
+    $justify-content: center,
     $align-items: center,
     $gap: 32px
   );
 
   &__ending-soon-wrap {
-    width: 100%;
     @include mx.d-flex(
       $flex-direction: column,
       $justify-content: flex-start,
@@ -135,7 +134,7 @@ section {
 
   &__cards-wrap {
     width: 100%;
-    @include mx.d-flex($justify-content: space-between);
+    @include mx.d-flex($justify-content: center, $gap: 32px);
   }
 
   &__card {
@@ -176,10 +175,9 @@ section {
 }
 
 .survey-list {
-  width: 100%;
   @include mx.d-flex(
     $flex-direction: column,
-    $justify-content: flex-start,
+    $justify-content: center,
     $align-items: flex-start,
     $gap: 40px
   );
