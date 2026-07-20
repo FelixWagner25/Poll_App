@@ -30,7 +30,10 @@ export class NewSurveyComponent {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3)],
     }),
-    description: new FormControl('', { nonNullable: true }),
+    description: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.maxLength(10)],
+    }),
     endDate: new FormControl('', {
       nonNullable: true,
       validators: [Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)],

@@ -26,6 +26,19 @@
                   />
                   <span class="btn-delete" (click)="deleteFormInput('name')"></span>
                 </div>
+                @if (
+                  surveyForm.controls.name.invalid &&
+                  (surveyForm.controls.name.dirty || surveyForm.controls.name.touched)
+                ) {
+                  <div class="error">
+                    @if (surveyForm.controls.name.hasError('required')) {
+                      <div>Name is required.</div>
+                    }
+                    @if (surveyForm.controls.name.hasError('minlength')) {
+                      <div>Name must have at least 3 characters.</div>
+                    }
+                  </div>
+                }
               </div>
               <div class="fbox-row-space-between width-100">
                 <div class="fbox-col-left gap-4px">
@@ -37,6 +50,16 @@
                     <input class="input input__date" id="end-date" formControlName="endDate" />
                     <span class="btn-delete" (click)="deleteFormInput('endDate')"></span>
                   </div>
+                  @if (
+                    surveyForm.controls.endDate.invalid &&
+                    (surveyForm.controls.endDate.dirty || surveyForm.controls.endDate.touched)
+                  ) {
+                    <div class="error">
+                      @if (surveyForm.controls.endDate.hasError('pattern')) {
+                        <div>Date must follow pattern: YYYY-MM-DD.</div>
+                      }
+                    </div>
+                  }
                 </div>
                 <div class="p-relative">
                   <button
@@ -48,6 +71,16 @@
                     <span class="label label--bold">Choose category</span>
                     <span class="btn-dropdown-icon"></span>
                   </button>
+                  @if (
+                    surveyForm.controls.category.invalid &&
+                    (surveyForm.controls.category.dirty || surveyForm.controls.category.touched)
+                  ) {
+                    <div class="error">
+                      @if (surveyForm.controls.category.hasError('required')) {
+                        <div>Category must be selected.</div>
+                      }
+                    </div>
+                  }
                   <div class="dropdown-selection">{{ selectedCategory }}</div>
                   <select formControlName="category" id="category" class="d-none"></select>
                   <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
@@ -113,6 +146,16 @@
                 ></textarea>
                 <span class="btn-delete" (click)="deleteFormInput('description')"></span>
               </div>
+              @if (
+                surveyForm.controls.description.invalid &&
+                (surveyForm.controls.description.dirty || surveyForm.controls.description.touched)
+              ) {
+                <div class="error">
+                  @if (surveyForm.controls.description.hasError('maxlength')) {
+                    <div>Description too long. 1200 characters are maximum.</div>
+                  }
+                </div>
+              }
             </div>
           </div>
           <div class="form-questions">

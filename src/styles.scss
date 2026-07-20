@@ -246,3 +246,9 @@ h2 {
   @include abs.font-size-wght(12px, 400);
   color: abs.$bg-default;
 }
+
+.error {
+  font-family: 'Mulish';
+  @include abs.font-size-wght(14px, 400);
+  color: red;
+}
