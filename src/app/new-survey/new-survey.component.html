@@ -24,7 +24,7 @@
                     id="name"
                     formControlName="name"
                   />
-                  <span class="btn-delete"></span>
+                  <span class="btn-delete" (click)="deleteFormInput('name')"></span>
                 </div>
               </div>
               <div class="fbox-row-space-between width-100">
@@ -35,7 +35,7 @@
                   </label>
                   <div class="fbox-row-center gap-8px">
                     <input class="input input__date" id="end-date" formControlName="endDate" />
-                    <span class="btn-delete"></span>
+                    <span class="btn-delete" (click)="deleteFormInput('endDate')"></span>
                   </div>
                 </div>
                 <div class="p-relative">
@@ -111,7 +111,7 @@
                   rows="5"
                   formControlName="description"
                 ></textarea>
-                <span class="btn-delete"></span>
+                <span class="btn-delete" (click)="deleteFormInput('description')"></span>
               </div>
             </div>
           </div>
