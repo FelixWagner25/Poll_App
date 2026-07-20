@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
+import { Category } from '../shared/types/category';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { SurveyService } from '../shared/services/survey.service';
 })
 export class HomeComponent {
   dropdownOpened = signal<boolean>(false);
-  selectedCategory: string = '';
+  selectedCategory: Category = null;
 
   surveyService = inject(SurveyService);
 
@@ -20,7 +21,7 @@ export class HomeComponent {
     this.dropdownOpened.update((value) => !value);
   }
 
-  setSelectedCategory(value: string): void {
+  setSelectedCategory(value: Category): void {
     this.selectedCategory = value;
     this.toggleDropdown();
   }

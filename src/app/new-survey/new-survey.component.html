@@ -47,22 +47,46 @@
                   <select formControlName="category" id="category" class="d-none"></select>
                   <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
                     <option ngValue="null" class="d-none"></option>
-                    <option class="btn-dropdown-categories__text" value="Team Activities">
+                    <option
+                      class="btn-dropdown-categories__text"
+                      value="Team Activities"
+                      (click)="setSelectedCategory('Team Activities')"
+                    >
                       Team Activites
                     </option>
-                    <option class="btn-dropdown-categories__text" value="Health & Wellness">
+                    <option
+                      class="btn-dropdown-categories__text"
+                      value="Health & Wellness"
+                      (click)="setSelectedCategory('Health & Wellness')"
+                    >
                       Health & Wellness
                     </option>
-                    <option class="btn-dropdown-categories__text" value="Gaming & Entertainment">
+                    <option
+                      class="btn-dropdown-categories__text"
+                      value="Gaming & Entertainment"
+                      (click)="setSelectedCategory('Gaming & Entertainment')"
+                    >
                       Gaming & Entertainment
                     </option>
-                    <option class="btn-dropdown-categories__text" value="Education & Learning">
+                    <option
+                      class="btn-dropdown-categories__text"
+                      value="Education & Learning"
+                      (click)="setSelectedCategory('Education & Learning')"
+                    >
                       Education & Learning
                     </option>
-                    <option class="btn-dropdown-categories__text" value="Lifestyle and Preferences">
+                    <option
+                      class="btn-dropdown-categories__text"
+                      value="Lifestyle and Preferences"
+                      (click)="setSelectedCategory('Lifestyle and Preferences')"
+                    >
                       Lifestyle & Preferences
                     </option>
-                    <option class="btn-dropdown-categories__text" value="Technonly & Innovation">
+                    <option
+                      class="btn-dropdown-categories__text"
+                      value="Technonly & Innovation"
+                      (click)="setSelectedCategory('Technonly & Innovation')"
+                    >
                       Technology & Innovation
                     </option>
                   </div>
