@@ -21,6 +21,7 @@ export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
   selectedCategory: Category = null;
+  multipleAnswers = signal<boolean>(false);
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -64,5 +65,9 @@ export class NewSurveyComponent {
 
   deleteFormInput(attribute: 'name' | 'description' | 'endDate') {
     this.surveyForm.controls[attribute].setValue('');
+  }
+
+  toggleCheckbox() {
+    this.multipleAnswers.update((value) => !value);
   }
 }

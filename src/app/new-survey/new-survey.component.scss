@@ -88,7 +88,7 @@ h2 {
     &.checked {
       content: url('../../../public/assets/img/checkbox_checked.svg');
       &:hover {
-        content: url('../../../public/assets/img/checkbox_hover.svg');
+        filter: brightness(110%);
       }
     }
   }
