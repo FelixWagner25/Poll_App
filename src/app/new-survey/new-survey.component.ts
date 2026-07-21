@@ -11,10 +11,11 @@ import { SurveyModel } from '../shared/models/survey.model';
 import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
 import { NewQuestionComponent } from '../new-question/new-question.component';
+import { NewAnswerComponent } from '../new-answer/new-answer.component';
 
 @Component({
   selector: 'app-new-survey',
-  imports: [RouterLink, FormsModule, ReactiveFormsModule, NewQuestionComponent],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, NewQuestionComponent, NewAnswerComponent],
   templateUrl: './new-survey.component.html',
   styleUrl: './new-survey.component.scss',
 })
@@ -24,6 +25,7 @@ export class NewSurveyComponent {
   selectedCategory: Category = null;
   multipleAnswers = signal<boolean>(false);
   additionalQuestionsIndices = signal<number[]>([]);
+  answerIndices = signal<number[]>([0, 1]);
 
   router = inject(Router);
   surveyService = inject(SurveyService);
