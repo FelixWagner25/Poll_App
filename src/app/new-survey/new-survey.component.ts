@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   FormControl,
@@ -25,7 +25,7 @@ export class NewSurveyComponent {
   selectedCategory: Category = null;
   multipleAnswers = signal<boolean>(false);
   additionalQuestionsIndices = signal<number[]>([]);
-  answerIndices = signal<number[]>([0, 1]);
+  additionalAnswerIndices = signal<number[]>([]);
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -82,5 +82,14 @@ export class NewSurveyComponent {
   addNextQuestion() {
     const currentIndex = this.additionalQuestionsIndices().length;
     this.additionalQuestionsIndices().push(currentIndex + 1);
+  }
+
+  addNextAnswer() {
+    if (this.additionalAnswerIndices().length >= 6) return;
+    this.additionalAnswerIndices().push(this.additionalAnswerIndices.length + 2);
+  }
+
+  deleteAnswer(index: number) {
+    this.additionalAnswerIndices().splice(index, 1);
   }
 }

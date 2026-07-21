@@ -1,5 +1,5 @@
 <div class="fbox-row-center gap-8px">
   <span class="answer-tag">{{ this.answerService.getSelectorByNumber(this.answerNumber()) }}.</span>
   <input class="input input__answer" type="text" />
-  <span class="btn-delete"></span>
+  <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
 </div>
