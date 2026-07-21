@@ -1,0 +1,30 @@
+@use '../abstract/mixins' as mx;
+@use '../abstract/colors' as col;
+
+.checkbox {
+  @include mx.d-flex($justify-content: space-between, $gap: 8px, $align-items: flex-start);
+
+  &__icon {
+    content: url('../../../public/assets/img/checkbox_new_survery_default.svg');
+    width: 15px;
+    height: 15px;
+
+    &:hover {
+      cursor: pointer;
+      content: url('../../../public/assets/img/checkbox_hover.svg');
+    }
+
+    &.checked {
+      content: url('../../../public/assets/img/checkbox_checked.svg');
+      &:hover {
+        filter: brightness(110%);
+      }
+    }
+  }
+
+  &__text {
+    font-family: 'Mulish';
+    @include mx.font-size-wght(12px, 400);
+    color: col.$bg-default;
+  }
+}

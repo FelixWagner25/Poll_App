@@ -1,6 +1,7 @@
 @use './styles/abstract/main' as abs;
 @use './styles/base/main' as base;
 @use './styles/layout/main' as layout;
+@use './styles/components/main' as comp;
 
 * {
   box-sizing: border-box;

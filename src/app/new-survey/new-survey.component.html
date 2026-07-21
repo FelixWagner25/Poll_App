@@ -207,52 +207,11 @@
                 </div>
               </div>
             </div>
-            <div class="fbox-col-left gap-24px">
-              <div class="fbox-col-left gap-8px">
-                <div class="fbox-row-space-between width-100">
-                  <label for="quest-1" class="label label--bold">1. Question</label>
-                  <span class="btn-delete"></span>
-                </div>
-                <input type="text" class="input input__default" id="quest-1" />
-              </div>
-              <div>
-                <div class="fbox-col-left gap-16px">
-                  <div class="fbox-row-space-between-center width-100">
-                    <span class="label label--bold">Answers</span>
-                    <div class="checkbox">
-                      <span class="checkbox__icon"></span>
-                      <span class="checkbox__text">Allow multiple answers.</span>
-                    </div>
-                  </div>
-                  <div class="fbox-col-left gap-8px">
-                    <div class="fbox-row-center gap-8px">
-                      <span class="answer-tag">A.</span>
-                      <input class="input input__answer" type="text" />
-                      <span class="btn-delete"></span>
-                    </div>
-                    <div class="fbox-row-center gap-8px">
-                      <span class="answer-tag">B.</span>
-                      <input class="input input__answer" type="text" />
-                      <span class="btn-delete"></span>
-                    </div>
-                  </div>
-                  <div class="fbox-row-space-between-center width-100">
-                    <div class="btn-add-answer">
-                      <div class="fbox-col-left gap-4px">
-                        <div class="fbox-row-center gap-8px">
-                          <span>Add answer</span>
-                          <span class="btn-add-answer__icon"></span>
-                        </div>
-                        <div class="btn-add-answer__underline"></div>
-                      </div>
-                    </div>
-                    <span class="small-note">You can add up to 6 answer fields.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            @for (item of additionalQuestionsIndices(); track $index) {
+              <app-new-question></app-new-question>
+            }
             <div>
-              <button routerLink="" class="form-action-btn">
+              <button class="form-action-btn" type="button" (click)="addNextQuestion()">
                 <span>Add next question</span>
                 <span class="form-action-btn__circle-icon"></span>
               </button>

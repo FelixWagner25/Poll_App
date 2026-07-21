@@ -1,0 +1,33 @@
+@use '../abstract/mixins' as mx;
+@use '../abstract/colors' as col;
+
+.answer-tag {
+  font-family: 'Mulish';
+  @include mx.font-size-wght(18px, 700);
+  color: col.$bg-default;
+}
+
+.btn-add-answer {
+  font-family: 'Nokora';
+  color: col.$bg-default;
+  font-size: 16px;
+  background-color: col.$primary-purple;
+  padding: 8px 12px;
+  width: 146px;
+
+  &:hover {
+    background-color: rgba(250, 245, 254, 0.2);
+    cursor: pointer;
+  }
+
+  &__icon {
+    content: url('../../../public/assets/img/add_circle.svg');
+    width: 16px;
+    height: 16px;
+  }
+
+  &__underline {
+    border-bottom: 1px solid col.$bg-default;
+    width: 100%;
+  }
+}

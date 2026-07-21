@@ -10,10 +10,11 @@ import {
 import { SurveyModel } from '../shared/models/survey.model';
 import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
+import { NewQuestionComponent } from '../new-question/new-question.component';
 
 @Component({
   selector: 'app-new-survey',
-  imports: [RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, NewQuestionComponent],
   templateUrl: './new-survey.component.html',
   styleUrl: './new-survey.component.scss',
 })
@@ -22,6 +23,7 @@ export class NewSurveyComponent {
   published = signal<boolean>(false);
   selectedCategory: Category = null;
   multipleAnswers = signal<boolean>(false);
+  additionalQuestionsIndices = signal<number[]>([]);
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -69,5 +71,10 @@ export class NewSurveyComponent {
 
   toggleCheckbox() {
     this.multipleAnswers.update((value) => !value);
+  }
+
+  addNextQuestion() {
+    const currentIndex = this.additionalQuestionsIndices().length;
+    this.additionalQuestionsIndices().push(currentIndex + 1);
   }
 }
