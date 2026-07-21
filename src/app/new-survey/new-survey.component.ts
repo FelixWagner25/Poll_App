@@ -42,6 +42,10 @@ export class NewSurveyComponent {
       validators: [Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)],
     }),
     category: new FormControl(null, { validators: [Validators.required] }),
+    firstQuestion: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
+    }),
   });
 
   publishSurvey(): void {
@@ -65,7 +69,7 @@ export class NewSurveyComponent {
     this.toggleDropdown();
   }
 
-  deleteFormInput(attribute: 'name' | 'description' | 'endDate') {
+  deleteFormInput(attribute: 'name' | 'description' | 'endDate' | 'firstQuestion') {
     this.surveyForm.controls[attribute].setValue('');
   }
 

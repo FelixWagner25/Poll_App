@@ -163,9 +163,26 @@
               <div class="fbox-col-left gap-8px">
                 <div class="fbox-row-space-between width-100">
                   <label for="quest-1" class="label label--bold">1. Question</label>
-                  <span class="btn-delete"></span>
+                  <span class="btn-delete" (click)="deleteFormInput('firstQuestion')"></span>
                 </div>
-                <input type="text" class="input input__default" id="quest-1" />
+                <input type="text" class="input input__default" formControlName="firstQuestion" />
+                @if (
+                  surveyForm.controls.firstQuestion.invalid &&
+                  (surveyForm.controls.firstQuestion.dirty ||
+                    surveyForm.controls.firstQuestion.touched)
+                ) {
+                  <div class="error">
+                    @if (surveyForm.controls.firstQuestion.hasError('required')) {
+                      <div>One question is mandatory.</div>
+                    }
+                    @if (surveyForm.controls.firstQuestion.hasError('maxlength')) {
+                      <div>Question too long. 1200 characters are maximum.</div>
+                    }
+                    @if (surveyForm.controls.firstQuestion.hasError('minlength')) {
+                      <div>Question too short. Three letters required.</div>
+                    }
+                  </div>
+                }
               </div>
               <div>
                 <div class="fbox-col-left gap-16px">
