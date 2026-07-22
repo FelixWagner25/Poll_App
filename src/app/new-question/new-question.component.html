@@ -26,9 +26,15 @@
           <input class="input input__answer" type="text" />
           <span class="btn-delete"></span>
         </div>
+        @for (item of additionalAnswerIndices(); track $index) {
+          <app-new-answer
+            (deleteAnswerEvent)="deleteAnswer($index)"
+            [answerNumber]="$index + 2"
+          ></app-new-answer>
+        }
       </div>
       <div class="fbox-row-space-between-center width-100">
-        <div class="btn-add-answer">
+        <div class="btn-add-answer" (click)="addNextAnswer()">
           <div class="fbox-col-left gap-4px">
             <div class="fbox-row-center gap-8px">
               <span>Add answer</span>
