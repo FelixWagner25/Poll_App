@@ -11,7 +11,11 @@
       <div class="fbox-row-space-between-center width-100">
         <span class="label label--bold">Answers</span>
         <div class="checkbox">
-          <span class="checkbox__icon"></span>
+          <span
+            class="checkbox__icon"
+            [class.checked]="multipleAnswers()"
+            (click)="toggleCheckbox()"
+          ></span>
           <span class="checkbox__text">Allow multiple answers.</span>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { NewAnswerComponent } from '../new-answer/new-answer.component';
 export class NewQuestionComponent {
   additionalQuestionIndices = signal<number[]>([]);
   additionalAnswerIndices = signal<number[]>([]);
+  multipleAnswers = signal<boolean>(false);
 
   addNextAnswer() {
     let nextIndex = this.additionalAnswerIndices().length;
@@ -19,5 +20,9 @@ export class NewQuestionComponent {
 
   deleteAnswer(index: number) {
     this.additionalAnswerIndices().splice(index, 1);
+  }
+
+  toggleCheckbox() {
+    this.multipleAnswers.update((value) => !value);
   }
 }
