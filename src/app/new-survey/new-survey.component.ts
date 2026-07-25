@@ -12,6 +12,7 @@ import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
 import { NewQuestionComponent } from '../new-question/new-question.component';
 import { NewAnswerComponent } from '../new-answer/new-answer.component';
+import { AnswerTransfer } from '../shared/interfaces/answer-transfer';
 
 @Component({
   selector: 'app-new-survey',
@@ -24,8 +25,8 @@ export class NewSurveyComponent {
   published = signal<boolean>(false);
   selectedCategory: Category = null;
   multipleAnswers = signal<boolean>(false);
-  additionalQuestionIndices = signal<number[]>([]);
-  additionalAnswerIndices = signal<number[]>([]);
+  addedQuestions = signal<number[]>([]);
+  addedAnswers = signal<AnswerTransfer[]>([]);
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -80,18 +81,27 @@ export class NewSurveyComponent {
   }
 
   addNextQuestion() {
-    let nextIndex = this.additionalQuestionIndices().length;
+    let nextIndex = this.addedQuestions().length;
     if (nextIndex >= 4) return;
-    this.additionalQuestionIndices.update((array) => [...array, nextIndex]);
+    this.addedQuestions.update((array) => [...array, nextIndex]);
   }
 
   addNextAnswer() {
-    let nextIndex = this.additionalAnswerIndices().length;
-    if (nextIndex >= 4) return;
-    this.additionalAnswerIndices.update((array) => [...array, nextIndex]);
+    const numberAddedAnswers = this.addedAnswers().length;
+    let nextIndex: number;
+    if (numberAddedAnswers == 0) {
+      nextIndex = 0;
+      this.addedAnswers.update(() => [{ internalId: 0, inputValue: '' }]);
+    } else {
+      nextIndex = this.addedAnswers()[numberAddedAnswers - 1].internalId + 1;
+      if (numberAddedAnswers >= 4) return;
+      this.addedAnswers.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
+    }
   }
 
-  deleteAnswer(index: number) {
-    this.additionalAnswerIndices().splice(index, 1);
+  deleteAnswer(internalId: number) {
+    let index = this.addedAnswers().findIndex((answer) => answer.internalId == internalId);
+    console.log(index);
+    this.addedAnswers().splice(index, 1);
   }
 }

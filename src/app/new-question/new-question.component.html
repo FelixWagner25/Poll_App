@@ -30,7 +30,7 @@
           <input class="input input__answer" type="text" />
           <span class="btn-delete"></span>
         </div>
-        @for (item of additionalAnswerIndices(); track $index) {
+        @for (item of addedAnswers(); track $index) {
           <app-new-answer
             (deleteAnswerEvent)="deleteAnswer($index)"
             [answerNumber]="$index + 2"

@@ -8,18 +8,18 @@ import { NewAnswerComponent } from '../new-answer/new-answer.component';
   styleUrl: './new-question.component.scss',
 })
 export class NewQuestionComponent {
-  additionalQuestionIndices = signal<number[]>([]);
-  additionalAnswerIndices = signal<number[]>([]);
+  addedQuestions = signal<number[]>([]);
+  addedAnswers = signal<number[]>([]);
   multipleAnswers = signal<boolean>(false);
 
   addNextAnswer() {
-    let nextIndex = this.additionalAnswerIndices().length;
+    let nextIndex = this.addedAnswers().length;
     if (nextIndex >= 4) return;
-    this.additionalAnswerIndices.update((array) => [...array, nextIndex]);
+    this.addedAnswers.update((array) => [...array, nextIndex]);
   }
 
   deleteAnswer(index: number) {
-    this.additionalAnswerIndices().splice(index, 1);
+    this.addedAnswers().splice(index, 1);
   }
 
   toggleCheckbox() {
