@@ -10,6 +10,8 @@ import { AnswerService } from '../shared/services/answer.service';
 export class NewAnswerComponent {
   answerNumber = input<number>(0);
   deleteAnswerEvent = output();
+  answerValue = input<string>('');
+  answerInputEvent = output<string>();
 
   answerService = inject(AnswerService);
 }

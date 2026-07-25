@@ -101,7 +101,19 @@ export class NewSurveyComponent {
 
   deleteAnswer(internalId: number) {
     let index = this.addedAnswers().findIndex((answer) => answer.internalId == internalId);
-    console.log(index);
     this.addedAnswers().splice(index, 1);
+  }
+
+  updateAnswerInputValue(internalId: number, updateValue: string) {
+    this.addedAnswers.update((answers) =>
+      answers.map((answer) =>
+        answer.internalId === internalId
+          ? {
+              internalId: internalId,
+              inputValue: updateValue,
+            }
+          : answer,
+      ),
+    );
   }
 }

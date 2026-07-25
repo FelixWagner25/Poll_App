@@ -1,5 +1,11 @@
 <div class="fbox-row-center gap-8px">
   <span class="answer-tag">{{ this.answerService.getSelectorByNumber(this.answerNumber()) }}.</span>
-  <input class="input input__answer" type="text" />
+  <input
+    #answerInput
+    class="input input__answer"
+    type="text"
+    [value]="answerValue()"
+    (input)="answerInputEvent.emit(answerInput.value)"
+  />
   <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
 </div>
