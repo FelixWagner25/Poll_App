@@ -25,8 +25,10 @@ export class NewSurveyComponent {
   published = signal<boolean>(false);
   selectedCategory: Category = null;
   multipleAnswersMandatoryQuestion = signal<boolean>(false);
-  addedQuestions = signal<number[]>([]);
+  addedQuestions = signal<AnswerTransfer[]>([]);
   addedAnswersMandatoryQuestion = signal<AnswerTransfer[]>([]);
+  indexLimitAddedQuestions = 5;
+  indexLimitAddedAnswers = 4;
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -81,9 +83,16 @@ export class NewSurveyComponent {
   }
 
   addNextQuestion() {
-    let nextIndex = this.addedQuestions().length;
-    if (nextIndex >= 4) return;
-    this.addedQuestions.update((array) => [...array, nextIndex]);
+    const numberAddedQuestions = this.addedQuestions().length;
+    let nextIndex: number;
+    if (numberAddedQuestions == 0) {
+      nextIndex = 0;
+      this.addedQuestions.update(() => [{ internalId: 0, inputValue: '' }]);
+    } else {
+      nextIndex = this.addedQuestions()[numberAddedQuestions - 1].internalId + 1;
+      if (numberAddedQuestions >= this.indexLimitAddedQuestions) return;
+      this.addedQuestions.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
+    }
   }
 
   addNextAnswer() {
@@ -96,7 +105,7 @@ export class NewSurveyComponent {
       nextIndex =
         this.addedAnswersMandatoryQuestion()[numberaddedAnswersMandatoryQuestion - 1].internalId +
         1;
-      if (numberaddedAnswersMandatoryQuestion >= 4) return;
+      if (numberaddedAnswersMandatoryQuestion >= this.indexLimitAddedAnswers) return;
       this.addedAnswersMandatoryQuestion.update((array) => [
         ...array,
         { internalId: nextIndex, inputValue: '' },
@@ -120,6 +129,24 @@ export class NewSurveyComponent {
               inputValue: updateValue,
             }
           : answer,
+      ),
+    );
+  }
+
+  deleteQuestion(internalId: number) {
+    let index = this.addedQuestions().findIndex((question) => question.internalId == internalId);
+    this.addedQuestions().splice(index, 1);
+  }
+
+  updateQuestionInputValue(internalId: number, updateValue: string) {
+    this.addedQuestions.update((questions) =>
+      questions.map((question) =>
+        question.internalId === internalId
+          ? {
+              internalId: internalId,
+              inputValue: updateValue,
+            }
+          : question,
       ),
     );
   }

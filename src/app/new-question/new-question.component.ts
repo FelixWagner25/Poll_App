@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input, output } from '@angular/core';
 import { NewAnswerComponent } from '../new-answer/new-answer.component';
 import { AnswerTransfer } from '../shared/interfaces/answer-transfer';
 
@@ -12,6 +12,11 @@ export class NewQuestionComponent {
   addedQuestions = signal<number[]>([]);
   addedAnswers = signal<AnswerTransfer[]>([]);
   multipleAnswers = signal<boolean>(false);
+  questionNumber = input<number>(0);
+  indexLimitAddedAnswers = 4;
+  deleteQuestionEvent = output();
+  questionInputEvent = output<string>();
+  questionInputValue = input<string>();
 
   addNextAnswer() {
     const numberAddedAnswers = this.addedAnswers().length;
@@ -21,7 +26,7 @@ export class NewQuestionComponent {
       this.addedAnswers.update(() => [{ internalId: 0, inputValue: '' }]);
     } else {
       nextIndex = this.addedAnswers()[numberAddedAnswers - 1].internalId + 1;
-      if (numberAddedAnswers >= 4) return;
+      if (numberAddedAnswers >= this.indexLimitAddedAnswers) return;
       this.addedAnswers.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
     }
   }
