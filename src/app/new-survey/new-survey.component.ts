@@ -24,9 +24,9 @@ export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
   selectedCategory: Category = null;
-  multipleAnswers = signal<boolean>(false);
+  multipleAnswersMandatoryQuestion = signal<boolean>(false);
   addedQuestions = signal<number[]>([]);
-  addedAnswers = signal<AnswerTransfer[]>([]);
+  addedAnswersMandatoryQuestion = signal<AnswerTransfer[]>([]);
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -77,7 +77,7 @@ export class NewSurveyComponent {
   }
 
   toggleCheckbox() {
-    this.multipleAnswers.update((value) => !value);
+    this.multipleAnswersMandatoryQuestion.update((value) => !value);
   }
 
   addNextQuestion() {
@@ -87,25 +87,32 @@ export class NewSurveyComponent {
   }
 
   addNextAnswer() {
-    const numberAddedAnswers = this.addedAnswers().length;
+    const numberaddedAnswersMandatoryQuestion = this.addedAnswersMandatoryQuestion().length;
     let nextIndex: number;
-    if (numberAddedAnswers == 0) {
+    if (numberaddedAnswersMandatoryQuestion == 0) {
       nextIndex = 0;
-      this.addedAnswers.update(() => [{ internalId: 0, inputValue: '' }]);
+      this.addedAnswersMandatoryQuestion.update(() => [{ internalId: 0, inputValue: '' }]);
     } else {
-      nextIndex = this.addedAnswers()[numberAddedAnswers - 1].internalId + 1;
-      if (numberAddedAnswers >= 4) return;
-      this.addedAnswers.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
+      nextIndex =
+        this.addedAnswersMandatoryQuestion()[numberaddedAnswersMandatoryQuestion - 1].internalId +
+        1;
+      if (numberaddedAnswersMandatoryQuestion >= 4) return;
+      this.addedAnswersMandatoryQuestion.update((array) => [
+        ...array,
+        { internalId: nextIndex, inputValue: '' },
+      ]);
     }
   }
 
   deleteAnswer(internalId: number) {
-    let index = this.addedAnswers().findIndex((answer) => answer.internalId == internalId);
-    this.addedAnswers().splice(index, 1);
+    let index = this.addedAnswersMandatoryQuestion().findIndex(
+      (answer) => answer.internalId == internalId,
+    );
+    this.addedAnswersMandatoryQuestion().splice(index, 1);
   }
 
   updateAnswerInputValue(internalId: number, updateValue: string) {
-    this.addedAnswers.update((answers) =>
+    this.addedAnswersMandatoryQuestion.update((answers) =>
       answers.map((answer) =>
         answer.internalId === internalId
           ? {

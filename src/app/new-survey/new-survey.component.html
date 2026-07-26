@@ -191,7 +191,7 @@
                     <div class="checkbox">
                       <span
                         class="checkbox__icon"
-                        [class.checked]="multipleAnswers()"
+                        [class.checked]="multipleAnswersMandatoryQuestion()"
                         (click)="toggleCheckbox()"
                       ></span>
                       <span class="checkbox__text">Allow multiple answers.</span>
@@ -208,7 +208,7 @@
                       <input class="input input__answer" type="text" />
                       <span class="btn-delete"></span>
                     </div>
-                    @for (item of addedAnswers(); track item.internalId) {
+                    @for (item of addedAnswersMandatoryQuestion(); track item.internalId) {
                       <app-new-answer
                         (deleteAnswerEvent)="deleteAnswer(item.internalId)"
                         [answerNumber]="$index + 2"

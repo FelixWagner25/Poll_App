@@ -30,10 +30,12 @@
           <input class="input input__answer" type="text" />
           <span class="btn-delete"></span>
         </div>
-        @for (item of addedAnswers(); track $index) {
+        @for (item of addedAnswers(); track item.internalId) {
           <app-new-answer
-            (deleteAnswerEvent)="deleteAnswer($index)"
+            (deleteAnswerEvent)="deleteAnswer(item.internalId)"
             [answerNumber]="$index + 2"
+            [answerValue]="item.inputValue"
+            (answerInputEvent)="updateAnswerInputValue(item.internalId, $event)"
           ></app-new-answer>
         }
       </div>
