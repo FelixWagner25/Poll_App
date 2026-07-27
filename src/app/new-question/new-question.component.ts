@@ -1,6 +1,6 @@
 import { Component, signal, input, output } from '@angular/core';
 import { NewAnswerComponent } from '../new-answer/new-answer.component';
-import { AnswerTransfer } from '../shared/interfaces/answer-transfer';
+import { InputTransfer } from '../shared/interfaces/input-transfer';
 import { FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class NewQuestionComponent {
   addedQuestions = signal<number[]>([]);
-  addedAnswers = signal<AnswerTransfer[]>([]);
+  addedAnswers = signal<InputTransfer[]>([]);
   multipleAnswers = signal<boolean>(false);
   questionNumber = input<number>(0);
   indexLimitAddedAnswers = 4;

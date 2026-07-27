@@ -1,4 +1,4 @@
-export interface AnswerTransfer {
+export interface InputTransfer {
   internalId: number;
   inputValue: string;
 }

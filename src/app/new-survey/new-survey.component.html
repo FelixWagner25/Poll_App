@@ -165,122 +165,12 @@
             </div>
           </div>
           <div class="form-questions">
-            <div class="fbox-col-left gap-24px">
-              <div class="p-relative">
-                <div class="fbox-col-left gap-8px">
-                  <div class="fbox-row-space-between width-100">
-                    <label for="quest-1" class="label label--bold">1. Question</label>
-                    <span class="btn-delete" (click)="deleteFormInput('firstQuestion')"></span>
-                  </div>
-                  <input type="text" class="input input__default" formControlName="firstQuestion" />
-                  @if (
-                    surveyForm.controls.firstQuestion.invalid &&
-                    (surveyForm.controls.firstQuestion.dirty ||
-                      surveyForm.controls.firstQuestion.touched)
-                  ) {
-                    <div class="error error--question">
-                      @if (surveyForm.controls.firstQuestion.hasError('required')) {
-                        <div>One question is required.</div>
-                      }
-                      @if (surveyForm.controls.firstQuestion.hasError('maxlength')) {
-                        <div>Question too long. 1200 characters are maximum.</div>
-                      }
-                      @if (surveyForm.controls.firstQuestion.hasError('minlength')) {
-                        <div>Question too short. Three letters required.</div>
-                      }
-                    </div>
-                  }
-                </div>
-              </div>
-              <div>
-                <div class="fbox-col-left gap-16px">
-                  <div class="fbox-row-space-between-center width-100">
-                    <span class="label label--bold">Answers</span>
-                    <div class="checkbox">
-                      <span
-                        class="checkbox__icon"
-                        [class.checked]="multipleAnswersMandatoryQuestion()"
-                        (click)="toggleCheckbox()"
-                      ></span>
-                      <span class="checkbox__text">Allow multiple answers.</span>
-                    </div>
-                  </div>
-                  <div class="fbox-col-left gap-8px">
-                    <div class="p-relative">
-                      <div class="fbox-row-center gap-8px">
-                        <span class="answer-tag">A.</span>
-                        <input
-                          class="input input__answer"
-                          type="text"
-                          formControlName="firstAnswer"
-                        />
-                        <span class="btn-delete" (click)="deleteFormInput('firstAnswer')"></span>
-                      </div>
-                      @if (
-                        surveyForm.controls.firstAnswer.invalid &&
-                        (surveyForm.controls.firstAnswer.dirty ||
-                          surveyForm.controls.firstAnswer.touched)
-                      ) {
-                        <div class="error error--answer">
-                          @if (surveyForm.controls.firstQuestion.hasError('required')) {
-                            <div>Text required.</div>
-                          }
-                        </div>
-                      }
-                    </div>
-                    <div class="p-relative">
-                      <div class="fbox-row-center gap-8px">
-                        <span class="answer-tag">B.</span>
-                        <input
-                          class="input input__answer"
-                          type="text"
-                          formControlName="secondAnswer"
-                        />
-                        <span class="btn-delete" (click)="deleteFormInput('secondAnswer')"></span>
-
-                        @if (
-                          surveyForm.controls.secondAnswer.invalid &&
-                          (surveyForm.controls.secondAnswer.dirty ||
-                            surveyForm.controls.secondAnswer.touched)
-                        ) {
-                          <div class="error error--answer">
-                            @if (surveyForm.controls.secondAnswer.hasError('required')) {
-                              <div>Text required.</div>
-                            }
-                          </div>
-                        }
-                      </div>
-                    </div>
-                    @for (item of addedAnswersMandatoryQuestion(); track item.internalId) {
-                      <app-new-answer
-                        (deleteAnswerEvent)="deleteAnswer(item.internalId)"
-                        [answerNumber]="$index + 2"
-                        [answerValue]="item.inputValue"
-                        (answerInputEvent)="updateAnswerInputValue(item.internalId, $event)"
-                      ></app-new-answer>
-                    }
-                  </div>
-                  <div class="fbox-row-space-between-center width-100">
-                    <div class="btn-add-answer" (click)="addNextAnswer()">
-                      <div class="fbox-col-left gap-4px">
-                        <div class="fbox-row-center gap-8px">
-                          <span>Add answer</span>
-                          <span class="btn-add-answer__icon"></span>
-                        </div>
-                        <div class="btn-add-answer__underline"></div>
-                      </div>
-                    </div>
-                    <span class="small-note">You can add up to 6 answer fields.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            @for (item of addedQuestions(); track item.internalId) {
+            @for (item of questions(); track item.internalId) {
               <app-new-question
                 (deleteQuestionEvent)="deleteQuestion(item.internalId)"
-                [questionNumber]="$index + 2"
+                [questionNumber]="item.internalId + 1"
                 [questionInputValue]="item.inputValue"
-                (questionInputEvent)="updateAnswerInputValue(item.internalId, item.inputValue)"
+                (questionInputEvent)="updateQuestionInputValue(item.internalId, item.inputValue)"
               ></app-new-question>
             }
             <div class="fbox-col-left gap-8px">

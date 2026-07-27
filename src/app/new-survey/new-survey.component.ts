@@ -11,23 +11,19 @@ import { SurveyModel } from '../shared/models/survey.model';
 import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
 import { NewQuestionComponent } from '../new-question/new-question.component';
-import { NewAnswerComponent } from '../new-answer/new-answer.component';
-import { AnswerTransfer } from '../shared/interfaces/answer-transfer';
+import { InputTransfer } from '../shared/interfaces/input-transfer';
 
 @Component({
   selector: 'app-new-survey',
-  imports: [RouterLink, FormsModule, ReactiveFormsModule, NewQuestionComponent, NewAnswerComponent],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, NewQuestionComponent],
   templateUrl: './new-survey.component.html',
   styleUrl: './new-survey.component.scss',
 })
 export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
-  multipleAnswersMandatoryQuestion = signal<boolean>(false);
-  addedQuestions = signal<AnswerTransfer[]>([]);
-  addedAnswersMandatoryQuestion = signal<AnswerTransfer[]>([]);
-  indexLimitAddedQuestions = 5;
-  indexLimitAddedAnswers = 4;
+  questions = signal<InputTransfer[]>([{ internalId: 0, inputValue: '' }]);
+  indexLimitQuestions = 5;
 
   router = inject(Router);
   surveyService = inject(SurveyService);
@@ -50,14 +46,7 @@ export class NewSurveyComponent {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
     }),
-    firstAnswer: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(1200)],
-    }),
-    secondAnswer: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(1200)],
-    }),
+    questions: new FormGroup({}),
   });
 
   publishSurvey(): void {
@@ -84,80 +73,31 @@ export class NewSurveyComponent {
     this.toggleDropdown();
   }
 
-  deleteFormInput(
-    attribute:
-      | 'name'
-      | 'description'
-      | 'endDate'
-      | 'firstQuestion'
-      | 'firstAnswer'
-      | 'secondAnswer',
-  ) {
+  deleteFormInput(attribute: 'name' | 'description' | 'endDate') {
     this.surveyForm.controls[attribute].setValue('');
   }
 
-  toggleCheckbox() {
-    this.multipleAnswersMandatoryQuestion.update((value) => !value);
-  }
-
   addNextQuestion() {
-    const numberAddedQuestions = this.addedQuestions().length;
+    const numberquestions = this.questions().length;
     let nextIndex: number;
-    if (numberAddedQuestions == 0) {
+    if (numberquestions == 0) {
       nextIndex = 0;
-      this.addedQuestions.update(() => [{ internalId: 0, inputValue: '' }]);
+      this.questions.update(() => [{ internalId: 0, inputValue: '' }]);
     } else {
-      nextIndex = this.addedQuestions()[numberAddedQuestions - 1].internalId + 1;
-      if (numberAddedQuestions >= this.indexLimitAddedQuestions) return;
-      this.addedQuestions.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
+      nextIndex = this.questions()[numberquestions - 1].internalId + 1;
+      if (numberquestions >= this.indexLimitQuestions) return;
+      this.questions.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
     }
-  }
-
-  addNextAnswer() {
-    const numberaddedAnswersMandatoryQuestion = this.addedAnswersMandatoryQuestion().length;
-    let nextIndex: number;
-    if (numberaddedAnswersMandatoryQuestion == 0) {
-      nextIndex = 0;
-      this.addedAnswersMandatoryQuestion.update(() => [{ internalId: 0, inputValue: '' }]);
-    } else {
-      nextIndex =
-        this.addedAnswersMandatoryQuestion()[numberaddedAnswersMandatoryQuestion - 1].internalId +
-        1;
-      if (numberaddedAnswersMandatoryQuestion >= this.indexLimitAddedAnswers) return;
-      this.addedAnswersMandatoryQuestion.update((array) => [
-        ...array,
-        { internalId: nextIndex, inputValue: '' },
-      ]);
-    }
-  }
-
-  deleteAnswer(internalId: number) {
-    let index = this.addedAnswersMandatoryQuestion().findIndex(
-      (answer) => answer.internalId == internalId,
-    );
-    this.addedAnswersMandatoryQuestion().splice(index, 1);
-  }
-
-  updateAnswerInputValue(internalId: number, updateValue: string) {
-    this.addedAnswersMandatoryQuestion.update((answers) =>
-      answers.map((answer) =>
-        answer.internalId === internalId
-          ? {
-              internalId: internalId,
-              inputValue: updateValue,
-            }
-          : answer,
-      ),
-    );
   }
 
   deleteQuestion(internalId: number) {
-    let index = this.addedQuestions().findIndex((question) => question.internalId == internalId);
-    this.addedQuestions().splice(index, 1);
+    if (internalId == 0) return; //One question is required and must not be deleted.
+    let index = this.questions().findIndex((question) => question.internalId == internalId);
+    this.questions().splice(index, 1);
   }
 
   updateQuestionInputValue(internalId: number, updateValue: string) {
-    this.addedQuestions.update((questions) =>
+    this.questions.update((questions) =>
       questions.map((question) =>
         question.internalId === internalId
           ? {
