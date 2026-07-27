@@ -43,38 +43,10 @@
         </div>
       </div>
       <div class="fbox-col-left gap-8px">
-        <div class="p-relative">
-          <div class="fbox-row-center gap-8px">
-            <span class="answer-tag">A.</span>
-            <input class="input input__answer" type="text" [formControl]="firstAnswerForm" />
-            <span class="btn-delete"></span>
-          </div>
-          @if (firstAnswerForm.invalid && (firstAnswerForm.dirty || firstAnswerForm.touched)) {
-            <div class="error error--answer">
-              @if (firstAnswerForm.hasError('required')) {
-                <div>Text required.</div>
-              }
-            </div>
-          }
-        </div>
-        <div class="p-relative">
-          <div class="fbox-row-center gap-8px">
-            <span class="answer-tag">B.</span>
-            <input class="input input__answer" type="text" [formControl]="secondAnswerForm" />
-            <span class="btn-delete"></span>
-          </div>
-          @if (secondAnswerForm.invalid && (secondAnswerForm.dirty || secondAnswerForm.touched)) {
-            <div class="error error--answer">
-              @if (secondAnswerForm.hasError('required')) {
-                <div>Text required.</div>
-              }
-            </div>
-          }
-        </div>
-        @for (item of addedAnswers(); track item.internalId) {
+        @for (item of answers(); track item.internalId) {
           <app-new-answer
             (deleteAnswerEvent)="deleteAnswer(item.internalId)"
-            [answerNumber]="$index + 2"
+            [answerNumber]="item.internalId"
             [answerValue]="item.inputValue"
             (answerInputEvent)="updateAnswerInputValue(item.internalId, $event)"
           ></app-new-answer>

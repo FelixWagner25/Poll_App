@@ -11,11 +11,13 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './new-question.component.scss',
 })
 export class NewQuestionComponent {
-  addedQuestions = signal<number[]>([]);
-  addedAnswers = signal<InputTransfer[]>([]);
+  answers = signal<InputTransfer[]>([
+    { internalId: 0, inputValue: '' },
+    { internalId: 1, inputValue: '' },
+  ]);
   multipleAnswers = signal<boolean>(false);
   questionNumber = input<number>(0);
-  indexLimitAddedAnswers = 4;
+  indexLimitAnswers = 6;
   deleteQuestionEvent = output();
   questionInputEvent = output<string>();
   questionInputValue = input<string>();
@@ -25,36 +27,26 @@ export class NewQuestionComponent {
     validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
   });
 
-  firstAnswerForm = new FormControl('', {
-    nonNullable: true,
-    validators: [Validators.required, Validators.maxLength(1200)],
-  });
-
-  secondAnswerForm = new FormControl('', {
-    nonNullable: true,
-    validators: [Validators.required, Validators.maxLength(1200)],
-  });
-
   addNextAnswer() {
-    const numberAddedAnswers = this.addedAnswers().length;
+    const numberAnswers = this.answers().length;
     let nextIndex: number;
-    if (numberAddedAnswers == 0) {
+    if (numberAnswers == 0) {
       nextIndex = 0;
-      this.addedAnswers.update(() => [{ internalId: 0, inputValue: '' }]);
+      this.answers.update(() => [{ internalId: 0, inputValue: '' }]);
     } else {
-      nextIndex = this.addedAnswers()[numberAddedAnswers - 1].internalId + 1;
-      if (numberAddedAnswers >= this.indexLimitAddedAnswers) return;
-      this.addedAnswers.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
+      nextIndex = this.answers()[numberAnswers - 1].internalId + 1;
+      if (numberAnswers >= this.indexLimitAnswers) return;
+      this.answers.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
     }
   }
 
   deleteAnswer(internalId: number) {
-    let index = this.addedAnswers().findIndex((answer) => answer.internalId == internalId);
-    this.addedAnswers().splice(index, 1);
+    let index = this.answers().findIndex((answer) => answer.internalId == internalId);
+    this.answers().splice(index, 1);
   }
 
   updateAnswerInputValue(internalId: number, updateValue: string) {
-    this.addedAnswers.update((answers) =>
+    this.answers.update((answers) =>
       answers.map((answer) =>
         answer.internalId === internalId
           ? {
