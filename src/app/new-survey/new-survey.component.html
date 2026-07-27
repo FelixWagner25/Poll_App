@@ -200,13 +200,21 @@
                   <div class="fbox-col-left gap-8px">
                     <div class="fbox-row-center gap-8px">
                       <span class="answer-tag">A.</span>
-                      <input class="input input__answer" type="text" />
-                      <span class="btn-delete"></span>
+                      <input
+                        class="input input__answer"
+                        type="text"
+                        formControlName="firstAnswer"
+                      />
+                      <span class="btn-delete" (click)="deleteFormInput('firstAnswer')"></span>
                     </div>
                     <div class="fbox-row-center gap-8px">
                       <span class="answer-tag">B.</span>
-                      <input class="input input__answer" type="text" />
-                      <span class="btn-delete"></span>
+                      <input
+                        class="input input__answer"
+                        type="text"
+                        formControlName="secondAnswer"
+                      />
+                      <span class="btn-delete" (click)="deleteFormInput('secondAnswer')"></span>
                     </div>
                     @for (item of addedAnswersMandatoryQuestion(); track item.internalId) {
                       <app-new-answer
