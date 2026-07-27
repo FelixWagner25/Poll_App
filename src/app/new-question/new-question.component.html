@@ -1,5 +1,5 @@
 <div class="fbox-col-left gap-24px">
-  <div class="fbox-col-left gap-8px">
+  <div class="fbox-col-left gap-8px p-relative">
     <div class="fbox-row-space-between width-100">
       <label for="question" class="label label--bold">
         {{ questionNumber().toString() }}. Question</label
@@ -13,7 +13,21 @@
       id="question"
       [value]="questionInputValue()"
       (input)="questionInputEvent.emit(questionInput.value)"
+      [formControl]="questionForm"
     />
+    @if (questionForm.invalid && (questionForm.dirty || questionForm.touched)) {
+      <div class="error error--question">
+        @if (questionForm.hasError('required')) {
+          <div>Text required.</div>
+        }
+        @if (questionForm.hasError('maxlength')) {
+          <div>Question too long. 1200 characters are maximum.</div>
+        }
+        @if (questionForm.hasError('minlength')) {
+          <div>Question too short. Three letters required.</div>
+        }
+      </div>
+    }
   </div>
   <div>
     <div class="fbox-col-left gap-16px">
@@ -29,15 +43,33 @@
         </div>
       </div>
       <div class="fbox-col-left gap-8px">
-        <div class="fbox-row-center gap-8px">
-          <span class="answer-tag">A.</span>
-          <input class="input input__answer" type="text" />
-          <span class="btn-delete"></span>
+        <div class="p-relative">
+          <div class="fbox-row-center gap-8px">
+            <span class="answer-tag">A.</span>
+            <input class="input input__answer" type="text" [formControl]="firstAnswerForm" />
+            <span class="btn-delete"></span>
+          </div>
+          @if (firstAnswerForm.invalid && (firstAnswerForm.dirty || firstAnswerForm.touched)) {
+            <div class="error error--answer">
+              @if (firstAnswerForm.hasError('required')) {
+                <div>Text required.</div>
+              }
+            </div>
+          }
         </div>
-        <div class="fbox-row-center gap-8px">
-          <span class="answer-tag">B.</span>
-          <input class="input input__answer" type="text" />
-          <span class="btn-delete"></span>
+        <div class="p-relative">
+          <div class="fbox-row-center gap-8px">
+            <span class="answer-tag">B.</span>
+            <input class="input input__answer" type="text" [formControl]="secondAnswerForm" />
+            <span class="btn-delete"></span>
+          </div>
+          @if (secondAnswerForm.invalid && (secondAnswerForm.dirty || secondAnswerForm.touched)) {
+            <div class="error error--answer">
+              @if (secondAnswerForm.hasError('required')) {
+                <div>Text required.</div>
+              }
+            </div>
+          }
         </div>
         @for (item of addedAnswers(); track item.internalId) {
           <app-new-answer

@@ -1,10 +1,12 @@
 import { Component, signal, input, output } from '@angular/core';
 import { NewAnswerComponent } from '../new-answer/new-answer.component';
 import { AnswerTransfer } from '../shared/interfaces/answer-transfer';
+import { FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-new-question',
-  imports: [NewAnswerComponent],
+  imports: [NewAnswerComponent, ReactiveFormsModule],
   templateUrl: './new-question.component.html',
   styleUrl: './new-question.component.scss',
 })
@@ -17,6 +19,21 @@ export class NewQuestionComponent {
   deleteQuestionEvent = output();
   questionInputEvent = output<string>();
   questionInputValue = input<string>();
+
+  questionForm = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
+  });
+
+  firstAnswerForm = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.maxLength(1200)],
+  });
+
+  secondAnswerForm = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.maxLength(1200)],
+  });
 
   addNextAnswer() {
     const numberAddedAnswers = this.addedAnswers().length;
