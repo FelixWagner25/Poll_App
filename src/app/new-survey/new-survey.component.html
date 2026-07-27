@@ -71,6 +71,59 @@
                     <span class="label label--bold">Choose category</span>
                     <span class="btn-dropdown-icon"></span>
                   </button>
+                  <div class="dropdown-selection">
+                    {{ surveyForm.controls.category.value ?? null }}
+                  </div>
+                  <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
+                    <button
+                      type="button"
+                      class="btn-dropdown-categories__text"
+                      value="Team Activities"
+                      (click)="setSelectedCategory('Team Activities')"
+                    >
+                      Team Activites
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-dropdown-categories__text"
+                      value="Health & Wellness"
+                      (click)="setSelectedCategory('Health & Wellness')"
+                    >
+                      Health & Wellness
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-dropdown-categories__text"
+                      value="Gaming & Entertainment"
+                      (click)="setSelectedCategory('Gaming & Entertainment')"
+                    >
+                      Gaming & Entertainment
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-dropdown-categories__text"
+                      value="Education & Learning"
+                      (click)="setSelectedCategory('Education & Learning')"
+                    >
+                      Education & Learning
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-dropdown-categories__text"
+                      value="Lifestyle & Preferences"
+                      (click)="setSelectedCategory('Lifestyle & Preferences')"
+                    >
+                      Lifestyle & Preferences
+                    </button>
+                    <button
+                      type="button"
+                      class="btn-dropdown-categories__text"
+                      value="Technology & Innovation"
+                      (click)="setSelectedCategory('Technology & Innovation')"
+                    >
+                      Technology & Innovation
+                    </button>
+                  </div>
                   @if (
                     surveyForm.controls.category.invalid &&
                     (surveyForm.controls.category.dirty || surveyForm.controls.category.touched)
@@ -81,53 +134,6 @@
                       }
                     </div>
                   }
-                  <div class="dropdown-selection">{{ selectedCategory }}</div>
-                  <select formControlName="category" id="category" class="d-none"></select>
-                  <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
-                    <option ngValue="null" class="d-none"></option>
-                    <option
-                      class="btn-dropdown-categories__text"
-                      value="Team Activities"
-                      (click)="setSelectedCategory('Team Activities')"
-                    >
-                      Team Activites
-                    </option>
-                    <option
-                      class="btn-dropdown-categories__text"
-                      value="Health & Wellness"
-                      (click)="setSelectedCategory('Health & Wellness')"
-                    >
-                      Health & Wellness
-                    </option>
-                    <option
-                      class="btn-dropdown-categories__text"
-                      value="Gaming & Entertainment"
-                      (click)="setSelectedCategory('Gaming & Entertainment')"
-                    >
-                      Gaming & Entertainment
-                    </option>
-                    <option
-                      class="btn-dropdown-categories__text"
-                      value="Education & Learning"
-                      (click)="setSelectedCategory('Education & Learning')"
-                    >
-                      Education & Learning
-                    </option>
-                    <option
-                      class="btn-dropdown-categories__text"
-                      value="Lifestyle and Preferences"
-                      (click)="setSelectedCategory('Lifestyle and Preferences')"
-                    >
-                      Lifestyle & Preferences
-                    </option>
-                    <option
-                      class="btn-dropdown-categories__text"
-                      value="Technonly & Innovation"
-                      (click)="setSelectedCategory('Technonly & Innovation')"
-                    >
-                      Technology & Innovation
-                    </option>
-                  </div>
                 </div>
               </div>
             </div>

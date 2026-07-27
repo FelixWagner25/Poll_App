@@ -203,6 +203,7 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: flex-start;
   gap: 4px;
   background-color: abs.$bg-default;
   opacity: 0;
@@ -216,6 +217,7 @@ h2 {
     font-family: 'Mulish';
     @include abs.font-size-wght(14px, 400);
     letter-spacing: 2%;
+    background-color: abs.$bg-default;
 
     &:hover {
       background-color: #f4e9fb;

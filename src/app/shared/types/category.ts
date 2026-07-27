@@ -3,6 +3,6 @@ export type Category =
   | 'Health & Wellness'
   | 'Gaming & Entertainment'
   | 'Education & Learning'
-  | 'Lifestyle and Preferences'
-  | 'Technonly & Innovation'
+  | 'Lifestyle & Preferences'
+  | 'Technology & Innovation'
   | null;

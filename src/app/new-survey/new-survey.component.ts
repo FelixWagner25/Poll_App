@@ -23,7 +23,6 @@ import { AnswerTransfer } from '../shared/interfaces/answer-transfer';
 export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
-  selectedCategory: Category = null;
   multipleAnswersMandatoryQuestion = signal<boolean>(false);
   addedQuestions = signal<AnswerTransfer[]>([]);
   addedAnswersMandatoryQuestion = signal<AnswerTransfer[]>([]);
@@ -46,7 +45,7 @@ export class NewSurveyComponent {
       nonNullable: true,
       validators: [Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)],
     }),
-    category: new FormControl(null, { validators: [Validators.required] }),
+    category: new FormControl<Category>(null, { validators: [Validators.required] }),
     firstQuestion: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
@@ -62,11 +61,14 @@ export class NewSurveyComponent {
   });
 
   publishSurvey(): void {
+    if (this.surveyForm.invalid) {
+      this.surveyForm.markAllAsTouched();
+      return;
+    }
     this.published.set(!this.published());
+    //@TODO here is a problem with the category assignment of suveryForm
     let survey = new SurveyModel(this.surveyForm.value);
     this.surveyService.addSurvey(survey);
-
-    //this.navigateToPublishedSurvey();
   }
 
   navigateToPublishedSurvey(): void {
@@ -77,8 +79,8 @@ export class NewSurveyComponent {
     this.dropdownOpened.update((value) => !value);
   }
 
-  setSelectedCategory(value: Category): void {
-    this.selectedCategory = value;
+  setSelectedCategory(category: Category): void {
+    this.setFormCategory(category);
     this.toggleDropdown();
   }
 
@@ -165,5 +167,11 @@ export class NewSurveyComponent {
           : question,
       ),
     );
+  }
+
+  setFormCategory(category: Category) {
+    this.surveyForm.controls.category.setValue(category);
+    this.surveyForm.controls.category.markAllAsTouched();
+    this.surveyForm.controls.category.markAllAsDirty();
   }
 }
