@@ -21,11 +21,9 @@ export class NewQuestionComponent {
   deleteQuestionEvent = output();
   questionInputEvent = output<string>();
   questionInputValue = input<string>();
-
-  questionForm = new FormControl('', {
-    nonNullable: true,
-    validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
-  });
+  questionFormControl = input<FormControl<string>>(
+    new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+  );
 
   addNextAnswer() {
     const numberAnswers = this.answers().length;

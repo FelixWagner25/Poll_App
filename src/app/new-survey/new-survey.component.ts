@@ -6,6 +6,7 @@ import {
   FormsModule,
   Validators,
   ReactiveFormsModule,
+  FormArray,
 } from '@angular/forms';
 import { SurveyModel } from '../shared/models/survey.model';
 import { Category } from '../shared/types/category';
@@ -42,11 +43,9 @@ export class NewSurveyComponent {
       validators: [Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)],
     }),
     category: new FormControl<Category>(null, { validators: [Validators.required] }),
-    firstQuestion: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1200)],
-    }),
-    questions: new FormGroup({}),
+    questions: new FormArray<FormControl<string>>([
+      new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    ]),
   });
 
   publishSurvey(): void {
@@ -88,12 +87,18 @@ export class NewSurveyComponent {
       if (numberquestions >= this.indexLimitQuestions) return;
       this.questions.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
     }
+
+    this.surveyForm.controls.questions.push(
+      new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    );
   }
 
   deleteQuestion(internalId: number) {
     if (internalId == 0) return; //One question is required and must not be deleted.
     let index = this.questions().findIndex((question) => question.internalId == internalId);
     this.questions().splice(index, 1);
+
+    this.surveyForm.controls.questions.removeAt(internalId);
   }
 
   updateQuestionInputValue(internalId: number, updateValue: string) {

@@ -171,6 +171,7 @@
                 [questionNumber]="item.internalId + 1"
                 [questionInputValue]="item.inputValue"
                 (questionInputEvent)="updateQuestionInputValue(item.internalId, item.inputValue)"
+                [questionFormControl]="surveyForm.controls.questions.at(item.internalId)"
               ></app-new-question>
             }
             <div class="fbox-col-left gap-8px">

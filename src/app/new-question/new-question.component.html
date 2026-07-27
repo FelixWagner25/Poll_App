@@ -13,17 +13,20 @@
       id="question"
       [value]="questionInputValue()"
       (input)="questionInputEvent.emit(questionInput.value)"
-      [formControl]="questionForm"
+      [formControl]="questionFormControl()"
     />
-    @if (questionForm.invalid && (questionForm.dirty || questionForm.touched)) {
+    @if (
+      questionFormControl().invalid &&
+      (questionFormControl().dirty || questionFormControl().touched)
+    ) {
       <div class="error error--question">
-        @if (questionForm.hasError('required')) {
+        @if (questionFormControl().hasError('required')) {
           <div>Text required.</div>
         }
-        @if (questionForm.hasError('maxlength')) {
+        @if (questionFormControl().hasError('maxlength')) {
           <div>Question too long. 1200 characters are maximum.</div>
         }
-        @if (questionForm.hasError('minlength')) {
+        @if (questionFormControl().hasError('minlength')) {
           <div>Question too short. Three letters required.</div>
         }
       </div>
