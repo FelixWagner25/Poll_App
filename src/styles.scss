@@ -252,6 +252,30 @@ h2 {
 
 .error {
   font-family: 'Mulish';
-  @include abs.font-size-wght(14px, 400);
+  @include abs.font-size-wght(14px, 600);
   color: red;
+
+  &--question {
+    position: absolute;
+    top: 50px;
+    left: 12px;
+  }
+
+  &--answer {
+    position: absolute;
+    top: 16px;
+    left: 36px;
+  }
+
+  &--end-date {
+    position: absolute;
+    top: 64px;
+    left: 0;
+  }
+
+  &--name {
+    position: absolute;
+    top: 40px;
+    left: 12px;
+  }
 }

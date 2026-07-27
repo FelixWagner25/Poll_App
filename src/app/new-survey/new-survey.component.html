@@ -15,7 +15,7 @@
         <div class="form-input-wrap">
           <div class="fbox-row width-100 gap-96px">
             <div class="fbox-col-left gap-8px">
-              <div class="fbox-col-left gap-4px">
+              <div class="fbox-col-left gap-4px p-relative">
                 <label class="label label--bold" for="name">Survey name</label>
                 <div class="fbox-row-center gap-8px">
                   <input
@@ -30,7 +30,7 @@
                   surveyForm.controls.name.invalid &&
                   (surveyForm.controls.name.dirty || surveyForm.controls.name.touched)
                 ) {
-                  <div class="error">
+                  <div class="error error--name">
                     @if (surveyForm.controls.name.hasError('required')) {
                       <div>Name is required.</div>
                     }
@@ -41,7 +41,7 @@
                 }
               </div>
               <div class="fbox-row-space-between width-100">
-                <div class="fbox-col-left gap-4px">
+                <div class="fbox-col-left gap-4px p-relative">
                   <label class="label" for="end-date">
                     <span class="label--bold">Set end date</span>
                     <span class="label--normal"> (optional)</span>
@@ -54,7 +54,7 @@
                     surveyForm.controls.endDate.invalid &&
                     (surveyForm.controls.endDate.dirty || surveyForm.controls.endDate.touched)
                   ) {
-                    <div class="error">
+                    <div class="error error--end-date">
                       @if (surveyForm.controls.endDate.hasError('pattern')) {
                         <div>Date must follow pattern: YYYY-MM-DD.</div>
                       }
@@ -137,7 +137,7 @@
                 </div>
               </div>
             </div>
-            <div class="fbox-col-left gap-4px">
+            <div class="fbox-col-left gap-4px p-relative">
               <label class="label" for="description">
                 <span class="label--bold">Describing text</span>
                 <span class="label--normal"> (optional)</span>
@@ -156,7 +156,7 @@
                 surveyForm.controls.description.invalid &&
                 (surveyForm.controls.description.dirty || surveyForm.controls.description.touched)
               ) {
-                <div class="error">
+                <div class="error error-name">
                   @if (surveyForm.controls.description.hasError('maxlength')) {
                     <div>Description too long. 1200 characters are maximum.</div>
                   }
@@ -166,29 +166,31 @@
           </div>
           <div class="form-questions">
             <div class="fbox-col-left gap-24px">
-              <div class="fbox-col-left gap-8px">
-                <div class="fbox-row-space-between width-100">
-                  <label for="quest-1" class="label label--bold">1. Question</label>
-                  <span class="btn-delete" (click)="deleteFormInput('firstQuestion')"></span>
-                </div>
-                <input type="text" class="input input__default" formControlName="firstQuestion" />
-                @if (
-                  surveyForm.controls.firstQuestion.invalid &&
-                  (surveyForm.controls.firstQuestion.dirty ||
-                    surveyForm.controls.firstQuestion.touched)
-                ) {
-                  <div class="error">
-                    @if (surveyForm.controls.firstQuestion.hasError('required')) {
-                      <div>One question is mandatory.</div>
-                    }
-                    @if (surveyForm.controls.firstQuestion.hasError('maxlength')) {
-                      <div>Question too long. 1200 characters are maximum.</div>
-                    }
-                    @if (surveyForm.controls.firstQuestion.hasError('minlength')) {
-                      <div>Question too short. Three letters required.</div>
-                    }
+              <div class="p-relative">
+                <div class="fbox-col-left gap-8px">
+                  <div class="fbox-row-space-between width-100">
+                    <label for="quest-1" class="label label--bold">1. Question</label>
+                    <span class="btn-delete" (click)="deleteFormInput('firstQuestion')"></span>
                   </div>
-                }
+                  <input type="text" class="input input__default" formControlName="firstQuestion" />
+                  @if (
+                    surveyForm.controls.firstQuestion.invalid &&
+                    (surveyForm.controls.firstQuestion.dirty ||
+                      surveyForm.controls.firstQuestion.touched)
+                  ) {
+                    <div class="error error--question">
+                      @if (surveyForm.controls.firstQuestion.hasError('required')) {
+                        <div>One question is required.</div>
+                      }
+                      @if (surveyForm.controls.firstQuestion.hasError('maxlength')) {
+                        <div>Question too long. 1200 characters are maximum.</div>
+                      }
+                      @if (surveyForm.controls.firstQuestion.hasError('minlength')) {
+                        <div>Question too short. Three letters required.</div>
+                      }
+                    </div>
+                  }
+                </div>
               </div>
               <div>
                 <div class="fbox-col-left gap-16px">
@@ -204,23 +206,50 @@
                     </div>
                   </div>
                   <div class="fbox-col-left gap-8px">
-                    <div class="fbox-row-center gap-8px">
-                      <span class="answer-tag">A.</span>
-                      <input
-                        class="input input__answer"
-                        type="text"
-                        formControlName="firstAnswer"
-                      />
-                      <span class="btn-delete" (click)="deleteFormInput('firstAnswer')"></span>
+                    <div class="p-relative">
+                      <div class="fbox-row-center gap-8px">
+                        <span class="answer-tag">A.</span>
+                        <input
+                          class="input input__answer"
+                          type="text"
+                          formControlName="firstAnswer"
+                        />
+                        <span class="btn-delete" (click)="deleteFormInput('firstAnswer')"></span>
+                      </div>
+                      @if (
+                        surveyForm.controls.firstAnswer.invalid &&
+                        (surveyForm.controls.firstAnswer.dirty ||
+                          surveyForm.controls.firstAnswer.touched)
+                      ) {
+                        <div class="error error--answer">
+                          @if (surveyForm.controls.firstQuestion.hasError('required')) {
+                            <div>Text required.</div>
+                          }
+                        </div>
+                      }
                     </div>
-                    <div class="fbox-row-center gap-8px">
-                      <span class="answer-tag">B.</span>
-                      <input
-                        class="input input__answer"
-                        type="text"
-                        formControlName="secondAnswer"
-                      />
-                      <span class="btn-delete" (click)="deleteFormInput('secondAnswer')"></span>
+                    <div class="p-relative">
+                      <div class="fbox-row-center gap-8px">
+                        <span class="answer-tag">B.</span>
+                        <input
+                          class="input input__answer"
+                          type="text"
+                          formControlName="secondAnswer"
+                        />
+                        <span class="btn-delete" (click)="deleteFormInput('secondAnswer')"></span>
+
+                        @if (
+                          surveyForm.controls.secondAnswer.invalid &&
+                          (surveyForm.controls.secondAnswer.dirty ||
+                            surveyForm.controls.secondAnswer.touched)
+                        ) {
+                          <div class="error error--answer">
+                            @if (surveyForm.controls.secondAnswer.hasError('required')) {
+                              <div>Text required.</div>
+                            }
+                          </div>
+                        }
+                      </div>
                     </div>
                     @for (item of addedAnswersMandatoryQuestion(); track item.internalId) {
                       <app-new-answer

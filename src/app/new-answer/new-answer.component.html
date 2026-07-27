@@ -1,11 +1,23 @@
-<div class="fbox-row-center gap-8px">
-  <span class="answer-tag">{{ this.answerService.getSelectorByNumber(this.answerNumber()) }}.</span>
-  <input
-    #answerInput
-    class="input input__answer"
-    type="text"
-    [value]="answerValue()"
-    (input)="answerInputEvent.emit(answerInput.value)"
-  />
-  <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
+<div class="p-relative">
+  <div class="fbox-row-center gap-8px">
+    <span class="answer-tag"
+      >{{ this.answerService.getSelectorByNumber(this.answerNumber()) }}.</span
+    >
+    <input
+      #answerInput
+      class="input input__answer"
+      type="text"
+      [value]="answerValue()"
+      (input)="answerInputEvent.emit(answerInput.value)"
+      [formControl]="answerForm"
+    />
+    <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
+  </div>
+  @if (answerForm.invalid && (answerForm.dirty || answerForm.touched)) {
+    <div class="error error--answer">
+      @if (answerForm.hasError('required')) {
+        <div>Text required.</div>
+      }
+    </div>
+  }
 </div>
