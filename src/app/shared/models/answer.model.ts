@@ -1,4 +1,3 @@
-import { ClassPropertyMapping } from '@angular/compiler';
 import { Answer } from '../interfaces/answer';
 
 export class AnswerModel implements Answer {
