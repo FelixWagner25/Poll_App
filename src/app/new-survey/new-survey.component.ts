@@ -85,8 +85,11 @@ export class NewSurveyComponent {
   }
 
   deleteQuestion(index: number): void {
-    if (index == 0) return; //One question is required and must not be deleted.
-    this.surveyForm.controls.questions.removeAt(index);
+    if (index == 0) {
+      this.surveyForm.controls.questions.at(index).controls.text.setValue('');
+    } else {
+      this.surveyForm.controls.questions.removeAt(index);
+    }
   }
 
   setFormCategory(category: Category): void {

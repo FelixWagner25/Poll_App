@@ -35,7 +35,10 @@ export class NewQuestionComponent {
   }
 
   deleteAnswer(index: number) {
-    if (this.answers.length <= 2) return;
-    this.answers.removeAt(index);
+    if (this.answers.length <= 2) {
+      this.answers.at(index).setValue('');
+    } else {
+      this.answers.removeAt(index);
+    }
   }
 }
