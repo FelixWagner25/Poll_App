@@ -195,6 +195,7 @@ h2 {
 
 .btn-dropdown-categories {
   position: absolute;
+  z-index: 10;
   top: 36px;
   left: 0;
   width: 100%;
@@ -259,7 +260,6 @@ h2 {
     position: absolute;
     top: 56px;
     left: 12px;
-    z-index: 0;
   }
 
   &--answer {

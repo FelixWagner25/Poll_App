@@ -55,8 +55,9 @@ export class NewSurveyComponent {
       return;
     }
     this.published.set(!this.published());
-    //@TODO here is a problem with the category assignment of suveryForm
+    console.log(this.surveyForm.value);
     let survey = new SurveyModel(this.surveyForm.value);
+    console.log(survey);
     this.surveyService.addSurvey(survey);
   }
 
