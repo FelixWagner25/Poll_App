@@ -219,20 +219,6 @@ section {
     max-height: 418px;
     overflow-y: scroll;
     padding-right: 16px; //for gap to scrollbar
-
-    scrollbar-color: col.$secondary-orange;
-    scrollbar-width: 10px;
-
-    &::-webkit-scrollbar {
-      width: 10px;
-      height: 64px;
-      color: col.$secondary-orange;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: col.$secondary-orange;
-      border-radius: 10px;
-    }
   }
 
   &__card {

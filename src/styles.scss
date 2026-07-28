@@ -280,3 +280,19 @@ h2 {
     left: 12px;
   }
 }
+
+.scrollbar {
+  scrollbar-color: abs.$secondary-orange;
+  scrollbar-width: 10px;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 64px;
+    color: abs.$secondary-orange;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: abs.$secondary-orange;
+    border-radius: 10px;
+  }
+}

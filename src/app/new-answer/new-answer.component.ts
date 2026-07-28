@@ -1,6 +1,6 @@
 import { Component, inject, input, output } from '@angular/core';
 import { AnswerService } from '../shared/services/answer.service';
-import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-new-answer',

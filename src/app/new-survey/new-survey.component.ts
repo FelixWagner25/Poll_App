@@ -13,7 +13,6 @@ import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
 import { NewQuestionComponent } from '../new-question/new-question.component';
 import { QuestionForm } from '../shared/interfaces/question-form';
-import { Question } from '../shared/interfaces/question';
 
 @Component({
   selector: 'app-new-survey',
@@ -24,7 +23,7 @@ import { Question } from '../shared/interfaces/question';
 export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
-  indexLimitQuestions = 5;
+  indexLimitQuestions = 6;
 
   router = inject(Router);
   surveyService = inject(SurveyService);

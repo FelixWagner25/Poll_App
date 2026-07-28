@@ -164,7 +164,7 @@
               }
             </div>
           </div>
-          <div class="form-questions">
+          <div class="form-questions scrollbar">
             @for (question of questionFormArray.controls; track question) {
               <app-new-question
                 (deleteQuestionEvent)="deleteQuestion($index)"
