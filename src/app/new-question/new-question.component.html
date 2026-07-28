@@ -1,4 +1,4 @@
-<div class="fbox-col-left gap-24px">
+<div class="fbox-col-left gap-24px" [formGroup]="questionForm()">
   <div class="fbox-col-left gap-8px p-relative">
     <div class="fbox-row-space-between width-100">
       <label for="question" class="label label--bold">
@@ -6,27 +6,18 @@
       >
       <span class="btn-delete" (click)="deleteQuestionEvent.emit()"></span>
     </div>
-    <input
-      #questionInput
-      type="text"
-      class="input input__default"
-      id="question"
-      [value]="questionInputValue()"
-      (input)="questionInputEvent.emit(questionInput.value)"
-      [formControl]="questionFormControl()"
-    />
+    <input type="text" class="input input__default" formControlName="text" />
     @if (
-      questionFormControl().invalid &&
-      (questionFormControl().dirty || questionFormControl().touched)
+      questionControlText.invalid && (questionControlText.dirty || questionControlText.touched)
     ) {
       <div class="error error--question">
-        @if (questionFormControl().hasError('required')) {
+        @if (questionControlText.hasError('required')) {
           <div>Text required.</div>
         }
-        @if (questionFormControl().hasError('maxlength')) {
+        @if (questionControlText.hasError('maxlength')) {
           <div>Question too long. 1200 characters are maximum.</div>
         }
-        @if (questionFormControl().hasError('minlength')) {
+        @if (questionControlText.hasError('minlength')) {
           <div>Question too short. Three letters required.</div>
         }
       </div>
@@ -37,26 +28,27 @@
       <div class="fbox-row-space-between-center width-100">
         <span class="label label--bold">Answers</span>
         <div class="checkbox">
-          <span
+          <input
+            type="checkbox"
             class="checkbox__icon"
-            [class.checked]="multipleAnswers()"
+            [class.checked]="questionForm().controls.multipleAnswers"
             (click)="toggleCheckbox()"
-          ></span>
+            formControlName="multipleAnswers"
+          />
           <span class="checkbox__text">Allow multiple answers.</span>
         </div>
       </div>
       <div class="fbox-col-left gap-8px">
-        @for (item of answers(); track item.internalId) {
+        @for (answerControl of answers.controls; track answerControl) {
           <app-new-answer
-            (deleteAnswerEvent)="deleteAnswer(item.internalId)"
-            [answerNumber]="item.internalId"
-            [answerValue]="item.inputValue"
-            (answerInputEvent)="updateAnswerInputValue(item.internalId, $event)"
+            (deleteAnswerEvent)="deleteAnswer($index)"
+            [answerNumber]="$index"
+            [answerControl]="answerControl"
           ></app-new-answer>
         }
       </div>
       <div class="fbox-row-space-between-center width-100">
-        <div class="btn-add-answer" (click)="addNextAnswer()">
+        <button class="btn-add-answer" (click)="addNextAnswer()">
           <div class="fbox-col-left gap-4px">
             <div class="fbox-row-center gap-8px">
               <span>Add answer</span>
@@ -64,7 +56,7 @@
             </div>
             <div class="btn-add-answer__underline"></div>
           </div>
-        </div>
+        </button>
         <span class="small-note">You can add up to 6 answer fields.</span>
       </div>
     </div>

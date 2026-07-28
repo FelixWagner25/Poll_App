@@ -11,10 +11,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 export class NewAnswerComponent {
   answerNumber = input<number>(0);
   deleteAnswerEvent = output();
-  answerValue = input<string>('');
-  answerInputEvent = output<string>();
+  answerControl = input.required<FormControl<string>>();
 
   answerService = inject(AnswerService);
-
-  answerFormControl = new FormControl('', { nonNullable: true, validators: [Validators.required] });
 }

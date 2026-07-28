@@ -20,6 +20,10 @@ export class NewQuestionComponent {
     return this.questionForm().controls.answers;
   }
 
+  get questionControlText(): FormControl<string> {
+    return this.questionForm().controls.text;
+  }
+
   addNextAnswer(): void {
     if (this.answers.length >= this.indexLimitAnswers) return;
     this.answers.push(

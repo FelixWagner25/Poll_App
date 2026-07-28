@@ -3,20 +3,16 @@
     <span class="answer-tag"
       >{{ this.answerService.getSelectorByNumber(this.answerNumber()) }}.</span
     >
-    <input
-      #answerInput
-      class="input input__answer"
-      type="text"
-      [value]="answerValue()"
-      (input)="answerInputEvent.emit(answerInput.value)"
-      [formControl]="answerFormControl"
-    />
+    <input class="input input__answer" type="text" [formControl]="answerControl()" />
     <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
   </div>
-  @if (answerFormControl.invalid && (answerFormControl.dirty || answerFormControl.touched)) {
+  @if (answerControl().invalid && (answerControl().dirty || answerControl().touched)) {
     <div class="error error--answer">
-      @if (answerFormControl.hasError('required')) {
+      @if (answerControl().hasError('required')) {
         <div>Text required.</div>
+      }
+      @if (answerControl().hasError('maxlength')) {
+        <div>Answer too long. Limited to 512 chrachters.</div>
       }
     </div>
   }

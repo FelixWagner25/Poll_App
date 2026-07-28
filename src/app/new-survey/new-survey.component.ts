@@ -43,7 +43,7 @@ export class NewSurveyComponent {
       validators: [Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)],
     }),
     category: new FormControl<Category>(null, { validators: [Validators.required] }),
-    questions: new FormArray<FormGroup<QuestionForm>>([]),
+    questions: new FormArray<FormGroup<QuestionForm>>([this.createQuestionGroup()]),
   });
 
   get questionFormArray(): FormArray<FormGroup<QuestionForm>> {

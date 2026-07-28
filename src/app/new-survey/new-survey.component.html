@@ -169,7 +169,7 @@
               <app-new-question
                 (deleteQuestionEvent)="deleteQuestion($index)"
                 [questionNumber]="$index + 1"
-                [questionFormControl]="question"
+                [questionForm]="question"
               ></app-new-question>
             }
             <div class="fbox-col-left gap-8px">
