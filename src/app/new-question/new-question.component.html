@@ -31,8 +31,7 @@
           <input
             type="checkbox"
             class="checkbox__icon"
-            [class.checked]="questionForm().controls.multipleAnswers"
-            (click)="toggleCheckbox()"
+            [class.checked]="questionForm().controls.multipleAnswers.value"
             formControlName="multipleAnswers"
           />
           <span class="checkbox__text">Allow multiple answers.</span>

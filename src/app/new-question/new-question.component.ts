@@ -38,9 +38,4 @@ export class NewQuestionComponent {
     if (this.answers.length <= 2) return;
     this.answers.removeAt(index);
   }
-
-  toggleCheckbox() {
-    //@TODO: check where to steer checkbox boolean. Probably in survey component in survey Form quesions FormArray.
-    //this.multipleAnswers.update((value) => !value);
-  }
 }
