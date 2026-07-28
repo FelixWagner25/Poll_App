@@ -9,13 +9,13 @@
       type="text"
       [value]="answerValue()"
       (input)="answerInputEvent.emit(answerInput.value)"
-      [formControl]="answerForm"
+      [formControl]="answerFormControl"
     />
     <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
   </div>
-  @if (answerForm.invalid && (answerForm.dirty || answerForm.touched)) {
+  @if (answerFormControl.invalid && (answerFormControl.dirty || answerFormControl.touched)) {
     <div class="error error--answer">
-      @if (answerForm.hasError('required')) {
+      @if (answerFormControl.hasError('required')) {
         <div>Text required.</div>
       }
     </div>

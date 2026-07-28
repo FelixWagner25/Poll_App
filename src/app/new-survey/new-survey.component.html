@@ -165,13 +165,11 @@
             </div>
           </div>
           <div class="form-questions">
-            @for (item of questions(); track item.internalId) {
+            @for (question of questionFormArray.controls; track question) {
               <app-new-question
-                (deleteQuestionEvent)="deleteQuestion(item.internalId)"
-                [questionNumber]="item.internalId + 1"
-                [questionInputValue]="item.inputValue"
-                (questionInputEvent)="updateQuestionInputValue(item.internalId, item.inputValue)"
-                [questionFormControl]="surveyForm.controls.questions.at(item.internalId)"
+                (deleteQuestionEvent)="deleteQuestion($index)"
+                [questionNumber]="$index + 1"
+                [questionFormControl]="question"
               ></app-new-question>
             }
             <div class="fbox-col-left gap-8px">

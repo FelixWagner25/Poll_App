@@ -16,5 +16,5 @@ export class NewAnswerComponent {
 
   answerService = inject(AnswerService);
 
-  answerForm = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+  answerFormControl = new FormControl('', { nonNullable: true, validators: [Validators.required] });
 }

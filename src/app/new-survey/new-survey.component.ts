@@ -23,7 +23,6 @@ import { InputTransfer } from '../shared/interfaces/input-transfer';
 export class NewSurveyComponent {
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
-  questions = signal<InputTransfer[]>([{ internalId: 0, inputValue: '' }]);
   indexLimitQuestions = 5;
 
   router = inject(Router);
@@ -47,6 +46,10 @@ export class NewSurveyComponent {
       new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     ]),
   });
+
+  get questionFormArray(): FormArray<FormControl<string>> {
+    return this.surveyForm.controls.questions;
+  }
 
   publishSurvey(): void {
     if (this.surveyForm.invalid) {
@@ -77,41 +80,16 @@ export class NewSurveyComponent {
   }
 
   addNextQuestion() {
-    const numberquestions = this.questions().length;
-    let nextIndex: number;
-    if (numberquestions == 0) {
-      nextIndex = 0;
-      this.questions.update(() => [{ internalId: 0, inputValue: '' }]);
-    } else {
-      nextIndex = this.questions()[numberquestions - 1].internalId + 1;
-      if (numberquestions >= this.indexLimitQuestions) return;
-      this.questions.update((array) => [...array, { internalId: nextIndex, inputValue: '' }]);
-    }
-
+    const numberQuestions = this.questionFormArray.controls.length;
+    if (numberQuestions >= this.indexLimitQuestions) return;
     this.surveyForm.controls.questions.push(
       new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     );
   }
 
-  deleteQuestion(internalId: number) {
-    if (internalId == 0) return; //One question is required and must not be deleted.
-    let index = this.questions().findIndex((question) => question.internalId == internalId);
-    this.questions().splice(index, 1);
-
-    this.surveyForm.controls.questions.removeAt(internalId);
-  }
-
-  updateQuestionInputValue(internalId: number, updateValue: string) {
-    this.questions.update((questions) =>
-      questions.map((question) =>
-        question.internalId === internalId
-          ? {
-              internalId: internalId,
-              inputValue: updateValue,
-            }
-          : question,
-      ),
-    );
+  deleteQuestion(index: number) {
+    if (index == 0) return; //One question is required and must not be deleted.
+    this.surveyForm.controls.questions.removeAt(index);
   }
 
   setFormCategory(category: Category) {
