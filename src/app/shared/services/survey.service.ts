@@ -40,7 +40,7 @@ export class SurveyService {
   }
 
   async addSurvey(survey: SurveyModel) {
-    const surveyData = survey.getCleanAddJson();
+    const surveyData = survey;
     const { data, error } = await this.supabase.from('surveys').insert([surveyData]).select();
     if (error) printPostgrestErrorMsg(error);
   }

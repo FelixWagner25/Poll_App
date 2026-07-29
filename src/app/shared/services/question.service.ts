@@ -39,7 +39,7 @@ export class QuestionService {
   }
 
   async addQuestion(question: QuestionModel) {
-    const questionData = question.getCleanAddJson();
+    const questionData = question;
     const { data, error } = await this.supabase.from('questions').insert([questionData]).select();
     if (error) printPostgrestErrorMsg(error);
   }
