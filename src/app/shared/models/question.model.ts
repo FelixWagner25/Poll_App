@@ -6,7 +6,10 @@ export class QuestionModel implements Question {
   multipleAnswers: boolean;
 
   constructor(data: Partial<Question> = {}) {
-    this.id = data.id ?? '0';
+    let randomId = crypto.randomUUID();
+    console.log(randomId);
+
+    this.id = data.id ?? randomId;
     this.text = data.text ?? '';
     this.multipleAnswers = data.multipleAnswers ?? false;
   }

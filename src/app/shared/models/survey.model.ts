@@ -9,7 +9,10 @@ export class SurveyModel implements Survey {
   category: Category;
 
   constructor(data: Partial<Survey> = {}) {
-    this.id = data.id ?? '0';
+    let randomId = crypto.randomUUID();
+    console.log(randomId);
+
+    this.id = data.id ?? randomId;
     this.name = data.name ?? 'n/a';
     this.description = data.description ?? '';
     this.endDate = data.endDate ?? '9999-12-31';

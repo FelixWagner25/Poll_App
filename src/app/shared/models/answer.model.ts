@@ -7,7 +7,10 @@ export class AnswerModel implements Answer {
   resultCount: number;
 
   constructor(data: Partial<Answer> = {}) {
-    this.id = data.id ?? '0';
+    let randomId = crypto.randomUUID();
+    console.log(randomId);
+
+    this.id = data.id ?? randomId;
     this.selector = data.selector ?? '';
     this.text = data.text ?? '';
     this.resultCount = data.resultCount ?? 0;

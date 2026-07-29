@@ -35,7 +35,7 @@ export class NewSurveyComponent {
     }),
     description: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.maxLength(10)],
+      validators: [Validators.maxLength(1024)],
     }),
     endDate: new FormControl('', {
       nonNullable: true,

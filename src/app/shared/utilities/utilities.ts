@@ -27,11 +27,3 @@ export function printPostgrestErrorMsg(error: PostgrestError): void {
     code: error.code,
   });
 }
-
-export function getIndexArray(length: number): number[] {
-  let indexArray = [];
-  for (let i = 0; i < length; i++) {
-    indexArray.push(i);
-  }
-  return indexArray;
-}
