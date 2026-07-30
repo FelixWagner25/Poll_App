@@ -13,6 +13,9 @@ import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
 import { NewQuestionComponent } from '../new-question/new-question.component';
 import { QuestionForm } from '../shared/interfaces/question-form';
+import { Survey } from '../shared/interfaces/survey';
+import { QuestionModel } from '../shared/models/question.model';
+import { QuestionService } from '../shared/services/question.service';
 
 @Component({
   selector: 'app-new-survey',
@@ -27,6 +30,7 @@ export class NewSurveyComponent {
 
   router = inject(Router);
   surveyService = inject(SurveyService);
+  questionService = inject(QuestionService);
 
   surveyForm = new FormGroup({
     name: new FormControl('', {
@@ -54,11 +58,21 @@ export class NewSurveyComponent {
       this.surveyForm.markAllAsTouched();
       return;
     }
-    this.published.set(!this.published());
-    console.log(this.surveyForm.value);
-    let survey = new SurveyModel(this.surveyForm.value);
-    console.log(survey);
+    let surveyId = crypto.randomUUID();
+    let survey = new SurveyModel({ ...this.surveyForm.value, id: surveyId });
     this.surveyService.addSurvey(survey);
+
+    for (let i = 0; i < this.questionFormArray.length; i++) {
+      let questionId = crypto.randomUUID();
+      let question = new QuestionModel({
+        ...this.questionFormArray.at(i).value,
+        id: questionId,
+        surveyId: surveyId,
+      });
+      this.questionService.addQuestion(question);
+    }
+
+    this.published.set(!this.published());
   }
 
   navigateToPublishedSurvey(): void {
