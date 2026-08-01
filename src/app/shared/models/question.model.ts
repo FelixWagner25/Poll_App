@@ -8,7 +8,6 @@ export class QuestionModel implements Question {
 
   constructor(data: Partial<Question> = {}) {
     let randomId = crypto.randomUUID();
-    console.log(randomId);
 
     this.id = data.id ?? randomId;
     this.text = data.text ?? '';

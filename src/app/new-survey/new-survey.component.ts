@@ -16,6 +16,8 @@ import { QuestionForm } from '../shared/interfaces/question-form';
 import { Survey } from '../shared/interfaces/survey';
 import { QuestionModel } from '../shared/models/question.model';
 import { QuestionService } from '../shared/services/question.service';
+import { AnswerModel } from '../shared/models/answer.model';
+import { AnswerService } from '../shared/services/answer.service';
 
 @Component({
   selector: 'app-new-survey',
@@ -31,6 +33,7 @@ export class NewSurveyComponent {
   router = inject(Router);
   surveyService = inject(SurveyService);
   questionService = inject(QuestionService);
+  answerService = inject(AnswerService);
 
   surveyForm = new FormGroup({
     name: new FormControl('', {
@@ -61,7 +64,12 @@ export class NewSurveyComponent {
     let surveyId = crypto.randomUUID();
     let survey = new SurveyModel({ ...this.surveyForm.value, id: surveyId });
     this.surveyService.addSurvey(survey);
+    this.addQuestionsToDatabase(surveyId);
 
+    this.published.set(!this.published());
+  }
+
+  addQuestionsToDatabase(surveyId: string) {
     for (let i = 0; i < this.questionFormArray.length; i++) {
       let questionId = crypto.randomUUID();
       let question = new QuestionModel({
@@ -70,9 +78,20 @@ export class NewSurveyComponent {
         surveyId: surveyId,
       });
       this.questionService.addQuestion(question);
+      this.addAnswersToDatabase(i, questionId);
     }
+  }
 
-    this.published.set(!this.published());
+  addAnswersToDatabase(formGroupIndex: number, questionId: string) {
+    for (let j = 0; j < this.questionFormArray.at(formGroupIndex).controls.answers.length; j++) {
+      let answerId = crypto.randomUUID();
+      let answer = new AnswerModel({
+        text: this.questionFormArray.at(formGroupIndex).controls.answers.at(j).value,
+        id: answerId,
+        questionId: questionId,
+      });
+      this.answerService.addAnswer(answer);
+    }
   }
 
   navigateToPublishedSurvey(): void {

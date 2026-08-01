@@ -40,7 +40,7 @@ export class AnswerService {
 
   async addAnswer(answer: AnswerModel) {
     const answerData = answer;
-    const { data, error } = await this.supabase.from('questions').insert([answerData]).select();
+    const { data, error } = await this.supabase.from('answers').insert([answerData]).select();
     if (error) printPostgrestErrorMsg(error);
   }
 
