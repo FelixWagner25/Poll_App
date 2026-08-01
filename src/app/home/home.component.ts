@@ -25,4 +25,21 @@ export class HomeComponent {
     this.selectedCategory = value;
     this.toggleDropdown();
   }
+
+  getRemainingDaysString(endDate: string): string {
+    if (endDate == '') return 'Active';
+    const endDateObj = new Date(endDate);
+    const today = new Date();
+    const diffInMs = endDateObj.getTime() - today.getTime();
+    const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+    if (diffInDays < 0) {
+      return 'Ended';
+    } else if (diffInDays == 0) {
+      return 'Ends today';
+    } else if (diffInDays == 1) {
+      return 'Ends in 1 day';
+    } else {
+      return 'Ends in ' + diffInDays.toString() + 'days';
+    }
+  }
 }

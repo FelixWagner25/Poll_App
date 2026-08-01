@@ -16,7 +16,7 @@ export class SurveyService {
   supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
   surveysAllEventsChannel;
 
-  private surveyList = signal<Survey[]>([]);
+  surveyList = signal<Survey[]>([]);
 
   constructor() {
     this.surveysAllEventsChannel = createDBSubscriptionChannel(

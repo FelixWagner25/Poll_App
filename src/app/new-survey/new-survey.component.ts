@@ -13,7 +13,6 @@ import { Category } from '../shared/types/category';
 import { SurveyService } from '../shared/services/survey.service';
 import { NewQuestionComponent } from '../new-question/new-question.component';
 import { QuestionForm } from '../shared/interfaces/question-form';
-import { Survey } from '../shared/interfaces/survey';
 import { QuestionModel } from '../shared/models/question.model';
 import { QuestionService } from '../shared/services/question.service';
 import { AnswerModel } from '../shared/models/answer.model';
