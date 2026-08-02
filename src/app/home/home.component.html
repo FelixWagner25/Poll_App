@@ -47,27 +47,15 @@
         <div class="surveys__ending-soon-wrap">
           <p class="surveys__ending-soon-text">Ending soon surveys</p>
           <div class="surveys__cards-wrap">
-            <div routerLink="survey-results" class="surveys__card">
-              <div>
-                <p class="surveys__card--category">Team activities</p>
-                <p class="surveys__card--title">Let's Plan the Next Team Event Together</p>
+            @for (survey of endingSoonSurveys(); track survey.id) {
+              <div routerLink="survey-results" class="surveys__card">
+                <div>
+                  <p class="surveys__card--category">{{ survey.category }}</p>
+                  <p class="surveys__card--title">{{ survey.name }}</p>
+                </div>
+                <p class="surveys__card--days-left">{{ getRemainingDaysString(survey.endDate) }}</p>
               </div>
-              <p class="surveys__card--days-left">Ends in 1 Day</p>
-            </div>
-            <div routerLink="survey-results" class="surveys__card">
-              <div>
-                <p class="surveys__card--category">Health & Wellness</p>
-                <p class="surveys__card--title">Fit & wellness survey!</p>
-              </div>
-              <p class="surveys__card--days-left">Ends in 2 Days</p>
-            </div>
-            <div routerLink="survey-results" class="surveys__card">
-              <div>
-                <p class="surveys__card--category">Gaming & Entertainment</p>
-                <p class="surveys__card--title">Gaming habits and favourite games!</p>
-              </div>
-              <p class="surveys__card--days-left">Ends in 3 Days</p>
-            </div>
+            }
           </div>
         </div>
         <div class="survey-list">
