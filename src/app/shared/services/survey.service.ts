@@ -1,9 +1,9 @@
 import { Injectable, signal } from '@angular/core';
-import { createClient } from '@supabase/supabase-js';
+import { createClient, RealtimeChannel } from '@supabase/supabase-js';
 import { Survey } from '../interfaces/survey';
 import { SurveyModel } from '../models/survey.model';
 import {
-  createDBSubscriptionChannel,
+  //createDBSubscriptionChannel,
   printPostgrestErrorMsg,
   unsubscribeDBChannel,
 } from '../utilities/utilities';
@@ -19,12 +19,7 @@ export class SurveyService {
   surveyList = signal<Survey[]>([]);
 
   constructor() {
-    this.surveysAllEventsChannel = createDBSubscriptionChannel(
-      this.supabase,
-      'custom-all-channel',
-      '*',
-      'surveys',
-    );
+    this.surveysAllEventsChannel = this.createSurveysDBSubscriptionChannel();
     this.getAllSurveys();
   }
 
@@ -32,16 +27,31 @@ export class SurveyService {
     unsubscribeDBChannel(this.surveysAllEventsChannel, this.supabase);
   }
 
-  async getAllSurveys() {
+  async getAllSurveys(): Promise<void> {
     let response = await this.supabase.from('surveys').select('*');
     console.log(response.data);
     this.surveyList.set((response.data ?? []) as Survey[]);
+    console.log('getAllSurveys');
     console.log(this.surveyList());
   }
 
-  async addSurvey(survey: SurveyModel) {
+  async addSurvey(survey: SurveyModel): Promise<void> {
     const surveyData = survey;
     const { data, error } = await this.supabase.from('surveys').insert([surveyData]).select();
     if (error) printPostgrestErrorMsg(error);
+  }
+
+  createSurveysDBSubscriptionChannel(): RealtimeChannel {
+    const channel = this.supabase
+      .channel('custom-all-channel')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'surveys' }, async () => {
+        try {
+          await this.getAllSurveys();
+        } catch (error) {
+          console.error(error);
+        }
+      })
+      .subscribe();
+    return channel;
   }
 }

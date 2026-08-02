@@ -9,7 +9,7 @@ export function createDBSubscriptionChannel(
   let subscribedChannel = client
     .channel(channel)
     .on('postgres_changes', { event: event, schema: 'public', table: table }, (payload) => {
-      console.log('Change received!', payload);
+      console.log(payload);
     })
     .subscribe();
   return subscribedChannel;
