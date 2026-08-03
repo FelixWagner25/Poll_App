@@ -36,11 +36,15 @@ export class HomeComponent {
   });
 
   endingSoonSurveys = computed(() => {
-    return this.surveyService.surveyList().filter((survey) => {
-      if (!survey.endDate) return false;
-      const remainingDays = this.calcDateDiffDays(this.getTodaysShortISOString(), survey.endDate);
-      return remainingDays >= 0 && remainingDays < 3;
-    });
+    return this.surveyService
+      .surveyList()
+      .filter((survey) => {
+        if (!survey.endDate) return false;
+        const remainingDays = this.calcDateDiffDays(this.getTodaysShortISOString(), survey.endDate);
+        return remainingDays >= 0 && remainingDays < 3;
+      })
+      .sort((a, b) => a.endDate.localeCompare(b.endDate))
+      .slice(0, 3);
   });
 
   toggleDropdown() {
