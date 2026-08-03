@@ -63,13 +63,13 @@
             <div class="survey-list__filter-btn-wrap">
               <button
                 class="survey-list__filter-btn survey-list__filter-btn active"
-                (click)="setYourSurveysFilter('active')"
+                (click)="selectedSurveyStatus.set('active')"
               >
                 Active survey
               </button>
               <button
                 class="survey-list__filter-btn survey-list__filter-btn"
-                (click)="setYourSurveysFilter('past')"
+                (click)="selectedSurveyStatus.set('past')"
               >
                 Past survey
               </button>
@@ -122,6 +122,9 @@
                   (click)="setSelectedCategory('Technology & Innovation')"
                 >
                   Technology & Innovation
+                </option>
+                <option class="btn-dropdown-categories__text" (click)="setSelectedCategory(null)">
+                  none
                 </option>
               </div>
             </div>

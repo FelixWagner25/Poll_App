@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Category } from '../shared/types/category';
 
-type SurveyStatusFilter = 'active' | 'past' | null;
+type SurveyStatusFilter = 'active' | 'past';
 
 @Component({
   selector: 'app-home',
@@ -23,9 +23,15 @@ export class HomeComponent {
     let surveys = this.surveyService.surveyList();
     let category = this.selectedCategory();
     let status = this.selectedSurveyStatus();
-    return this.surveyService.surveyList().filter((survey) => {
-      if (this.selectedCategory() == null) return true;
-      return survey.category == this.selectedCategory() ? true : false;
+    const today = this.getTodaysShortISOString();
+    return surveys.filter((survey) => {
+      const matchedCategory = category === null || survey.category === category;
+      if (!survey.endDate) return matchedCategory && status === 'active';
+      const remainingDays = this.calcDateDiffDays(today, survey.endDate);
+      const matchedStatus =
+        (status === 'active' && remainingDays >= 0) || (status === 'past' && remainingDays < 0);
+      //return survey.category == this.selectedCategory() ? true : false;
+      return matchedCategory && matchedStatus;
     });
   });
 
@@ -44,7 +50,6 @@ export class HomeComponent {
   setSelectedCategory(value: Category): void {
     this.selectedCategory.set(value);
     this.toggleDropdown();
-    this.setYourSurveysFilter(value);
   }
 
   getRemainingDaysString(endDate: string): string {
@@ -71,35 +76,5 @@ export class HomeComponent {
   getTodaysShortISOString(): string {
     let today = new Date();
     return today.toISOString().substring(0, 10);
-  }
-
-  setYourSurveysFilter(filter: 'active' | 'past' | Category) {
-    //this.yourSurveys.set(this.surveyService.surveyList());
-    switch (filter) {
-      case 'active':
-        this.yourSurveys().filter((survey) => {
-          const remainingDays = this.calcDateDiffDays(
-            this.getTodaysShortISOString(),
-            survey.endDate,
-          );
-          return remainingDays < 0 ? false : true;
-        });
-        break;
-      case 'past':
-        this.yourSurveys().filter((survey) => {
-          if (!survey.endDate) return false;
-          const remainingDays = this.calcDateDiffDays(
-            this.getTodaysShortISOString(),
-            survey.endDate,
-          );
-          return remainingDays > 0 ? false : true;
-        });
-        break;
-      default:
-        this.yourSurveys().filter((survey) => {
-          return survey.category == filter ? true : false;
-        });
-        break;
-    }
   }
 }
