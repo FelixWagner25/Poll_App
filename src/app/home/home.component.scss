@@ -175,6 +175,7 @@ section {
 }
 
 .survey-list {
+  width: 1068px;
   @include mx.d-flex(
     $flex-direction: column,
     $justify-content: center,
@@ -216,7 +217,7 @@ section {
     display: grid;
     grid-template-columns: auto auto;
     gap: 16px;
-    max-height: 418px;
+    height: 418px;
     overflow-y: scroll;
     padding-right: 16px; //for gap to scrollbar
   }

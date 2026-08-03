@@ -2,6 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Category } from '../shared/types/category';
+import { retry } from 'rxjs';
 
 type SurveyStatusFilter = 'active' | 'past';
 
@@ -80,5 +81,13 @@ export class HomeComponent {
   getTodaysShortISOString(): string {
     let today = new Date();
     return today.toISOString().substring(0, 10);
+  }
+
+  activeSurveyFilter() {
+    return this.selectedSurveyStatus() === 'active';
+  }
+
+  pastSurveyFilter() {
+    return this.selectedSurveyStatus() === 'past';
   }
 }

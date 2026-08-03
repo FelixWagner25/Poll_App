@@ -62,14 +62,16 @@
           <div class="survey-list__filter-wrap">
             <div class="survey-list__filter-btn-wrap">
               <button
-                class="survey-list__filter-btn survey-list__filter-btn active"
+                class="survey-list__filter-btn survey-list__filter-btn"
                 (click)="selectedSurveyStatus.set('active')"
+                [class.active]="activeSurveyFilter()"
               >
                 Active survey
               </button>
               <button
                 class="survey-list__filter-btn survey-list__filter-btn"
                 (click)="selectedSurveyStatus.set('past')"
+                [class.active]="pastSurveyFilter()"
               >
                 Past survey
               </button>
