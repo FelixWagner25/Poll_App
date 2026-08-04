@@ -13,7 +13,7 @@
         <div class="status status--secondary">Published</div>
         <div class="survey__date-category-wrap survey__text">
           @if (survey().endDate) {
-            <span>Ends on {{ survey().endDate }}</span>
+            <span>Ends on {{ convertISOtoGermanDateStr(survey().endDate) }}</span>
           } @else {
             <span>Active</span>
           }

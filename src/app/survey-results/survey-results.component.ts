@@ -39,7 +39,12 @@ export class SurveyResultsComponent {
     console.log(this.survey());
   }
 
-  surveyHasEndDate(): Boolean {
-    return false; //!(this.survey().endDate === '9999-12-31');
+  convertISOtoGermanDateStr(endDate: string): string {
+    if (endDate === '') return '';
+    let strArr = endDate.split('-');
+    const year = strArr[0];
+    const month = strArr[1];
+    const day = strArr[2];
+    return strArr[2] + '.' + strArr[1] + '.' + strArr[0];
   }
 }
