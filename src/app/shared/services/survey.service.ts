@@ -1,13 +1,11 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { createClient, RealtimeChannel } from '@supabase/supabase-js';
 import { Survey } from '../interfaces/survey';
 import { SurveyModel } from '../models/survey.model';
-import {
-  //createDBSubscriptionChannel,
-  printPostgrestErrorMsg,
-  unsubscribeDBChannel,
-} from '../utilities/utilities';
+import { printPostgrestErrorMsg, unsubscribeDBChannel } from '../utilities/utilities';
 import { SUPABASE_URL, SUPABASE_KEY } from '../constants/constants';
+import { QuestionModel } from '../models/question.model';
+import { Question } from '../interfaces/question';
 
 @Injectable({
   providedIn: 'root',
@@ -29,10 +27,7 @@ export class SurveyService {
 
   async getAllSurveys(): Promise<void> {
     let response = await this.supabase.from('surveys').select('*');
-    console.log(response.data);
     this.surveyList.set((response.data ?? []) as Survey[]);
-    console.log('getAllSurveys');
-    console.log(this.surveyList());
   }
 
   async addSurvey(survey: SurveyModel): Promise<void> {
@@ -53,5 +48,20 @@ export class SurveyService {
       })
       .subscribe();
     return channel;
+  }
+
+  async addQuestion(question: QuestionModel): Promise<void> {
+    const questionData = question;
+    const { data, error } = await this.supabase.from('questions').insert([questionData]).select();
+    if (error) printPostgrestErrorMsg(error);
+  }
+
+  async getQuestionsBySurveyId(surveyId: string): Promise<Question[]> {
+    let { data, error } = await this.supabase
+      .from('questions')
+      .select('*')
+      .eq('surveyId', surveyId);
+    if (error) throw error;
+    return (data ?? []) as Question[];
   }
 }

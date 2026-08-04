@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { SurveyService } from '../shared/services/survey.service';
+import { Question } from '../shared/interfaces/question';
 
 @Component({
   selector: 'app-survey-results',
@@ -10,9 +12,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SurveyResultsComponent {
   private route = inject(ActivatedRoute);
+  readonly surveyService = inject(SurveyService);
+
   surveyId: string | null = null;
 
-  ngOnInit() {
-    this.surveyId = this.route.snapshot.paramMap.get('id');
+  questions = signal<Question[]>([]);
+
+  async ngOnInit(): Promise<void> {
+    const currentSurveyId = this.route.snapshot.paramMap.get('id');
+    if (currentSurveyId === null) return;
+    this.surveyId = currentSurveyId;
+
+    try {
+      const questions = await this.surveyService.getQuestionsBySurveyId(this.surveyId);
+      this.questions.set(questions);
+      console.log(this.questions());
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
