@@ -88,46 +88,45 @@
               </button>
               <div class="dropdown-selection">{{ selectedCategory() }}</div>
               <div class="btn-dropdown-categories" [class.opened]="dropdownOpened()">
-                <option ngValue="null" class="d-none"></option>
-                <option
+                <button class="btn-dropdown-categories__text" (click)="setSelectedCategory(null)">
+                  All Surveys
+                </button>
+                <button
                   class="btn-dropdown-categories__text"
                   (click)="setSelectedCategory('Team Activities')"
                 >
                   Team Activites
-                </option>
-                <option
+                </button>
+                <button
                   class="btn-dropdown-categories__text"
                   (click)="setSelectedCategory('Health & Wellness')"
                 >
                   Health & Wellness
-                </option>
-                <option
+                </button>
+                <button
                   class="btn-dropdown-categories__text"
                   (click)="setSelectedCategory('Gaming & Entertainment')"
                 >
                   Gaming & Entertainment
-                </option>
-                <option
+                </button>
+                <button
                   class="btn-dropdown-categories__text"
                   (click)="setSelectedCategory('Education & Learning')"
                 >
                   Education & Learning
-                </option>
-                <option
+                </button>
+                <button
                   class="btn-dropdown-categories__text"
                   (click)="setSelectedCategory('Lifestyle & Preferences')"
                 >
                   Lifestyle & Preferences
-                </option>
-                <option
+                </button>
+                <button
                   class="btn-dropdown-categories__text"
                   (click)="setSelectedCategory('Technology & Innovation')"
                 >
                   Technology & Innovation
-                </option>
-                <option class="btn-dropdown-categories__text" (click)="setSelectedCategory(null)">
-                  all
-                </option>
+                </button>
               </div>
             </div>
           </div>
