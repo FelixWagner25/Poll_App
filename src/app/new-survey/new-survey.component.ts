@@ -25,14 +25,15 @@ import { AnswerService } from '../shared/services/answer.service';
   styleUrl: './new-survey.component.scss',
 })
 export class NewSurveyComponent {
-  dropdownOpened = signal<boolean>(false);
-  published = signal<boolean>(false);
-  indexLimitQuestions = 6;
-
   router = inject(Router);
   surveyService = inject(SurveyService);
   questionService = inject(QuestionService);
   answerService = inject(AnswerService);
+
+  dropdownOpened = signal<boolean>(false);
+  published = signal<boolean>(false);
+  indexLimitQuestions = 6;
+  readonly surveyId: string = crypto.randomUUID();
 
   surveyForm = new FormGroup({
     name: new FormControl('', {
@@ -55,12 +56,11 @@ export class NewSurveyComponent {
     return this.surveyForm.controls.questions;
   }
 
-  publishSurvey(): void {
+  publishSurvey(surveyId: string): void {
     if (this.surveyForm.invalid) {
       this.surveyForm.markAllAsTouched();
       return;
     }
-    let surveyId = crypto.randomUUID();
     let survey = new SurveyModel({ ...this.surveyForm.value, id: surveyId });
     this.surveyService.addSurvey(survey);
     this.addQuestionsToDatabase(surveyId);
@@ -93,8 +93,8 @@ export class NewSurveyComponent {
     }
   }
 
-  navigateToPublishedSurvey(): void {
-    this.router.navigate(['/survey-results']);
+  navigateToPublishedSurvey(surveyId: string): void {
+    this.router.navigate(['/survey-results', surveyId]);
   }
 
   toggleDropdown(): void {

@@ -6,12 +6,16 @@
           <p class="status status--secondary">Draft</p>
           <h2>Create new survey</h2>
         </div>
-        <button routerLink="" class="form-action-btn">
+        <button [routerLink]="" class="form-action-btn">
           <span>Cancel</span>
           <span class="form-action-btn__close-icon"></span>
         </button>
       </div>
-      <form class="fbox-col-left gap-40px" [formGroup]="surveyForm" (ngSubmit)="publishSurvey()">
+      <form
+        class="fbox-col-left gap-40px"
+        [formGroup]="surveyForm"
+        (ngSubmit)="publishSurvey(this.surveyId)"
+      >
         <div class="form-input-wrap">
           <div class="fbox-row width-100 gap-96px">
             <div class="fbox-col-left gap-8px">
@@ -189,13 +193,13 @@
   </div>
   <div
     class="published-message-bg"
-    (click)="navigateToPublishedSurvey()"
+    (click)="navigateToPublishedSurvey(this.surveyId)"
     [class.show]="published()"
   ></div>
   <div class="published-message" [class.show]="published()">
     <div class="fbox-row-space-between gap-64px">
       <div class="published-message__text">Your survey is now published</div>
-      <div class="published-message__icon" (click)="navigateToPublishedSurvey()"></div>
+      <div class="published-message__icon" (click)="navigateToPublishedSurvey(this.surveyId)"></div>
     </div>
   </div>
 </div>

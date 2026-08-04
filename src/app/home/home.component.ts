@@ -2,7 +2,6 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Category } from '../shared/types/category';
-import { retry } from 'rxjs';
 
 type SurveyStatusFilter = 'active' | 'past';
 

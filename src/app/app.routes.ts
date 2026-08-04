@@ -6,5 +6,5 @@ import { SurveyResultsComponent } from './survey-results/survey-results.componen
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'new-survey', component: NewSurveyComponent },
-  { path: 'survey-results', component: SurveyResultsComponent },
+  { path: 'survey-results/:id', component: SurveyResultsComponent },
 ];
