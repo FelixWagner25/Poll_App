@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Question } from '../shared/interfaces/question';
+import { Survey } from '../shared/interfaces/survey';
 
 @Component({
   selector: 'app-survey-results',
@@ -15,8 +16,13 @@ export class SurveyResultsComponent {
   readonly surveyService = inject(SurveyService);
 
   surveyId: string | null = null;
-
   questions = signal<Question[]>([]);
+  survey = computed(
+    () =>
+      this.surveyService.surveyList().filter((survey) => {
+        return survey.id === this.surveyId;
+      })[0],
+  );
 
   async ngOnInit(): Promise<void> {
     const currentSurveyId = this.route.snapshot.paramMap.get('id');
@@ -30,5 +36,10 @@ export class SurveyResultsComponent {
     } catch (error) {
       console.error(error);
     }
+    console.log(this.survey());
+  }
+
+  surveyHasEndDate(): Boolean {
+    return false; //!(this.survey().endDate === '9999-12-31');
   }
 }

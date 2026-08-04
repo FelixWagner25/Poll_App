@@ -15,7 +15,7 @@ export class SurveyModel implements Survey {
     this.id = data.id ?? randomId;
     this.name = data.name ?? 'n/a';
     this.description = data.description ?? '';
-    this.endDate = data.endDate ?? '9999-12-31';
+    this.endDate = data.endDate ?? '';
     this.category = data.category ?? null;
   }
 
