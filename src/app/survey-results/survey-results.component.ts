@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Question } from '../shared/interfaces/question';
-import { Survey } from '../shared/interfaces/survey';
 
 @Component({
   selector: 'app-survey-results',
@@ -31,8 +30,11 @@ export class SurveyResultsComponent {
 
     try {
       const questions = await this.surveyService.getQuestionsBySurveyId(this.surveyId);
-      this.questions.set(questions);
-      console.log(this.questions());
+      this.questions.set(
+        [...questions].sort((a, b) => {
+          return a.positionIndex - b.positionIndex;
+        }),
+      );
     } catch (error) {
       console.error(error);
     }

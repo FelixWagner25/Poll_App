@@ -27,7 +27,7 @@
       <!-- </div> -->
       <form class="fbox-col-left gap-24px width-100">
         <div class="survey-questions-wrap">
-          @for (question of questions(); track question.id) {
+          @for (question of questions(); track question.positionIndex) {
             <div class="survey__question">
               <div class="survey__question--headline">
                 <span>{{ $index + 1 }}.</span>
@@ -85,7 +85,7 @@
         <span class="results__headline results__headline--addition">LIVE</span>
       </h3>
       <div class="fbox-col-left gap-24px">
-        @for (question of questions(); track question.id) {
+        @for (question of questions(); track question.positionIndex) {
           <div class="fbox-col-left gap-16px">
             <div class="results__question">{{ question.text }}</div>
             <div class="fbox-col-left gap-6px width-100">

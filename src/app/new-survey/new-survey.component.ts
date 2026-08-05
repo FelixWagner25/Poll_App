@@ -72,6 +72,7 @@ export class NewSurveyComponent {
       let question = new QuestionModel({
         ...this.questionFormArray.at(i).value,
         id: questionId,
+        positionIndex: i,
         surveyId: surveyId,
       });
       this.surveyService.addQuestion(question);
@@ -85,6 +86,7 @@ export class NewSurveyComponent {
       let answer = new AnswerModel({
         text: this.questionFormArray.at(formGroupIndex).controls.answers.at(j).value,
         id: answerId,
+        positionIndex: j,
         questionId: questionId,
       });
       this.answerService.addAnswer(answer);
