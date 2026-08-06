@@ -27,7 +27,7 @@
       <!-- </div> -->
       <form class="fbox-col-left gap-24px width-100">
         <div class="survey-questions-wrap">
-          @for (question of questions(); track question.positionIndex) {
+          @for (question of questions(); track question.id) {
             <div class="survey__question">
               <div class="survey__question--headline">
                 <span>{{ $index + 1 }}.</span>
@@ -39,36 +39,15 @@
                 </div>
               </div>
               <div class="fbox-col-left gap-8px width-100">
-                <div class="survey__answer">
-                  <span class="survey__answer--checkbox"></span>
-                  <span class="survey__answer--selector">A.</span>
-                  <span class="survey__answer--text">19.09.2025</span>
-                </div>
-                <div class="survey__answer">
-                  <span class="survey__answer--checkbox"></span>
-                  <span class="survey__answer--selector">B.</span>
-                  <span class="survey__answer--text">20.09.2025</span>
-                </div>
-                <div class="survey__answer">
-                  <span class="survey__answer--checkbox"></span>
-                  <span class="survey__answer--selector">C.</span>
-                  <span class="survey__answer--text">21.09.2025</span>
-                </div>
-                <div class="survey__answer">
-                  <span class="survey__answer--checkbox"></span>
-                  <span class="survey__answer--selector">A.</span>
-                  <span class="survey__answer--text">19.09.2025</span>
-                </div>
-                <div class="survey__answer">
-                  <span class="survey__answer--checkbox"></span>
-                  <span class="survey__answer--selector">B.</span>
-                  <span class="survey__answer--text">20.09.2025</span>
-                </div>
-                <div class="survey__answer">
-                  <span class="survey__answer--checkbox"></span>
-                  <span class="survey__answer--selector">C.</span>
-                  <span class="survey__answer--text">21.09.2025</span>
-                </div>
+                @for (answer of answers()[$index]; track answer.id) {
+                  <div class="survey__answer">
+                    <span class="survey__answer--checkbox"></span>
+                    <span class="survey__answer--selector"
+                      >{{ answerService.getSelectorByNumber($index) }}.</span
+                    >
+                    <span class="survey__answer--text">{{ answer.text }}</span>
+                  </div>
+                }
               </div>
             </div>
           }
@@ -85,34 +64,22 @@
         <span class="results__headline results__headline--addition">LIVE</span>
       </h3>
       <div class="fbox-col-left gap-24px">
-        @for (question of questions(); track question.positionIndex) {
+        @for (question of questions(); track question.id) {
           <div class="fbox-col-left gap-16px">
             <div class="results__question">{{ question.text }}</div>
             <div class="fbox-col-left gap-6px width-100">
-              <div class="results__answer">
-                <div class="results__answer--selector">A</div>
-                <div class="results__progress-bar">
-                  <div class="results__progress-bar results__progress-bar--bg"></div>
-                  <div class="results__progress-bar results__progress-bar--progress"></div>
+              @for (answer of answers()[$index]; track answer.id) {
+                <div class="results__answer">
+                  <div class="results__answer--selector">
+                    {{ answerService.getSelectorByNumber($index) }}
+                  </div>
+                  <div class="results__progress-bar">
+                    <div class="results__progress-bar results__progress-bar--bg"></div>
+                    <div class="results__progress-bar results__progress-bar--progress"></div>
+                  </div>
+                  <div class="results__answer--number">{{ answer.resultCount }}</div>
                 </div>
-                <div class="results__answer--number">27%</div>
-              </div>
-              <div class="results__answer">
-                <div class="results__answer--selector">B</div>
-                <div class="results__progress-bar">
-                  <div class="results__progress-bar results__progress-bar--bg"></div>
-                  <div class="results__progress-bar results__progress-bar--progress"></div>
-                </div>
-                <div class="results__answer--number">27%</div>
-              </div>
-              <div class="results__answer">
-                <div class="results__answer--selector">C</div>
-                <div class="results__progress-bar">
-                  <div class="results__progress-bar results__progress-bar--bg"></div>
-                  <div class="results__progress-bar results__progress-bar--progress"></div>
-                </div>
-                <div class="results__answer--number">27%</div>
-              </div>
+              }
             </div>
           </div>
         }

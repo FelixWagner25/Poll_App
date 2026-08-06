@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Question } from '../shared/interfaces/question';
+import { Answer } from '../shared/interfaces/answer';
+import { AnswerService } from '../shared/services/answer.service';
 
 @Component({
   selector: 'app-survey-results',
@@ -13,9 +15,11 @@ import { Question } from '../shared/interfaces/question';
 export class SurveyResultsComponent {
   private route = inject(ActivatedRoute);
   readonly surveyService = inject(SurveyService);
+  answerService = inject(AnswerService);
 
   surveyId: string | null = null;
   questions = signal<Question[]>([]);
+  answers = signal<Answer[][]>([]);
   survey = computed(
     () =>
       this.surveyService.surveyList().filter((survey) => {
@@ -38,6 +42,17 @@ export class SurveyResultsComponent {
     } catch (error) {
       console.error(error);
     }
+
+    try {
+      for (let i = 0; i < this.questions().length; i++) {
+        const questionId = this.questions()[i].id;
+        let questionAnswers = await this.surveyService.getAnswersByQuestionId(questionId);
+        questionAnswers.sort((a, b) => {
+          return a.positionIndex - b.positionIndex;
+        });
+        this.answers.set([...this.answers(), questionAnswers]);
+      }
+    } catch (error) {}
     console.log(this.survey());
   }
 

@@ -6,6 +6,7 @@ import { printPostgrestErrorMsg, unsubscribeDBChannel } from '../utilities/utili
 import { SUPABASE_URL, SUPABASE_KEY } from '../constants/constants';
 import { QuestionModel } from '../models/question.model';
 import { Question } from '../interfaces/question';
+import { Answer } from '../interfaces/answer';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +64,14 @@ export class SurveyService {
       .eq('surveyId', surveyId);
     if (error) throw error;
     return (data ?? []) as Question[];
+  }
+
+  async getAnswersByQuestionId(questionId: string): Promise<Answer[]> {
+    let { data, error } = await this.supabase
+      .from('answers')
+      .select('*')
+      .eq('questionId', questionId);
+    if (error) throw error;
+    return (data ?? []) as Answer[];
   }
 }
