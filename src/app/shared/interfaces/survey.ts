@@ -6,4 +6,5 @@ export interface Survey {
   description: string;
   endDate: string;
   category: Category;
+  participantsCount: number;
 }

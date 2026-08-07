@@ -77,7 +77,9 @@
                     <div class="results__progress-bar results__progress-bar--bg"></div>
                     <div class="results__progress-bar results__progress-bar--progress"></div>
                   </div>
-                  <div class="results__answer--number">{{ answer.resultCount }}</div>
+                  <div class="results__answer--number">
+                    {{ getAnswerResult(answer.resultCount, this.survey().participantsCount) }}
+                  </div>
                 </div>
               }
             </div>

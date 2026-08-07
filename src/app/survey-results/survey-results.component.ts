@@ -64,4 +64,9 @@ export class SurveyResultsComponent {
     const day = strArr[2];
     return strArr[2] + '.' + strArr[1] + '.' + strArr[0];
   }
+
+  getAnswerResult(resultCount: number, participantsCount: number) {
+    if (participantsCount == 0) return '0 %';
+    return String(Math.round((resultCount / participantsCount) * 100)) + ' %';
+  }
 }

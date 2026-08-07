@@ -7,6 +7,7 @@ export class SurveyModel implements Survey {
   description: string;
   endDate: string;
   category: Category;
+  participantsCount: number;
 
   constructor(data: Partial<Survey> = {}) {
     let randomId = crypto.randomUUID();
@@ -17,6 +18,7 @@ export class SurveyModel implements Survey {
     this.description = data.description ?? '';
     this.endDate = data.endDate ?? '';
     this.category = data.category ?? null;
+    this.participantsCount = data.participantsCount ?? 0;
   }
 
   getCleanAddJson() {
