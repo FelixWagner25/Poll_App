@@ -73,7 +73,7 @@ section {
   &__answer {
     padding-left: 8px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     gap: 8px;
     font-family: 'Mulish';
@@ -86,8 +86,12 @@ section {
 
     &--checkbox {
       content: url('../../../public/assets/img/checkbox_default.svg');
-      padding-top: 3px;
       padding-right: 8px;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &.checked {
         content: url('../../../public/assets/img/checkbox_checked.svg');

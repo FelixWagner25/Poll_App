@@ -65,8 +65,18 @@ export class SurveyResultsComponent {
     return year + '.' + month + '.' + day;
   }
 
-  getAnswerResult(resultCount: number, participantsCount: number) {
+  getAnswerResult(resultCount: number, participantsCount: number): string {
     if (participantsCount == 0) return '0 %';
     return String(Math.round((resultCount / participantsCount) * 100)) + ' %';
+  }
+
+  toggleAnswer(answer: Answer): void {
+    answer.userSelected = !answer.userSelected;
+    if (answer.userSelected) {
+      answer.resultCount++;
+    } else {
+      if (answer.resultCount == 0) return;
+      answer.resultCount--;
+    }
   }
 }

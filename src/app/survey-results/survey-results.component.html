@@ -45,8 +45,13 @@
                   </div>
                   <div class="fbox-col-left gap-8px width-100">
                     @for (answer of answers()[$index]; track answer.id) {
-                      <div class="survey__answer">
-                        <span class="survey__answer--checkbox"></span>
+                      <div class="survey__answer" (click)="toggleAnswer(answer)">
+                        <span
+                          type="checkbox"
+                          class="survey__answer--checkbox"
+                          [class.checked]="answer.userSelected"
+                        >
+                        </span>
                         <span class="survey__answer--selector"
                           >{{ answerService.getSelectorByNumber($index) }}.</span
                         >
