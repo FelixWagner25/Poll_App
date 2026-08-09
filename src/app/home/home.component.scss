@@ -217,7 +217,7 @@ section {
     display: grid;
     grid-template-columns: auto auto;
     gap: 16px;
-    height: 418px;
+    max-height: 418px;
     overflow-y: scroll;
     padding-right: 16px; //for gap to scrollbar
   }

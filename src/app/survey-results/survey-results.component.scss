@@ -47,6 +47,7 @@ section {
     color: col.$primary-purple;
     @include mx.font-size-wght(16px, 500);
     font-family: 'Mulish';
+    line-break: anywhere;
   }
 
   &__question {
@@ -99,6 +100,7 @@ section {
 
     &--text {
       @include mx.font-size-wght(16px, 400);
+      line-break: anywhere;
     }
   }
 }

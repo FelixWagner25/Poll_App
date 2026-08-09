@@ -62,7 +62,7 @@ export class SurveyResultsComponent {
     const year = strArr[0];
     const month = strArr[1];
     const day = strArr[2];
-    return strArr[2] + '.' + strArr[1] + '.' + strArr[0];
+    return year + '.' + month + '.' + day;
   }
 
   getAnswerResult(resultCount: number, participantsCount: number) {

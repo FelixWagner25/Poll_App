@@ -1,91 +1,98 @@
-<section>
-  <div class="fbox-row-space-between width-100">
-    <img routerLink="" src="assets/img/logo_purple.svg" class="logo" alt="PollApp Logo" />
-    <button routerLink="/new-survey" class="btn btn--primary">
-      <span>Create survey</span>
-      <span class="btn__add-circle"></span>
-    </button>
-  </div>
-  <div class="fbox-row gap-42px">
-    <div class="survey">
-      <!-- <div class="fbox-col-left gap-42px"> -->
-      <div class="fbox-col-left gap-16px width-100">
-        <div class="status status--secondary">Published</div>
-        <div class="survey__date-category-wrap survey__text">
-          @if (survey().endDate) {
-            <span>Ends on {{ convertISOtoGermanDateStr(survey().endDate) }}</span>
-          } @else {
-            <span>Active</span>
-          }
-          <span>Category: {{ survey().category }}</span>
-        </div>
-        <h2 class="survey__headline">{{ survey().name }}</h2>
-        <div class="survey__text">
-          {{ survey().description }}
-        </div>
+<div class="center-content">
+  <div class="max-width-1440px">
+    <section>
+      <div class="fbox-row-space-between width-100">
+        <img routerLink="" src="assets/img/logo_purple.svg" class="logo" alt="PollApp Logo" />
+        <button routerLink="/new-survey" class="btn btn--primary">
+          <span>Create survey</span>
+          <span class="btn__add-circle"></span>
+        </button>
       </div>
-      <!-- </div> -->
-      <form class="fbox-col-left gap-24px width-100">
-        <div class="survey-questions-wrap">
-          @for (question of questions(); track question.id) {
-            <div class="survey__question">
-              <div class="survey__question--headline">
-                <span>{{ $index + 1 }}.</span>
-                <div class="fbox-col-left gap-4px">
-                  <p>{{ question.text }}</p>
-                  <p [class.d-none]="!question.multipleAnswers" class="survey__question--subline">
-                    Multiple answers are possible.
-                  </p>
-                </div>
-              </div>
-              <div class="fbox-col-left gap-8px width-100">
-                @for (answer of answers()[$index]; track answer.id) {
-                  <div class="survey__answer">
-                    <span class="survey__answer--checkbox"></span>
-                    <span class="survey__answer--selector"
-                      >{{ answerService.getSelectorByNumber($index) }}.</span
-                    >
-                    <span class="survey__answer--text">{{ answer.text }}</span>
-                  </div>
-                }
-              </div>
+      <div class="fbox-row gap-42px">
+        <div class="survey">
+          <!-- <div class="fbox-col-left gap-42px"> -->
+          <div class="fbox-col-left gap-16px width-100">
+            <div class="status status--secondary">Published</div>
+            <div class="survey__date-category-wrap survey__text">
+              @if (survey().endDate) {
+                <span>Ends on {{ convertISOtoGermanDateStr(survey().endDate) }}</span>
+              } @else {
+                <span>Active</span>
+              }
+              <span>Category: {{ survey().category }}</span>
             </div>
-          }
-        </div>
-        <div class="fbox-row-space-between-flex-end width-100">
-          <span></span>
-          <button routerLink="" class="btn btn--primary">Complete survey</button>
-        </div>
-      </form>
-    </div>
-    <div class="results">
-      <h3 class="results__headline">
-        <span class="results__headline results__healine--default">Survey results </span>
-        <span class="results__headline results__headline--addition">LIVE</span>
-      </h3>
-      <div class="fbox-col-left gap-24px">
-        @for (question of questions(); track question.id) {
-          <div class="fbox-col-left gap-16px">
-            <div class="results__question">{{ question.text }}</div>
-            <div class="fbox-col-left gap-6px width-100">
-              @for (answer of answers()[$index]; track answer.id) {
-                <div class="results__answer">
-                  <div class="results__answer--selector">
-                    {{ answerService.getSelectorByNumber($index) }}
+            <h2 class="survey__headline">{{ survey().name }}</h2>
+            <div class="survey__text">
+              {{ survey().description }}
+            </div>
+          </div>
+          <!-- </div> -->
+          <form class="fbox-col-left gap-24px width-100">
+            <div class="survey-questions-wrap">
+              @for (question of questions(); track question.id) {
+                <div class="survey__question">
+                  <div class="survey__question--headline">
+                    <span>{{ $index + 1 }}.</span>
+                    <div class="fbox-col-left gap-4px">
+                      <p>{{ question.text }}</p>
+                      <p
+                        [class.d-none]="!question.multipleAnswers"
+                        class="survey__question--subline"
+                      >
+                        Multiple answers are possible.
+                      </p>
+                    </div>
                   </div>
-                  <div class="results__progress-bar">
-                    <div class="results__progress-bar results__progress-bar--bg"></div>
-                    <div class="results__progress-bar results__progress-bar--progress"></div>
-                  </div>
-                  <div class="results__answer--number">
-                    {{ getAnswerResult(answer.resultCount, this.survey().participantsCount) }}
+                  <div class="fbox-col-left gap-8px width-100">
+                    @for (answer of answers()[$index]; track answer.id) {
+                      <div class="survey__answer">
+                        <span class="survey__answer--checkbox"></span>
+                        <span class="survey__answer--selector"
+                          >{{ answerService.getSelectorByNumber($index) }}.</span
+                        >
+                        <span class="survey__answer--text">{{ answer.text }}</span>
+                      </div>
+                    }
                   </div>
                 </div>
               }
             </div>
+            <div class="fbox-row-space-between-flex-end width-100">
+              <span></span>
+              <button routerLink="" class="btn btn--primary">Complete survey</button>
+            </div>
+          </form>
+        </div>
+        <div class="results">
+          <h3 class="results__headline">
+            <span class="results__headline results__healine--default">Survey results </span>
+            <span class="results__headline results__headline--addition">LIVE</span>
+          </h3>
+          <div class="fbox-col-left gap-24px">
+            @for (question of questions(); track question.id) {
+              <div class="fbox-col-left gap-16px">
+                <div class="results__question">{{ question.text }}</div>
+                <div class="fbox-col-left gap-6px width-100">
+                  @for (answer of answers()[$index]; track answer.id) {
+                    <div class="results__answer">
+                      <div class="results__answer--selector">
+                        {{ answerService.getSelectorByNumber($index) }}
+                      </div>
+                      <div class="results__progress-bar">
+                        <div class="results__progress-bar results__progress-bar--bg"></div>
+                        <div class="results__progress-bar results__progress-bar--progress"></div>
+                      </div>
+                      <div class="results__answer--number">
+                        {{ getAnswerResult(answer.resultCount, this.survey().participantsCount) }}
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
           </div>
-        }
+        </div>
       </div>
-    </div>
+    </section>
   </div>
-</section>
+</div>
