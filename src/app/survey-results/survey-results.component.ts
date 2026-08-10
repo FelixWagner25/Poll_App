@@ -1,18 +1,28 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Question } from '../shared/interfaces/question';
 import { Answer } from '../shared/interfaces/answer';
 import { AnswerService } from '../shared/services/answer.service';
+import {
+  AbstractControl,
+  FormArray,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
+import { QuestionSelectionForm } from '../shared/interfaces/question-selection-form';
 
 @Component({
   selector: 'app-survey-results',
-  imports: [RouterLink],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './survey-results.component.html',
   styleUrl: './survey-results.component.scss',
 })
 export class SurveyResultsComponent {
+  router = inject(Router);
   private route = inject(ActivatedRoute);
   readonly surveyService = inject(SurveyService);
   answerService = inject(AnswerService);
@@ -79,4 +89,25 @@ export class SurveyResultsComponent {
       answer.resultCount--;
     }
   }
+
+  questionsForm = new FormArray<FormGroup<QuestionSelectionForm>>([]);
+
+  publishAnswerSelection() {
+    this.router.navigate(['/'], { fragment: 'surveys' });
+  }
+}
+
+export function answerSelectionValidator(multipleAnswers: boolean): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const selectedAnswers = control.value as boolean[];
+    const selectedCount = selectedAnswers.filter((selection) => {
+      return selection;
+    }).length;
+
+    if (selectedCount === 0) return { noAnswerSelected: true };
+
+    if (!multipleAnswers && selectedCount > 1) return { multipleAnswersNotAllowed: true };
+
+    return null;
+  };
 }

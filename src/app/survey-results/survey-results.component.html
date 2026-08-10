@@ -27,7 +27,11 @@
             </div>
           </div>
           <!-- </div> -->
-          <form class="fbox-col-left gap-24px width-100">
+          <form
+            class="fbox-col-left gap-24px width-100"
+            [formGroup]="questionForm"
+            (ngSubmit)="publishAnswerSelection()"
+          >
             <div class="survey-questions-wrap">
               @for (question of questions(); track question.id) {
                 <div class="survey__question">
@@ -64,7 +68,7 @@
             </div>
             <div class="fbox-row-space-between-flex-end width-100">
               <span></span>
-              <button routerLink="" class="btn btn--primary">Complete survey</button>
+              <button routerLink="" class="btn btn--primary" type="submit">Complete survey</button>
             </div>
           </form>
         </div>
