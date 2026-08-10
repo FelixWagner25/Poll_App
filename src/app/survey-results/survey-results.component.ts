@@ -8,6 +8,7 @@ import { AnswerService } from '../shared/services/answer.service';
 import {
   AbstractControl,
   FormArray,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
@@ -36,6 +37,7 @@ export class SurveyResultsComponent {
         return survey.id === this.surveyId;
       })[0],
   );
+  questionsForm = new FormArray<FormGroup<QuestionSelectionForm>>([]);
 
   async ngOnInit(): Promise<void> {
     const currentSurveyId = this.route.snapshot.paramMap.get('id');
@@ -62,7 +64,10 @@ export class SurveyResultsComponent {
         });
         this.answers.set([...this.answers(), questionAnswers]);
       }
-    } catch (error) {}
+      this.buildQuestionsForm();
+    } catch (error) {
+      console.log(error);
+    }
     console.log(this.survey());
   }
 
@@ -80,20 +85,39 @@ export class SurveyResultsComponent {
     return String(Math.round((resultCount / participantsCount) * 100)) + ' %';
   }
 
-  toggleAnswer(answer: Answer): void {
-    answer.userSelected = !answer.userSelected;
-    if (answer.userSelected) {
-      answer.resultCount++;
-    } else {
-      if (answer.resultCount == 0) return;
-      answer.resultCount--;
-    }
+  toggleAnswer(questionIndex: number, answerIndex: number): void {
+    const questionGroup = this.questionsForm.at(questionIndex);
+    const selectedAnswers = questionGroup.controls.selectedAnswers;
+    const answerControl = selectedAnswers.at(answerIndex);
+    answerControl.setValue(!answerControl.value);
   }
-
-  questionsForm = new FormArray<FormGroup<QuestionSelectionForm>>([]);
 
   publishAnswerSelection() {
     this.router.navigate(['/'], { fragment: 'surveys' });
+  }
+
+  buildQuestionsForm(): void {
+    this.questionsForm.clear();
+    for (let i = 0; i < this.questions().length; i++) {
+      const questionAnswers = this.answers()[i];
+
+      const answerControls = new FormArray<FormControl<boolean>>([], {
+        validators: [answerSelectionValidator(this.questions()[i].multipleAnswers)],
+      });
+
+      for (let j = 0; j < questionAnswers.length; j++) {
+        answerControls.push(
+          new FormControl<boolean>(false, {
+            nonNullable: true,
+          }),
+        );
+      }
+
+      const questionGroup = new FormGroup<QuestionSelectionForm>({
+        selectedAnswers: answerControls,
+      });
+      this.questionsForm.push(questionGroup);
+    }
   }
 }
 

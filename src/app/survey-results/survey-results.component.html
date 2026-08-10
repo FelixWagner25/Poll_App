@@ -10,60 +10,75 @@
       </div>
       <div class="fbox-row gap-42px">
         <div class="survey">
-          <!-- <div class="fbox-col-left gap-42px"> -->
-          <div class="fbox-col-left gap-16px width-100">
-            <div class="status status--secondary">Published</div>
-            <div class="survey__date-category-wrap survey__text">
-              @if (survey().endDate) {
-                <span>Ends on {{ convertISOtoGermanDateStr(survey().endDate) }}</span>
-              } @else {
-                <span>Active</span>
-              }
-              <span>Category: {{ survey().category }}</span>
+          @if (survey()) {
+            <!-- <div class="fbox-col-left gap-42px"> -->
+            <div class="fbox-col-left gap-16px width-100">
+              <div class="status status--secondary">Published</div>
+              <div class="survey__date-category-wrap survey__text">
+                @if (survey().endDate) {
+                  <span>Ends on {{ convertISOtoGermanDateStr(survey().endDate) }}</span>
+                } @else {
+                  <span>Active</span>
+                }
+                <span>Category: {{ survey().category }}</span>
+              </div>
+              <h2 class="survey__headline">{{ survey().name }}</h2>
+              <div class="survey__text">
+                {{ survey().description }}
+              </div>
             </div>
-            <h2 class="survey__headline">{{ survey().name }}</h2>
-            <div class="survey__text">
-              {{ survey().description }}
-            </div>
-          </div>
+          }
           <!-- </div> -->
           <form
             class="fbox-col-left gap-24px width-100"
-            [formGroup]="questionForm"
+            [formArray]="questionsForm"
             (ngSubmit)="publishAnswerSelection()"
           >
             <div class="survey-questions-wrap">
-              @for (question of questions(); track question.id) {
-                <div class="survey__question">
-                  <div class="survey__question--headline">
-                    <span>{{ $index + 1 }}.</span>
-                    <div class="fbox-col-left gap-4px">
-                      <p>{{ question.text }}</p>
-                      <p
-                        [class.d-none]="!question.multipleAnswers"
-                        class="survey__question--subline"
-                      >
-                        Multiple answers are possible.
-                      </p>
+              @if (questionsForm.length > 0) {
+                @for (question of questions(); track question.id; let questionIndex = $index) {
+                  <div class="survey__question">
+                    <div class="survey__question--headline">
+                      <span>{{ questionIndex + 1 }}.</span>
+                      <div class="fbox-col-left gap-4px">
+                        <p>{{ question.text }}</p>
+                        <p
+                          [class.d-none]="!question.multipleAnswers"
+                          class="survey__question--subline"
+                        >
+                          Multiple answers are possible.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="fbox-col-left gap-8px width-100">
+                      @for (
+                        answer of answers()[questionIndex];
+                        track answer.id;
+                        let answerIndex = $index
+                      ) {
+                        <div
+                          class="survey__answer"
+                          (click)="toggleAnswer(questionIndex, answerIndex)"
+                        >
+                          <span
+                            type="checkbox"
+                            class="survey__answer--checkbox"
+                            [class.checked]="
+                              questionsForm
+                                .at(questionIndex)
+                                .controls.selectedAnswers.at(answerIndex).value
+                            "
+                          >
+                          </span>
+                          <span class="survey__answer--selector"
+                            >{{ answerService.getSelectorByNumber($index) }}.</span
+                          >
+                          <span class="survey__answer--text">{{ answer.text }}</span>
+                        </div>
+                      }
                     </div>
                   </div>
-                  <div class="fbox-col-left gap-8px width-100">
-                    @for (answer of answers()[$index]; track answer.id) {
-                      <div class="survey__answer" (click)="toggleAnswer(answer)">
-                        <span
-                          type="checkbox"
-                          class="survey__answer--checkbox"
-                          [class.checked]="answer.userSelected"
-                        >
-                        </span>
-                        <span class="survey__answer--selector"
-                          >{{ answerService.getSelectorByNumber($index) }}.</span
-                        >
-                        <span class="survey__answer--text">{{ answer.text }}</span>
-                      </div>
-                    }
-                  </div>
-                </div>
+                }
               }
             </div>
             <div class="fbox-row-space-between-flex-end width-100">
@@ -78,14 +93,18 @@
             <span class="results__headline results__headline--addition">LIVE</span>
           </h3>
           <div class="fbox-col-left gap-24px">
-            @for (question of questions(); track question.id) {
+            @for (question of questions(); track question.id; let questionIndex = $index) {
               <div class="fbox-col-left gap-16px">
                 <div class="results__question">{{ question.text }}</div>
                 <div class="fbox-col-left gap-6px width-100">
-                  @for (answer of answers()[$index]; track answer.id) {
+                  @for (
+                    answer of answers()[questionIndex];
+                    track answer.id;
+                    let answerIndex = $index
+                  ) {
                     <div class="results__answer">
                       <div class="results__answer--selector">
-                        {{ answerService.getSelectorByNumber($index) }}
+                        {{ answerService.getSelectorByNumber(answerIndex) }}
                       </div>
                       <div class="results__progress-bar">
                         <div class="results__progress-bar results__progress-bar--bg"></div>

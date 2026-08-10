@@ -6,7 +6,6 @@ export class AnswerModel implements Answer {
   resultCount: number;
   positionIndex: number;
   questionId: string;
-  userSelected: boolean;
 
   constructor(data: Partial<Answer> = {}) {
     let randomId = crypto.randomUUID();
@@ -16,7 +15,6 @@ export class AnswerModel implements Answer {
     this.resultCount = data.resultCount ?? 0;
     this.positionIndex = data.positionIndex ?? 0;
     this.questionId = data.questionId ?? 'error';
-    this.userSelected = false; // Always false. There is no user managment but this attribute is needed for selection steering.
   }
 
   getCleanAddJson() {
