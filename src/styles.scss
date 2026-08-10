@@ -279,6 +279,12 @@ h2 {
     top: 50px;
     left: 12px;
   }
+
+  &--answer-selection {
+    position: absolute;
+    bottom: -16px;
+    left: 20px;
+  }
 }
 
 .scrollbar {

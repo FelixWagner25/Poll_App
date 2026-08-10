@@ -93,7 +93,13 @@ export class SurveyResultsComponent {
   }
 
   publishAnswerSelection() {
-    this.router.navigate(['/'], { fragment: 'surveys' });
+    if (this.questionsForm.invalid) {
+      this.questionsForm.markAllAsTouched();
+      console.log('All touched');
+    }
+    console.log('Complete survey');
+
+    //this.router.navigate(['/'], { fragment: 'surveys' });
   }
 
   buildQuestionsForm(): void {

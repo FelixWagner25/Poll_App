@@ -48,6 +48,28 @@
                         >
                           Multiple answers are possible.
                         </p>
+                        @if (
+                          this.questionsForm.at(questionIndex).controls.selectedAnswers.invalid &&
+                          (questionsForm.at(questionIndex).controls.selectedAnswers.dirty ||
+                            questionsForm.at(questionIndex).controls.selectedAnswers.touched)
+                        ) {
+                          <div class="error error--answer-selection">
+                            @if (
+                              this.questionsForm
+                                .at(questionIndex)
+                                .controls.selectedAnswers.hasError('noAnswerSelected')
+                            ) {
+                              <span>One answer is required.</span>
+                            }
+                            @if (
+                              this.questionsForm
+                                .at(questionIndex)
+                                .controls.selectedAnswers.hasError('multipleAnswersNotAllowed')
+                            ) {
+                              <span>Only one answer allowed.</span>
+                            }
+                          </div>
+                        }
                       </div>
                     </div>
                     <div class="fbox-col-left gap-8px width-100">
@@ -83,7 +105,7 @@
             </div>
             <div class="fbox-row-space-between-flex-end width-100">
               <span></span>
-              <button routerLink="" class="btn btn--primary" type="submit">Complete survey</button>
+              <button class="btn btn--primary" type="submit">Complete survey</button>
             </div>
           </form>
         </div>

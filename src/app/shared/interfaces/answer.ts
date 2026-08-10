@@ -4,5 +4,4 @@ export interface Answer {
   resultCount: number;
   positionIndex: number;
   questionId: string;
-  userSelected: boolean;
 }
