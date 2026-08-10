@@ -93,7 +93,7 @@
                           >
                           </span>
                           <span class="survey__answer--selector"
-                            >{{ answerService.getSelectorByNumber($index) }}.</span
+                            >{{ surveyService.getSelectorByNumber($index) }}.</span
                           >
                           <span class="survey__answer--text">{{ answer.text }}</span>
                         </div>
@@ -126,7 +126,7 @@
                   ) {
                     <div class="results__answer">
                       <div class="results__answer--selector">
-                        {{ answerService.getSelectorByNumber(answerIndex) }}
+                        {{ surveyService.getSelectorByNumber(answerIndex) }}
                       </div>
                       <div class="results__progress-bar">
                         <div class="results__progress-bar results__progress-bar--bg"></div>

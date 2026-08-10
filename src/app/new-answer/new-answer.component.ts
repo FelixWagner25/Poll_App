@@ -1,6 +1,6 @@
 import { Component, inject, input, output } from '@angular/core';
-import { AnswerService } from '../shared/services/answer.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { SurveyService } from '../shared/services/survey.service';
 
 @Component({
   selector: 'app-new-answer',
@@ -13,5 +13,5 @@ export class NewAnswerComponent {
   deleteAnswerEvent = output();
   answerControl = input.required<FormControl<string>>();
 
-  answerService = inject(AnswerService);
+  surveyService = inject(SurveyService);
 }

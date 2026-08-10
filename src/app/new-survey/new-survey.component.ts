@@ -15,7 +15,6 @@ import { NewQuestionComponent } from '../new-question/new-question.component';
 import { QuestionForm } from '../shared/interfaces/question-form';
 import { QuestionModel } from '../shared/models/question.model';
 import { AnswerModel } from '../shared/models/answer.model';
-import { AnswerService } from '../shared/services/answer.service';
 
 @Component({
   selector: 'app-new-survey',
@@ -26,7 +25,6 @@ import { AnswerService } from '../shared/services/answer.service';
 export class NewSurveyComponent {
   router = inject(Router);
   surveyService = inject(SurveyService);
-  answerService = inject(AnswerService);
 
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
@@ -89,7 +87,7 @@ export class NewSurveyComponent {
         positionIndex: j,
         questionId: questionId,
       });
-      this.answerService.addAnswer(answer);
+      this.surveyService.addAnswer(answer);
     }
   }
 

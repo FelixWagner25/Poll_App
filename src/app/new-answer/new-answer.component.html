@@ -1,7 +1,7 @@
 <div class="p-relative">
   <div class="fbox-row-center gap-8px">
     <span class="answer-tag"
-      >{{ this.answerService.getSelectorByNumber(this.answerNumber()) }}.</span
+      >{{ this.surveyService.getSelectorByNumber(this.answerNumber()) }}.</span
     >
     <input class="input input__answer" type="text" [formControl]="answerControl()" />
     <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>

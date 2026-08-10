@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Question } from '../shared/interfaces/question';
 import { Answer } from '../shared/interfaces/answer';
-import { AnswerService } from '../shared/services/answer.service';
 import {
   AbstractControl,
   FormArray,
@@ -26,7 +25,6 @@ export class SurveyResultsComponent {
   router = inject(Router);
   private route = inject(ActivatedRoute);
   readonly surveyService = inject(SurveyService);
-  answerService = inject(AnswerService);
 
   surveyId: string | null = null;
   questions = signal<Question[]>([]);
@@ -90,15 +88,21 @@ export class SurveyResultsComponent {
     const selectedAnswers = questionGroup.controls.selectedAnswers;
     const answerControl = selectedAnswers.at(answerIndex);
     answerControl.setValue(!answerControl.value);
+    if (answerControl) {
+      this.answers()[questionIndex][answerIndex].resultCount++;
+    } else {
+      if (this.answers()[questionIndex][answerIndex].resultCount == 0) return;
+      this.answers()[questionIndex][answerIndex].resultCount--;
+    }
   }
 
-  publishAnswerSelection() {
+  async publishAnswerSelection() {
     if (this.questionsForm.invalid) {
       this.questionsForm.markAllAsTouched();
-      console.log('All touched');
+      return;
     }
-    console.log('Complete survey');
-
+    await this.surveyService.addParticipantToSurvey(this.survey().id);
+    await this.updateAnswerResultsInDatabase();
     //this.router.navigate(['/'], { fragment: 'surveys' });
   }
 
@@ -123,6 +127,16 @@ export class SurveyResultsComponent {
         selectedAnswers: answerControls,
       });
       this.questionsForm.push(questionGroup);
+    }
+  }
+
+  async updateAnswerResultsInDatabase() {
+    for (let i = 0; i < this.questionsForm.length; i++) {
+      for (let j = 0; j < this.questionsForm.at(i).controls.selectedAnswers.length; j++) {
+        if (this.questionsForm.at(i).controls.selectedAnswers.at(j).value == true) {
+          await this.surveyService.addResultCountToAnswer(this.answers()[i][j].id);
+        }
+      }
     }
   }
 }
