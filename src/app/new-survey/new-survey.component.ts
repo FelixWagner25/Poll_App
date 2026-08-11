@@ -52,19 +52,19 @@ export class NewSurveyComponent {
     return this.surveyForm.controls.questions;
   }
 
-  publishSurvey(surveyId: string): void {
+  async publishSurvey(surveyId: string): Promise<void> {
     if (this.surveyForm.invalid) {
       this.surveyForm.markAllAsTouched();
       return;
     }
     let survey = new SurveyModel({ ...this.surveyForm.value, id: surveyId });
-    this.surveyService.addSurvey(survey);
-    this.addQuestionsToDatabase(surveyId);
+    await this.surveyService.addSurvey(survey);
+    await this.addQuestionsToDatabase(surveyId);
 
     this.published.set(!this.published());
   }
 
-  addQuestionsToDatabase(surveyId: string) {
+  async addQuestionsToDatabase(surveyId: string) {
     for (let i = 0; i < this.questionFormArray.length; i++) {
       let questionId = crypto.randomUUID();
       let question = new QuestionModel({
@@ -73,12 +73,12 @@ export class NewSurveyComponent {
         positionIndex: i,
         surveyId: surveyId,
       });
-      this.surveyService.addQuestion(question);
-      this.addAnswersToDatabase(i, questionId);
+      await this.surveyService.addQuestion(question);
+      await this.addAnswersToDatabase(i, questionId);
     }
   }
 
-  addAnswersToDatabase(formGroupIndex: number, questionId: string) {
+  async addAnswersToDatabase(formGroupIndex: number, questionId: string) {
     for (let j = 0; j < this.questionFormArray.at(formGroupIndex).controls.answers.length; j++) {
       let answerId = crypto.randomUUID();
       let answer = new AnswerModel({
@@ -87,7 +87,7 @@ export class NewSurveyComponent {
         positionIndex: j,
         questionId: questionId,
       });
-      this.surveyService.addAnswer(answer);
+      await this.surveyService.addAnswer(answer);
     }
   }
 

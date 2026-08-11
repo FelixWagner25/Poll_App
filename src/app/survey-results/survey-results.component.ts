@@ -1,9 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
-import { Question } from '../shared/interfaces/question';
-import { Answer } from '../shared/interfaces/answer';
 import {
   AbstractControl,
   FormArray,
@@ -14,6 +12,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { QuestionSelectionForm } from '../shared/interfaces/question-selection-form';
+import { calcDateDiffDays, getTodaysShortISOString } from '../shared/utilities/utilities';
 
 @Component({
   selector: 'app-survey-results',
@@ -56,7 +55,9 @@ export class SurveyResultsComponent {
     answerControl.setValue(!answerControl.value);
   }
 
-  async publishAnswerSelection() {
+  async publishAnswerSelection(): Promise<void> {
+    if (this.surveyHasEnded()) return;
+
     if (this.questionsForm.invalid) {
       this.questionsForm.markAllAsTouched();
       return;
@@ -96,6 +97,17 @@ export class SurveyResultsComponent {
         selectedAnswers: answerControls,
       });
       this.questionsForm.push(questionGroup);
+    }
+  }
+
+  surveyHasEnded() {
+    let survey = this.surveyService.survey();
+    if (survey) {
+      const todayStr = getTodaysShortISOString();
+      const diffDays = calcDateDiffDays(todayStr, survey.endDate);
+      return diffDays < 0;
+    } else {
+      return false;
     }
   }
 }
