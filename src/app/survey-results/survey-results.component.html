@@ -130,7 +130,12 @@
                       </div>
                       <div class="results__progress-bar">
                         <div class="results__progress-bar results__progress-bar--bg"></div>
-                        <div class="results__progress-bar results__progress-bar--progress"></div>
+                        <div
+                          class="results__progress-bar results__progress-bar--progress"
+                          [style.width]="
+                            getAnswerResult(answer.resultCount, this.survey().participantsCount)
+                          "
+                        ></div>
                       </div>
                       <div class="results__answer--number">
                         {{ getAnswerResult(answer.resultCount, this.survey().participantsCount) }}

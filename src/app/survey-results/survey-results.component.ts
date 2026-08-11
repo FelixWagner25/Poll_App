@@ -80,7 +80,7 @@ export class SurveyResultsComponent {
 
   getAnswerResult(resultCount: number, participantsCount: number): string {
     if (participantsCount == 0) return '0 %';
-    return String(Math.round((resultCount / participantsCount) * 100)) + ' %';
+    return String(Math.round((resultCount / participantsCount) * 100)) + '%';
   }
 
   toggleAnswer(questionIndex: number, answerIndex: number): void {

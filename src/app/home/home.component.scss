@@ -4,6 +4,7 @@
 section {
   min-height: 100vh;
   padding: 40px 110px;
+  padding-bottom: 184px;
   @include mx.d-flex(
     $flex-direction: column,
     $justify-content: flex-start,
