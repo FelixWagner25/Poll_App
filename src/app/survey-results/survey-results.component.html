@@ -10,21 +10,22 @@
       </div>
       <div class="fbox-row gap-42px">
         <div class="survey">
-          @if (survey()) {
+          @let survey = surveyService.survey();
+          @if (survey !== null) {
             <!-- <div class="fbox-col-left gap-42px"> -->
             <div class="fbox-col-left gap-16px width-100">
               <div class="status status--secondary">Published</div>
               <div class="survey__date-category-wrap survey__text">
-                @if (survey().endDate) {
-                  <span>Ends on {{ convertISOtoGermanDateStr(survey().endDate) }}</span>
+                @if (survey.endDate) {
+                  <span>Ends on {{ convertISOtoGermanDateStr(survey.endDate) }}</span>
                 } @else {
                   <span>Active</span>
                 }
-                <span>Category: {{ survey().category }}</span>
+                <span>Category: {{ survey.category }}</span>
               </div>
-              <h2 class="survey__headline">{{ survey().name }}</h2>
+              <h2 class="survey__headline">{{ survey.name }}</h2>
               <div class="survey__text">
-                {{ survey().description }}
+                {{ survey.description }}
               </div>
             </div>
           }
@@ -73,11 +74,7 @@
                       </div>
                     </div>
                     <div class="fbox-col-left gap-8px width-100">
-                      @for (
-                        answer of answers()[questionIndex];
-                        track answer.id;
-                        let answerIndex = $index
-                      ) {
+                      @for (answer of question.answers; track answer.id; let answerIndex = $index) {
                         <div
                           class="survey__answer"
                           (click)="toggleAnswer(questionIndex, answerIndex)"
@@ -119,26 +116,21 @@
               <div class="fbox-col-left gap-16px">
                 <div class="results__question">{{ question.text }}</div>
                 <div class="fbox-col-left gap-6px width-100">
-                  @for (
-                    answer of answers()[questionIndex];
-                    track answer.id;
-                    let answerIndex = $index
-                  ) {
+                  @for (answer of question.answers; track answer.id; let answerIndex = $index) {
                     <div class="results__answer">
                       <div class="results__answer--selector">
                         {{ surveyService.getSelectorByNumber(answerIndex) }}
                       </div>
                       <div class="results__progress-bar">
-                        <div class="results__progress-bar results__progress-bar--bg"></div>
-                        <div
-                          class="results__progress-bar results__progress-bar--progress"
-                          [style.width]="
-                            getAnswerResult(answer.resultCount, this.survey().participantsCount)
-                          "
-                        ></div>
+                        <div class="results__progress-bar results__progress-bar--bg">
+                          <div
+                            class="results__progress-bar results__progress-bar--progress"
+                            [style.width.%]="surveyService.getAnswerPercentage(answer.resultCount)"
+                          ></div>
+                        </div>
                       </div>
                       <div class="results__answer--number">
-                        {{ getAnswerResult(answer.resultCount, this.survey().participantsCount) }}
+                        {{ surveyService.getAnswerPercentage(answer.resultCount) }}%
                       </div>
                     </div>
                   }

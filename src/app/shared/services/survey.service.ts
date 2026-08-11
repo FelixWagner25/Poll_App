@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { createClient, RealtimeChannel } from '@supabase/supabase-js';
 import { Survey } from '../interfaces/survey';
 import { SurveyModel } from '../models/survey.model';
@@ -8,6 +8,7 @@ import { QuestionModel } from '../models/question.model';
 import { Question } from '../interfaces/question';
 import { Answer } from '../interfaces/answer';
 import { AnswerModel } from '../models/answer.model';
+import { SurveyWithResults } from '../interfaces/suvery-with-results';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,10 @@ export class SurveyService {
   surveysAllEventsChannel;
 
   surveyList = signal<Survey[]>([]);
+  survey = signal<SurveyWithResults | null>(null);
+
+  surveyQuestions = computed(() => this.survey()?.questions ?? []);
+  participantsCount = computed(() => this.survey()?.participantsCount ?? 0);
 
   constructor() {
     this.surveysAllEventsChannel = this.createSurveysDBSubscriptionChannel();
@@ -30,6 +35,11 @@ export class SurveyService {
   async getAllSurveys(): Promise<void> {
     let response = await this.supabase.from('surveys').select('*');
     this.surveyList.set((response.data ?? []) as Survey[]);
+  }
+
+  async loadSurveyWithResults(surveyId: string): Promise<void> {
+    const survey = await this.getSurveyWithQuestionsAndAnswers(surveyId);
+    this.survey.set(survey);
   }
 
   async addSurvey(survey: SurveyModel): Promise<void> {
@@ -58,24 +68,6 @@ export class SurveyService {
     if (error) printPostgrestErrorMsg(error);
   }
 
-  async getQuestionsBySurveyId(surveyId: string): Promise<Question[]> {
-    let { data, error } = await this.supabase
-      .from('questions')
-      .select('*')
-      .eq('surveyId', surveyId);
-    if (error) throw error;
-    return (data ?? []) as Question[];
-  }
-
-  async getAnswersByQuestionId(questionId: string): Promise<Answer[]> {
-    let { data, error } = await this.supabase
-      .from('answers')
-      .select('*')
-      .eq('questionId', questionId);
-    if (error) throw error;
-    return (data ?? []) as Answer[];
-  }
-
   async addAnswer(answer: AnswerModel): Promise<void> {
     const answerData = answer;
     const { data, error } = await this.supabase.from('answers').insert([answerData]).select();
@@ -101,41 +93,65 @@ export class SurveyService {
     }
   }
 
-  async addParticipantToSurvey(surveyId: string): Promise<void> {
-    const { data: survey, error } = await this.supabase
+  async getSurveyWithQuestionsAndAnswers(surveyId: string): Promise<SurveyWithResults> {
+    const { data, error } = await this.supabase
       .from('surveys')
-      .select('participantsCount')
+      .select(
+        `
+      id,
+      name,
+      description,
+      category,
+      endDate,
+      participantsCount,
+      questions (
+        id,
+        text,
+        multipleAnswers,
+        positionIndex,
+        surveyId,
+        answers (
+          id,
+          text,
+          resultCount,
+          positionIndex,
+          questionId
+        )
+      )
+    `,
+      )
       .eq('id', surveyId)
-      .single();
-    if (error) throw error;
-    const participantsCount = survey.participantsCount;
-    const { data, error: updateError } = await this.supabase
-      .from('surveys')
-      .update({ participantsCount: participantsCount + 1 })
-      .eq('id', surveyId)
-      .select()
+      .order('positionIndex', {
+        referencedTable: 'questions',
+        ascending: true,
+      })
+      .order('positionIndex', {
+        referencedTable: 'questions.answers',
+        ascending: true,
+      })
       .single();
 
-    if (updateError) throw updateError;
+    if (error) {
+      throw error;
+    }
+
+    return data as SurveyWithResults;
   }
 
-  async addResultCountToAnswer(answerId: string): Promise<void> {
-    const { data: answer, error } = await this.supabase
-      .from('answers')
-      .select('resultCount')
-      .eq('id', answerId)
-      .single();
+  getAnswerPercentage(resultCount: number): number {
+    const participants = this.participantsCount();
+    if (participants == 0) return 0;
+    return Math.round((resultCount / participants) * 100);
+  }
+
+  async submitSurveyResults(surveyId: string, answerIds: string[]): Promise<void> {
+    const { error } = await this.supabase.rpc('submit_survey_vote', {
+      p_survey_id: surveyId,
+      p_answer_ids: answerIds,
+    });
+
     if (error) throw error;
 
-    const resultCount = answer.resultCount;
-
-    const { data, error: updateError } = await this.supabase
-      .from('answers')
-      .update({ resultCount: resultCount + 1 })
-      .eq('id', answerId)
-      .select()
-      .single();
-
-    if (updateError) throw updateError;
+    await this.loadSurveyWithResults(surveyId);
   }
 }

@@ -26,47 +26,18 @@ export class SurveyResultsComponent {
   private route = inject(ActivatedRoute);
   readonly surveyService = inject(SurveyService);
 
-  surveyId: string | null = null;
-  questions = signal<Question[]>([]);
-  answers = signal<Answer[][]>([]);
-  survey = computed(
-    () =>
-      this.surveyService.surveyList().filter((survey) => {
-        return survey.id === this.surveyId;
-      })[0],
-  );
+  surveyId = '';
+  survey = this.surveyService.survey;
+  questions = this.surveyService.surveyQuestions;
+
   questionsForm = new FormArray<FormGroup<QuestionSelectionForm>>([]);
 
   async ngOnInit(): Promise<void> {
-    const currentSurveyId = this.route.snapshot.paramMap.get('id');
-    if (currentSurveyId === null) return;
-    this.surveyId = currentSurveyId;
-
-    try {
-      const questions = await this.surveyService.getQuestionsBySurveyId(this.surveyId);
-      this.questions.set(
-        [...questions].sort((a, b) => {
-          return a.positionIndex - b.positionIndex;
-        }),
-      );
-    } catch (error) {
-      console.error(error);
-    }
-
-    try {
-      for (let i = 0; i < this.questions().length; i++) {
-        const questionId = this.questions()[i].id;
-        let questionAnswers = await this.surveyService.getAnswersByQuestionId(questionId);
-        questionAnswers.sort((a, b) => {
-          return a.positionIndex - b.positionIndex;
-        });
-        this.answers.set([...this.answers(), questionAnswers]);
-      }
-      this.buildQuestionsForm();
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(this.survey());
+    const surveyId = this.route.snapshot.paramMap.get('id');
+    if (!surveyId) return;
+    this.surveyId = surveyId;
+    await this.surveyService.loadSurveyWithResults(this.surveyId);
+    this.buildQuestionsForm();
   }
 
   convertISOtoGermanDateStr(endDate: string): string {
@@ -78,22 +49,11 @@ export class SurveyResultsComponent {
     return year + '.' + month + '.' + day;
   }
 
-  getAnswerResult(resultCount: number, participantsCount: number): string {
-    if (participantsCount == 0) return '0 %';
-    return String(Math.round((resultCount / participantsCount) * 100)) + '%';
-  }
-
   toggleAnswer(questionIndex: number, answerIndex: number): void {
     const questionGroup = this.questionsForm.at(questionIndex);
     const selectedAnswers = questionGroup.controls.selectedAnswers;
     const answerControl = selectedAnswers.at(answerIndex);
     answerControl.setValue(!answerControl.value);
-    if (answerControl) {
-      this.answers()[questionIndex][answerIndex].resultCount++;
-    } else {
-      if (this.answers()[questionIndex][answerIndex].resultCount == 0) return;
-      this.answers()[questionIndex][answerIndex].resultCount--;
-    }
   }
 
   async publishAnswerSelection() {
@@ -101,21 +61,30 @@ export class SurveyResultsComponent {
       this.questionsForm.markAllAsTouched();
       return;
     }
-    await this.surveyService.addParticipantToSurvey(this.survey().id);
-    await this.updateAnswerResultsInDatabase();
+    const selectedAnswerIds: string[] = [];
+
+    this.questions().forEach((question, questionIndex) => {
+      const selections = this.questionsForm.at(questionIndex).controls.selectedAnswers;
+
+      question.answers.forEach((answer, answerIndex) => {
+        if (selections.at(answerIndex).value) {
+          selectedAnswerIds.push(answer.id);
+        }
+      });
+    });
+
+    await this.surveyService.submitSurveyResults(this.surveyId, selectedAnswerIds);
     //this.router.navigate(['/'], { fragment: 'surveys' });
   }
 
   buildQuestionsForm(): void {
     this.questionsForm.clear();
     for (let i = 0; i < this.questions().length; i++) {
-      const questionAnswers = this.answers()[i];
-
       const answerControls = new FormArray<FormControl<boolean>>([], {
         validators: [answerSelectionValidator(this.questions()[i].multipleAnswers)],
       });
 
-      for (let j = 0; j < questionAnswers.length; j++) {
+      for (let j = 0; j < this.questions()[i].answers.length; j++) {
         answerControls.push(
           new FormControl<boolean>(false, {
             nonNullable: true,
@@ -127,16 +96,6 @@ export class SurveyResultsComponent {
         selectedAnswers: answerControls,
       });
       this.questionsForm.push(questionGroup);
-    }
-  }
-
-  async updateAnswerResultsInDatabase() {
-    for (let i = 0; i < this.questionsForm.length; i++) {
-      for (let j = 0; j < this.questionsForm.at(i).controls.selectedAnswers.length; j++) {
-        if (this.questionsForm.at(i).controls.selectedAnswers.at(j).value == true) {
-          await this.surveyService.addResultCountToAnswer(this.answers()[i][j].id);
-        }
-      }
     }
   }
 }
