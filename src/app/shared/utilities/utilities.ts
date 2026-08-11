@@ -31,7 +31,8 @@ export function printPostgrestErrorMsg(error: PostgrestError): void {
 export function calcDateDiffDays(dateString1: string, dateString2: string): number {
   const date1 = new Date(dateString1);
   const date2 = new Date(dateString2);
-  return date2.getDay() - date1.getDay();
+  const msPerDay = 24 * 60 * 60 * 100;
+  return (date2.getTime() - date1.getTime()) / msPerDay;
 }
 
 export function getTodaysShortISOString(): string {

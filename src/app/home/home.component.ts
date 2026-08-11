@@ -60,7 +60,13 @@ export class HomeComponent {
   getRemainingDaysString(endDate: string): string {
     if (endDate == '') return 'Active';
     const todayStr = getTodaysShortISOString();
+    console.log('getTodaysShortISOString', todayStr);
+
     const diffDays = calcDateDiffDays(todayStr, endDate);
+    console.log('endDate', endDate);
+
+    console.log('diffDays', diffDays);
+
     if (diffDays < 0) {
       return 'Ended';
     } else if (diffDays == 0) {
