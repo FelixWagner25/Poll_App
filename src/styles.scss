@@ -77,6 +77,17 @@ h2 {
     height: 0;
     transition: all 300ms ease-out;
   }
+
+  &--primary.disabled {
+    color: #221227;
+    background-color: abs.$tertiary-orange;
+    height: 48px;
+
+    &:hover {
+      background-color: abs.$tertiary-orange;
+      cursor: default;
+    }
+  }
 }
 
 .status {

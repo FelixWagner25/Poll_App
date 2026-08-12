@@ -103,9 +103,13 @@
             <div class="fbox-row-space-between-flex-end width-100">
               <span></span>
               <div>
-                <button class="btn btn--primary" type="submit">Complete survey</button>
+                <button class="btn btn--primary" [class.disabled]="surveyHasEnded()" type="submit">
+                  Complete survey
+                </button>
                 @if (this.surveyHasEnded()) {
-                  <span class="error">Survey has ended. No submission possible, any more.</span>
+                  <div class="fbox-row-center-center">
+                    <span class="error">Survey has ended.</span>
+                  </div>
                 }
               </div>
             </div>
