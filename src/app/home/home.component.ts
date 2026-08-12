@@ -3,12 +3,13 @@ import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Category } from '../shared/types/category';
 import { calcDateDiffDays, getTodaysShortISOString } from '../shared/utilities/utilities';
+import { NewSurveyComponent } from '../new-survey/new-survey.component';
 
 type SurveyStatusFilter = 'active' | 'past';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, NewSurveyComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -19,6 +20,7 @@ export class HomeComponent {
   selectedCategory = signal<Category>(null);
 
   selectedSurveyStatus = signal<SurveyStatusFilter>('active');
+  overlayOpen = signal(false);
 
   yourSurveys = computed(() => {
     let surveys = this.surveyService.surveyList();
@@ -84,5 +86,13 @@ export class HomeComponent {
 
   pastSurveyFilter() {
     return this.selectedSurveyStatus() === 'past';
+  }
+
+  openOverlay(): void {
+    this.overlayOpen.set(true);
+  }
+
+  closeOverlay(): void {
+    this.overlayOpen.set(false);
   }
 }

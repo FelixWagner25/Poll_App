@@ -13,7 +13,7 @@
             opinious, engage your audience, <br />
             and turn feedback into action.
           </p>
-          <button routerLink="new-survey/" class="title__btn btn btn--primary">
+          <button (click)="openOverlay()" class="title__btn btn btn--primary">
             <span>New survey</span>
             <span class="btn__add-circle"></span>
           </button>
@@ -150,3 +150,8 @@
     </section>
   </div>
 </div>
+<app-new-survey
+  class="overlay"
+  [class.overlay--open]="overlayOpen()"
+  (closeOverlayEvent)="closeOverlay()"
+></app-new-survey>

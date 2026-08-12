@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   FormControl,
@@ -28,6 +28,7 @@ export class NewSurveyComponent {
 
   dropdownOpened = signal<boolean>(false);
   published = signal<boolean>(false);
+  closeOverlayEvent = output<void>();
   indexLimitQuestions = 6;
   readonly surveyId: string = crypto.randomUUID();
 

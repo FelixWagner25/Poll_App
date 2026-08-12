@@ -21,10 +21,18 @@ button {
   display: none;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 h2 {
   font-family: 'Nerko_One';
   @include abs.font(72px, 400);
   color: abs.$primary-orange;
+}
+
+.bg-default {
+  background-color: abs.$bg-default;
 }
 
 .bg-purple {
@@ -312,4 +320,26 @@ h2 {
     background-color: abs.$secondary-orange;
     border-radius: 10px;
   }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms ease-out,
+    visibility 300ms;
+}
+
+.overlay--open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
