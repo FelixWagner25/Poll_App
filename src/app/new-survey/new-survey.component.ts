@@ -94,6 +94,7 @@ export class NewSurveyComponent {
 
   navigateToPublishedSurvey(surveyId: string): void {
     this.router.navigate(['/survey-results', surveyId]);
+    this.closeOverlayEvent.emit();
   }
 
   toggleDropdown(): void {
