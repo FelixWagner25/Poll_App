@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, Renderer2 } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
@@ -13,10 +13,11 @@ import {
 } from '@angular/forms';
 import { QuestionSelectionForm } from '../shared/interfaces/question-selection-form';
 import { calcDateDiffDays, getTodaysShortISOString } from '../shared/utilities/utilities';
+import { NewSurveyComponent } from '../new-survey/new-survey.component';
 
 @Component({
   selector: 'app-survey-results',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, NewSurveyComponent],
   templateUrl: './survey-results.component.html',
   styleUrl: './survey-results.component.scss',
 })
@@ -28,8 +29,11 @@ export class SurveyResultsComponent {
   surveyId = '';
   survey = this.surveyService.survey;
   questions = this.surveyService.surveyQuestions;
+  overlayOpen = signal(false);
 
   questionsForm = new FormArray<FormGroup<QuestionSelectionForm>>([]);
+
+  constructor(private renderer: Renderer2) {}
 
   async ngOnInit(): Promise<void> {
     const surveyId = this.route.snapshot.paramMap.get('id');
@@ -109,6 +113,16 @@ export class SurveyResultsComponent {
     } else {
       return false;
     }
+  }
+
+  openOverlay(): void {
+    this.overlayOpen.set(true);
+    this.renderer.addClass(document.body, 'overflow-hidden');
+  }
+
+  closeOverlay(): void {
+    this.overlayOpen.set(false);
+    this.renderer.removeClass(document.body, 'overflow-hidden');
   }
 }
 

@@ -3,7 +3,7 @@
     <section>
       <div class="fbox-row-space-between width-100">
         <img routerLink="" src="assets/img/logo_purple.svg" class="logo" alt="PollApp Logo" />
-        <button routerLink="/new-survey" class="btn btn--primary">
+        <button (click)="openOverlay()" class="btn btn--primary">
           <span>Create survey</span>
           <span class="btn__add-circle"></span>
         </button>
@@ -152,3 +152,8 @@
     </section>
   </div>
 </div>
+<app-new-survey
+  class="overlay"
+  [class.overlay--open]="overlayOpen()"
+  (closeOverlayEvent)="closeOverlay()"
+></app-new-survey>
