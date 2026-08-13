@@ -110,7 +110,6 @@ section {
 
 .surveys {
   width: 100%;
-  padding-right: 40px;
   @include mx.d-flex(
     $flex-direction: column,
     $justify-content: center,

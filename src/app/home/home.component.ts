@@ -35,7 +35,6 @@ export class HomeComponent {
       const remainingDays = calcDateDiffDays(today, survey.endDate);
       const matchedStatus =
         (status === 'active' && remainingDays >= 0) || (status === 'past' && remainingDays < 0);
-      //return survey.category == this.selectedCategory() ? true : false;
       return matchedCategory && matchedStatus;
     });
   });
@@ -46,7 +45,7 @@ export class HomeComponent {
       .filter((survey) => {
         if (!survey.endDate) return false;
         const remainingDays = calcDateDiffDays(getTodaysShortISOString(), survey.endDate);
-        return remainingDays >= 0 && remainingDays < 3;
+        return remainingDays >= 0;
       })
       .sort((a, b) => a.endDate.localeCompare(b.endDate))
       .slice(0, 3);
