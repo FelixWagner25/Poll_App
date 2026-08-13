@@ -1,5 +1,5 @@
 import { Component, inject, output, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -18,7 +18,7 @@ import { AnswerModel } from '../shared/models/answer.model';
 
 @Component({
   selector: 'app-new-survey',
-  imports: [RouterLink, FormsModule, ReactiveFormsModule, NewQuestionComponent],
+  imports: [FormsModule, ReactiveFormsModule, NewQuestionComponent],
   templateUrl: './new-survey.component.html',
   styleUrl: './new-survey.component.scss',
 })

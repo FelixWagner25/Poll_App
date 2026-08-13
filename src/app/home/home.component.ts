@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, Renderer2 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Category } from '../shared/types/category';
@@ -21,6 +21,8 @@ export class HomeComponent {
 
   selectedSurveyStatus = signal<SurveyStatusFilter>('active');
   overlayOpen = signal(false);
+
+  constructor(private renderer: Renderer2) {}
 
   yourSurveys = computed(() => {
     let surveys = this.surveyService.surveyList();
@@ -90,9 +92,11 @@ export class HomeComponent {
 
   openOverlay(): void {
     this.overlayOpen.set(true);
+    this.renderer.addClass(document.body, 'overflow-hidden');
   }
 
   closeOverlay(): void {
     this.overlayOpen.set(false);
+    this.renderer.removeClass(document.body, 'overflow-hidden');
   }
 }
