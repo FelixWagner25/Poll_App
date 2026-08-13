@@ -107,8 +107,9 @@
                   Complete survey
                 </button>
                 @if (this.surveyHasEnded()) {
-                  <div class="fbox-row-center-center">
-                    <span class="error">Survey has ended.</span>
+                  <div class="fbox-col-center">
+                    <div class="error">Survey has ended.</div>
+                    <div class="error">No submission possible, any more.</div>
                   </div>
                 }
               </div>
