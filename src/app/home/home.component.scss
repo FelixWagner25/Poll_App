@@ -16,6 +16,10 @@ section {
 .title {
   @include mx.d-flex($gap: 32px, $align-items: flex-start);
 
+  @include mx.respond(zero, xl) {
+    flex-direction: column;
+  }
+
   &__text-wrap {
     @include mx.d-flex(
       $flex-direction: column,
@@ -30,8 +34,14 @@ section {
     color: col.$primary-orange;
     @include mx.font-size-wght(100px, 400);
     line-height: 90%;
+
     @include mx.respond(xxl, max) {
       font-size: 72px;
+    }
+    @include mx.respond(zero, xxl) {
+      font-size: 62px;
+    }
+    @include mx.respond(zero, xl) {
     }
   }
 
@@ -42,6 +52,9 @@ section {
     line-height: 120%;
     @include mx.respond(xxl, max) {
       font-size: 20px;
+    }
+    @include mx.respond(zero, xxl) {
+      font-size: 18px;
     }
   }
 }
@@ -58,6 +71,9 @@ section {
     .title-img__question-bubble {
       transform: scale(1.1);
       left: 0;
+      @include mx.respond(zero, xl) {
+        transform: scale(0.9);
+      }
     }
 
     .title-img__star {
@@ -76,6 +92,10 @@ section {
     z-index: 10;
     width: 420px;
     height: 420px;
+    @include mx.respond(zero, xl) {
+      height: 250px;
+      width: 343px;
+    }
   }
 
   &__checked {
@@ -84,6 +104,10 @@ section {
     bottom: 80px;
     z-index: 9;
     transition: all 300ms ease-out;
+    @include mx.respond(zero, xl) {
+      right: 0;
+      bottom: 60px;
+    }
   }
 
   &__question-bubble {
@@ -93,6 +117,10 @@ section {
     z-index: 11;
     transform: scale(0.6);
     transition: all 300ms ease-out;
+    @include mx.respond(zero, xl) {
+      transform: scale(0.9);
+      left: 0;
+    }
   }
 
   &__question-mark {
@@ -102,6 +130,10 @@ section {
     top: 0;
     transform: rotate(20deg) scale(0.8);
     transition: all 300ms ease-out;
+    @include mx.respond(zero, xl) {
+      right: 40px;
+      transform: rotate(0) scale(0.8);
+    }
   }
 
   &__star {
@@ -111,6 +143,10 @@ section {
     z-index: 11;
     transition: all 300ms ease-out;
     transform: scale(0.8);
+    @include mx.respond(zero, xl) {
+      bottom: 10px;
+      left: 20px;
+    }
   }
 }
 
