@@ -12,6 +12,10 @@ section {
     $gap: 90px
   );
 
+  @include mx.respond(s, l) {
+    padding: 40px 32px;
+  }
+
   @include mx.respond(zero, s) {
     padding: 40px 16px;
   }
@@ -23,6 +27,7 @@ section {
   @include mx.respond(zero, xl) {
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
   }
 
   &__text-wrap {
@@ -58,6 +63,9 @@ section {
     }
     @include mx.respond(zero, xxl) {
       font-size: 18px;
+    }
+    @include mx.respond(zero, xs) {
+      font-size: 16px;
     }
   }
 }
@@ -104,9 +112,9 @@ section {
       width: 420px;
       height: 420px;
     }
-    @include mx.respond(zero, xxs) {
-      height: 210px;
-      width: 300px;
+    @include mx.respond(zero, xs) {
+      height: 200px;
+      width: 272px;
     }
   }
 
@@ -121,7 +129,7 @@ section {
       bottom: 80px;
       transition: all 300ms ease-out;
     }
-    @include mx.respond(zero, xxs) {
+    @include mx.respond(zero, xs) {
       right: 10px;
       bottom: 20px;
     }
@@ -138,7 +146,7 @@ section {
       top: 100px;
       transition: all 300ms ease-out;
     }
-    @include mx.respond(zero, xxs) {
+    @include mx.respond(zero, xs) {
       left: 0;
       top: 0;
     }
@@ -155,7 +163,7 @@ section {
       transform: rotate(20deg) scale(0.8);
       transition: all 300ms ease-out;
     }
-    @include mx.respond(zero, xxs) {
+    @include mx.respond(zero, xs) {
       right: 30px;
       top: 0;
     }
@@ -242,17 +250,26 @@ section {
 }
 
 .survey-list {
-  width: 1068px;
+  max-width: 1068px;
   @include mx.d-flex(
     $flex-direction: column,
     $justify-content: center,
     $align-items: flex-start,
     $gap: 40px
   );
+  @include mx.respond(zero, xl) {
+    width: 100%;
+    align-items: center;
+  }
 
   &__filter-wrap {
     width: 100%;
     @include mx.d-flex($justify-content: space-between);
+    @include mx.respond(zero, xs) {
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
   }
 
   &__filter-btn-wrap {
@@ -287,6 +304,15 @@ section {
     max-height: 418px;
     overflow-y: scroll;
     padding-right: 16px; //for gap to scrollbar
+    @include mx.respond(zero, xl) {
+      display: flex;
+      grid-template-columns: none;
+      flex-direction: column;
+      align-items: center;
+      max-height: none;
+      padding-right: 0;
+      overflow-y: auto;
+    }
   }
 
   &__card {
@@ -303,6 +329,12 @@ section {
       $gap: 24px
     );
     background-color: rgba(217, 217, 217, 0.08);
+    @include mx.respond(xs, xxl) {
+      width: 400px;
+    }
+    @include mx.respond(zero, xs) {
+      width: 304px;
+    }
 
     &:hover {
       background-color: rgba(217, 217, 217, 0.16);
