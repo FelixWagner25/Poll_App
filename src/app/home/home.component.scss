@@ -12,7 +12,7 @@ section {
     $gap: 90px
   );
 
-  @include mx.respond(s, l) {
+  @include mx.respond(s, xl) {
     padding: 40px 32px;
   }
 
@@ -188,12 +188,7 @@ section {
 
 .surveys {
   width: 100%;
-  @include mx.d-flex(
-    $flex-direction: column,
-    $justify-content: center,
-    $align-items: center,
-    $gap: 32px
-  );
+  @include mx.d-flex($flex-direction: column, $gap: 32px);
 
   &__ending-soon-wrap {
     @include mx.d-flex(
@@ -202,6 +197,10 @@ section {
       $align-items: flex-start,
       $gap: 32px
     );
+
+    @include mx.respond(zero, xl) {
+      width: 100%;
+    }
   }
 
   &__ending-soon-text {
@@ -213,6 +212,11 @@ section {
   &__cards-wrap {
     width: 100%;
     @include mx.d-flex($justify-content: center, $gap: 32px);
+    overflow-x: auto;
+    scrollbar-width: none;
+    @include mx.respond(zero, xl) {
+      justify-content: flex-start;
+    }
   }
 
   &__card {
@@ -227,6 +231,11 @@ section {
       $justify-content: space-between,
       $align-items: flex-start
     );
+
+    @include mx.respond(zero, xxl) {
+      width: 310px;
+      flex: 0 0 310px;
+    }
 
     &:hover {
       background-color: #f4e9fb;
