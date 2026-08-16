@@ -37,6 +37,9 @@ section {
       $justify-content: flex-start,
       $gap: 40px
     );
+    @include mx.respond(zero, l) {
+      align-items: center;
+    }
   }
 
   &__headline {

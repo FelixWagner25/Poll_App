@@ -66,6 +66,9 @@ h2 {
     &:hover {
       background-color: abs.$primary-orange;
     }
+    @include abs.respond(zero, l) {
+      background-color: abs.$primary-orange;
+    }
   }
 
   &--secondary {
@@ -84,6 +87,11 @@ h2 {
     width: 0;
     height: 0;
     transition: all 300ms ease-out;
+    @include abs.respond(zero, l) {
+      width: 20px;
+      height: 20px;
+      content: url('../public/assets/img/add_circle_purple.svg');
+    }
   }
 
   &--primary.disabled {
