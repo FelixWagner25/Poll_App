@@ -36,9 +36,10 @@ h2 {
   }
 
   &__close-icon {
-    width: 13px;
-    height: 13px;
+    width: 21px;
+    height: 21px;
     content: url('../../../public/assets/img/close.svg');
+    padding: 4px;
   }
 
   &__circle-icon {
@@ -69,13 +70,16 @@ h2 {
   grid-template-columns: auto auto;
   row-gap: 24px;
   column-gap: 124px;
-  //max-height: 400px;
+  max-height: 400px;
   overflow-y: auto;
   padding-right: 8px; //scrollbar distance
   @include mx.respond(zero, xxl) {
+    display: flex;
     flex-direction: column;
     grid-template-columns: none;
     gap: 24px;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
@@ -152,5 +156,22 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
+  }
+}
+
+.new-survey-title-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  @include mx.respond(zero, xxl) {
+    justify-content: flex-start;
+    gap: 24px;
+  }
+}
+
+.btn__cancel-text {
+  @include mx.respond(zero, m) {
+    display: none;
   }
 }

@@ -29,6 +29,9 @@ h2 {
   font-family: 'Nerko_One';
   @include abs.font(72px, 400);
   color: abs.$primary-orange;
+  @include abs.respond(zero, xxl) {
+    font-size: 56px;
+  }
 }
 
 .bg-default {
@@ -344,6 +347,7 @@ h2 {
   visibility: hidden;
   pointer-events: none;
   transform: translateY(-100%);
+  overflow-y: auto;
 
   transition:
     opacity 300ms ease-out,
