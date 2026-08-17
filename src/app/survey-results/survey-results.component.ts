@@ -49,7 +49,7 @@ export class SurveyResultsComponent {
     const year = strArr[0];
     const month = strArr[1];
     const day = strArr[2];
-    return year + '.' + month + '.' + day;
+    return day + '.' + month + '.' + year;
   }
 
   toggleAnswer(questionIndex: number, answerIndex: number): void {
