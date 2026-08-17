@@ -8,8 +8,6 @@ section {
   border-radius: 5px;
   border-top-right-radius: 100px;
   background-color: col.$primary-purple;
-  width: min(100%, 1166px);
-  min-height: 844px;
   @include mx.d-flex(
     $flex-direction: column,
     $align-items: flex-start,
@@ -58,6 +56,12 @@ h2 {
   padding: 40px 32px;
   padding-bottom: 24px; //because of added text with 12px and gap with 4px
   @include mx.d-flex($flex-direction: column, $align-items: flex-start, $gap: 64px);
+  @include mx.respond(zero, xxl) {
+    width: 100%;
+  }
+  @include mx.respond(zero, xxl) {
+    gap: 32px;
+  }
 }
 
 .form-questions {
@@ -65,9 +69,14 @@ h2 {
   grid-template-columns: auto auto;
   row-gap: 24px;
   column-gap: 124px;
-  max-height: 400px;
+  //max-height: 400px;
   overflow-y: auto;
   padding-right: 8px; //scrollbar distance
+  @include mx.respond(zero, xxl) {
+    flex-direction: column;
+    grid-template-columns: none;
+    gap: 24px;
+  }
 }
 
 .published-message {
@@ -113,25 +122,35 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: #35273a;
   opacity: 0;
   z-index: 1;
+  visibility: hidden;
   transition: all 300ms ease-out;
 
   &.show {
     opacity: 0.6;
     top: 0;
     z-index: 20;
+    visibility: visible;
   }
 }
 
 .section-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
+  min-height: 100vh;
   z-index: 10;
+  background-color: col.$bg-default;
+}
+
+.survey-info-wrap {
+  display: flex;
+  width: 100%;
+  gap: 96px;
+  @include mx.respond(zero, xxl) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
 }

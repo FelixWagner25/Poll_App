@@ -134,6 +134,8 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
+    @include abs.respond(zero, xxl) {
+    }
   }
 
   &__answer {
@@ -141,6 +143,8 @@ h2 {
     height: 37px;
     &:focus {
       @include abs.font-size-wght(18px, 500);
+    }
+    @include abs.respond(zero, xxl) {
     }
   }
 
@@ -154,6 +158,8 @@ h2 {
 
   &__textarea {
     width: abs.$input-width;
+    @include abs.respond(zero, xxl) {
+    }
   }
 
   &:focus {

@@ -1,5 +1,5 @@
-<div class="p-relative height-100vh width-100 bg-default">
-  <div class="height-100vh fbox-row-center-center section-wrap">
+<div class="section-wrap">
+  <div class="fbox-row-center-center height-100vh">
     <section>
       <div class="fbox-row-space-between-flex-end width-100">
         <div class="fbox-col-left">
@@ -17,7 +17,7 @@
         (ngSubmit)="publishSurvey(this.surveyId)"
       >
         <div class="form-input-wrap">
-          <div class="fbox-row width-100 gap-96px">
+          <div class="survey-info-wrap">
             <div class="fbox-col-left gap-8px">
               <div class="fbox-col-left gap-4px p-relative">
                 <label class="label label--bold" for="name">Survey name</label>
@@ -191,15 +191,15 @@
       </form>
     </section>
   </div>
-  <div
-    class="published-message-bg"
-    (click)="navigateToPublishedSurvey(this.surveyId)"
-    [class.show]="published()"
-  ></div>
-  <div class="published-message" [class.show]="published()">
-    <div class="fbox-row-space-between gap-64px">
-      <div class="published-message__text">Your survey is now published</div>
-      <div class="published-message__icon" (click)="navigateToPublishedSurvey(this.surveyId)"></div>
-    </div>
+</div>
+<div
+  class="published-message-bg"
+  (click)="navigateToPublishedSurvey(this.surveyId)"
+  [class.show]="published()"
+></div>
+<div class="published-message" [class.show]="published()">
+  <div class="fbox-row-space-between gap-64px">
+    <div class="published-message__text">Your survey is now published</div>
+    <div class="published-message__icon" (click)="navigateToPublishedSurvey(this.surveyId)"></div>
   </div>
 </div>

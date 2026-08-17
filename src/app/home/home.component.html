@@ -152,8 +152,10 @@
     </section>
   </div>
 </div>
-<app-new-survey
-  class="overlay"
-  [class.overlay--open]="overlayOpen()"
-  (closeOverlayEvent)="closeOverlay()"
-></app-new-survey>
+<div class="fbox-row-center-center">
+  <app-new-survey
+    class="overlay"
+    [class.overlay--open]="overlayOpen()"
+    (closeOverlayEvent)="closeOverlay()"
+  ></app-new-survey>
+</div>
