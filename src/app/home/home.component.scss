@@ -232,9 +232,17 @@ section {
       $align-items: flex-start
     );
 
-    @include mx.respond(zero, xxl) {
+    @include mx.respond(l, xxl) {
       width: 310px;
       flex: 0 0 310px;
+    }
+
+    @include mx.respond(zero, l) {
+      height: 233px;
+      width: 250px;
+      padding: 24px 16px;
+      border-top-right-radius: 80px;
+      flex: 0 0 250px;
     }
 
     &:hover {
