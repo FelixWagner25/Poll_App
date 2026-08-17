@@ -322,6 +322,7 @@ section {
     grid-template-columns: auto auto;
     gap: 16px;
     max-height: 418px;
+    min-height: 200px;
     overflow-y: scroll;
     padding-right: 16px; //for gap to scrollbar
     @include mx.respond(zero, xl) {
