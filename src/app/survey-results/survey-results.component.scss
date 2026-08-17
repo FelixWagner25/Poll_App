@@ -9,6 +9,12 @@ section {
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
+  @include mx.respond(s, l) {
+    padding: 40px 40px;
+  }
+  @include mx.respond(zero, s) {
+    padding: 40px 16px;
+  }
 }
 
 .logo {
@@ -29,10 +35,14 @@ section {
   border-top-right-radius: 160px;
   padding: 40px;
   min-width: 702px;
+  @include mx.respond(zero, xl) {
+    min-width: 0;
+  }
 
   &__date-category-wrap {
     display: flex;
     justify-content: space-between;
+    gap: 24px;
     width: 100%;
   }
 
@@ -117,6 +127,11 @@ section {
   column-gap: 40px;
   row-gap: 42px;
   width: 100%;
+  @include mx.respond(zero, l) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .results {
@@ -149,6 +164,9 @@ section {
     font-family: 'Mulish';
     position: relative;
     min-width: 315px;
+    @include mx.respond(zero, xxs) {
+      min-width: 280px;
+    }
 
     &--selector {
       @include mx.font-size-wght(12px, 700);
@@ -177,6 +195,9 @@ section {
       width: 255px;
       position: absolute;
       left: 20px;
+      @include mx.respond(zero, xxs) {
+        width: 220px;
+      }
     }
 
     &--progress {
@@ -184,5 +205,38 @@ section {
       position: absolute;
       top: 0;
     }
+  }
+}
+
+.survey-results-wrap {
+  display: flex;
+  gap: 42px;
+
+  @include mx.respond(zero, xxl) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.create-survey-btn-text {
+  @include mx.respond(zero, s) {
+    display: none;
+  }
+}
+
+.complete-survey-btn-text {
+  @include mx.respond(zero, s) {
+    display: none;
+  }
+}
+
+.survey-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  @include mx.respond(zero, xl) {
+    gap: 48px;
   }
 }

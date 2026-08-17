@@ -4,11 +4,11 @@
       <div class="fbox-row-space-between width-100">
         <img routerLink="" src="assets/img/logo_purple.svg" class="logo" alt="PollApp Logo" />
         <button (click)="openOverlay()" class="btn btn--primary">
-          <span>Create survey</span>
+          <span class="create-survey-btn-text">Create survey</span>
           <span class="btn__add-circle"></span>
         </button>
       </div>
-      <div class="fbox-row gap-42px">
+      <div class="survey-results-wrap">
         <div class="survey">
           @let survey = surveyService.survey();
           @if (survey !== null) {
@@ -31,7 +31,7 @@
           }
           <!-- </div> -->
           <form
-            class="fbox-col-left gap-24px width-100"
+            class="survey-form"
             [formArray]="questionsForm"
             (ngSubmit)="publishAnswerSelection()"
           >
@@ -104,7 +104,8 @@
               <span></span>
               <div>
                 <button class="btn btn--primary" [class.disabled]="surveyHasEnded()" type="submit">
-                  Complete survey
+                  <span>Complete</span>
+                  <span class="complete-survey-btn-text">survey</span>
                 </button>
                 @if (this.surveyHasEnded()) {
                   <div class="fbox-col-center">
