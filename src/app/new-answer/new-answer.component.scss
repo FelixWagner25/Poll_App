@@ -1,0 +1,27 @@
+@use '../../styles/abstract/mixins' as mx;
+
+.form-field {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-areas: 'decorator input delete';
+  gap: 8px;
+  align-items: center;
+
+  &__decorator {
+    grid-area: decorator;
+  }
+
+  &__input {
+    grid-area: input;
+  }
+
+  &__delete {
+    grid-area: delete;
+  }
+
+  @include mx.respond(zero, m) {
+    grid-template-areas:
+      'decorator . delete'
+      'input input input';
+  }
+}

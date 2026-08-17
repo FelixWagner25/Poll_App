@@ -29,8 +29,11 @@ h2 {
   font-family: 'Nerko_One';
   @include abs.font(72px, 400);
   color: abs.$primary-orange;
-  @include abs.respond(zero, xxl) {
+  @include abs.respond(xxs, xxl) {
     font-size: 56px;
+  }
+  @include abs.respond(zero, xxs) {
+    font-size: 48px;
   }
 }
 
@@ -137,8 +140,11 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, m) {
+    @include abs.respond(xxs, m) {
       width: abs.$input-width-responsive;
+    }
+    @include abs.respond(zero, xxs) {
+      width: 220px;
     }
   }
 
@@ -148,8 +154,11 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, m) {
+    @include abs.respond(xxs, m) {
       width: abs.$input-width-responsive;
+    }
+    @include abs.respond(zero, xxs) {
+      width: 220px;
     }
   }
 
@@ -159,15 +168,21 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, m) {
+    @include abs.respond(xxs, m) {
       width: abs.$input-width-responsive;
+    }
+    @include abs.respond(zero, xxs) {
+      width: 220px;
     }
   }
 
   &__textarea {
     width: abs.$input-width;
-    @include abs.respond(zero, m) {
+    @include abs.respond(xxs, m) {
       width: abs.$input-width-responsive;
+    }
+    @include abs.respond(zero, xxs) {
+      width: 220px;
     }
   }
 
@@ -183,10 +198,16 @@ h2 {
 
   &--bold {
     @include abs.font-size-wght(18px, 700);
+    @include abs.respond(zero, xxs) {
+      font-size: 16px;
+    }
   }
 
   &--normal {
     @include abs.font-size-wght(18px, 400);
+    @include abs.respond(zero, xxs) {
+      font-size: 16px;
+    }
   }
 }
 

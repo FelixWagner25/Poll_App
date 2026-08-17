@@ -20,15 +20,18 @@
           <div class="survey-info-wrap">
             <div class="fbox-col-left gap-8px">
               <div class="fbox-col-left gap-4px p-relative">
-                <label class="label label--bold" for="name">Survey name</label>
-                <div class="fbox-row-center gap-8px">
+                <div class="form-field">
+                  <label class="label label--bold form-fieled__label" for="name">Survey name</label>
                   <input
-                    class="input input__default"
+                    class="input input__default form-field__input"
                     type="text"
                     id="name"
                     formControlName="name"
                   />
-                  <span class="btn-delete" (click)="deleteFormInput('name')"></span>
+                  <span
+                    class="btn-delete form-field__delete"
+                    (click)="deleteFormInput('name')"
+                  ></span>
                 </div>
                 @if (
                   surveyForm.controls.name.invalid &&
@@ -46,13 +49,20 @@
               </div>
               <div class="date-category-wrap">
                 <div class="fbox-col-left gap-4px p-relative">
-                  <label class="label" for="end-date">
-                    <span class="label--bold">Set end date</span>
-                    <span class="label--normal"> (optional)</span>
-                  </label>
-                  <div class="fbox-row-center gap-8px">
-                    <input class="input input__date" id="end-date" formControlName="endDate" />
-                    <span class="btn-delete" (click)="deleteFormInput('endDate')"></span>
+                  <div class="form-field">
+                    <label class="label form-fieled__label" for="end-date">
+                      <span class="label--bold">Set end date</span>
+                      <span class="label--normal"> (optional)</span>
+                    </label>
+                    <input
+                      class="input input__date form-field__input"
+                      id="end-date"
+                      formControlName="endDate"
+                    />
+                    <span
+                      class="btn-delete form-field__delete"
+                      (click)="deleteFormInput('endDate')"
+                    ></span>
                   </div>
                   @if (
                     surveyForm.controls.endDate.invalid &&
@@ -142,19 +152,22 @@
               </div>
             </div>
             <div class="fbox-col-left gap-4px p-relative">
-              <label class="label" for="description">
-                <span class="label--bold">Describing text</span>
-                <span class="label--normal"> (optional)</span>
-              </label>
-              <div class="fbox-row gap-8px">
+              <div class="form-field">
+                <label class="label form-fieled__label" for="description">
+                  <span class="label--bold">Describing text</span>
+                  <span class="label--normal"> (optional)</span>
+                </label>
                 <textarea
-                  class="input input__textarea"
+                  class="input input__textarea form-field__input"
                   rows="8"
                   id="description"
                   rows="5"
                   formControlName="description"
                 ></textarea>
-                <span class="btn-delete" (click)="deleteFormInput('description')"></span>
+                <span
+                  class="btn-delete form-field__delete"
+                  (click)="deleteFormInput('description')"
+                ></span>
               </div>
               @if (
                 surveyForm.controls.description.invalid &&

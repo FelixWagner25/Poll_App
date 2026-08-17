@@ -1,10 +1,14 @@
 <div class="p-relative">
-  <div class="fbox-row-center gap-8px">
-    <span class="answer-tag"
+  <div class="form-field">
+    <span class="answer-tag form-field__decorator"
       >{{ this.surveyService.getSelectorByNumber(this.answerNumber()) }}.</span
     >
-    <input class="input input__answer" type="text" [formControl]="answerControl()" />
-    <span class="btn-delete" (click)="deleteAnswerEvent.emit()"></span>
+    <input
+      class="input input__answer form-field__input"
+      type="text"
+      [formControl]="answerControl()"
+    />
+    <span class="btn-delete form-field__delete" (click)="deleteAnswerEvent.emit()"></span>
   </div>
   @if (answerControl().invalid && (answerControl().dirty || answerControl().touched)) {
     <div class="error error--answer">
