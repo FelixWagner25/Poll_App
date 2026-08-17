@@ -44,7 +44,7 @@
                   </div>
                 }
               </div>
-              <div class="fbox-row-space-between width-100">
+              <div class="date-category-wrap">
                 <div class="fbox-col-left gap-4px p-relative">
                   <label class="label" for="end-date">
                     <span class="label--bold">Set end date</span>
@@ -176,7 +176,7 @@
                 [questionForm]="question"
               ></app-new-question>
             }
-            <div class="fbox-col-left gap-8px">
+            <div class="add-question-btn-wrap">
               <button class="form-action-btn" type="button" (click)="addNextQuestion()">
                 <span>Add next question</span>
                 <span class="form-action-btn__circle-icon"></span>
@@ -185,7 +185,7 @@
             </div>
           </div>
         </div>
-        <div class="fbox-col-right width-100">
+        <div class="publish-btn-wrap">
           <button class="btn btn--primary" type="submit">Publish</button>
         </div>
       </form>

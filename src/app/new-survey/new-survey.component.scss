@@ -14,6 +14,10 @@ section {
     $justify-content: flex-start,
     $gap: 32px
   );
+  @include mx.respond(zero, m) {
+    align-items: center;
+    padding: 40px 16px;
+  }
 }
 
 h2 {
@@ -173,5 +177,35 @@ h2 {
 .btn__cancel-text {
   @include mx.respond(zero, m) {
     display: none;
+  }
+}
+
+.date-category-wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @include mx.respond(zero, m) {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    gap: 40px;
+  }
+}
+
+.publish-btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  @include mx.respond(zero, m) {
+    justify-content: center;
+  }
+}
+
+.add-question-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  @include mx.respond(zero, m) {
+    align-items: center;
   }
 }

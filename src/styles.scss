@@ -137,7 +137,8 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, xxl) {
+    @include abs.respond(zero, m) {
+      width: abs.$input-width-responsive;
     }
   }
 
@@ -147,7 +148,8 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, xxl) {
+    @include abs.respond(zero, m) {
+      width: abs.$input-width-responsive;
     }
   }
 
@@ -157,11 +159,15 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
+    @include abs.respond(zero, m) {
+      width: abs.$input-width-responsive;
+    }
   }
 
   &__textarea {
     width: abs.$input-width;
-    @include abs.respond(zero, xxl) {
+    @include abs.respond(zero, m) {
+      width: abs.$input-width-responsive;
     }
   }
 
