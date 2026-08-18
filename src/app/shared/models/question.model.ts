@@ -16,11 +16,4 @@ export class QuestionModel implements Question {
     this.positionIndex = data.positionIndex ?? 0;
     this.surveyId = data.surveyId ?? 'error';
   }
-
-  getCleanAddJson() {
-    return {
-      text: this.text,
-      multipleAnswers: this.multipleAnswers,
-    };
-  }
 }

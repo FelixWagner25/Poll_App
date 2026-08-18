@@ -53,6 +53,10 @@ export class NewSurveyComponent {
     return this.surveyForm.controls.questions;
   }
 
+  /**
+   * Publishes survey in home component and submits survey data to backend if survey form is valid.
+   * @param surveyId - survey id
+   */
   async publishSurvey(surveyId: string): Promise<void> {
     if (this.surveyForm.invalid) {
       this.surveyForm.markAllAsTouched();
@@ -65,7 +69,12 @@ export class NewSurveyComponent {
     this.published.set(!this.published());
   }
 
-  async addQuestionsToDatabase(surveyId: string) {
+  /**
+   * Pushes a surveys questions to backend.
+   *
+   * @param surveyId - survey id
+   */
+  async addQuestionsToDatabase(surveyId: string): Promise<void> {
     for (let i = 0; i < this.questionFormArray.length; i++) {
       let questionId = crypto.randomUUID();
       let question = new QuestionModel({
@@ -79,7 +88,13 @@ export class NewSurveyComponent {
     }
   }
 
-  async addAnswersToDatabase(formGroupIndex: number, questionId: string) {
+  /**
+   * Pushes a question's answers to backend.
+   *
+   * @param formGroupIndex - form group index
+   * @param questionId - question id
+   */
+  async addAnswersToDatabase(formGroupIndex: number, questionId: string): Promise<void> {
     for (let j = 0; j < this.questionFormArray.at(formGroupIndex).controls.answers.length; j++) {
       let answerId = crypto.randomUUID();
       let answer = new AnswerModel({
@@ -92,30 +107,58 @@ export class NewSurveyComponent {
     }
   }
 
+  /**
+   * Navigates the user to the published survey.
+   *
+   * @param surveyId - survey id
+   */
   navigateToPublishedSurvey(surveyId: string): void {
     this.router.navigate(['/survey-results', surveyId]);
     this.closeOverlayEvent.emit();
   }
 
+  /**
+   * Toggles category dropdown.
+   *
+   */
   toggleDropdown(): void {
     this.dropdownOpened.update((value) => !value);
   }
 
+  /**
+   * Sets selected category of new survey in survey form.
+   *
+   * @param category - selectable category
+   */
   setSelectedCategory(category: Category): void {
     this.setFormCategory(category);
     this.toggleDropdown();
   }
 
+  /**
+   * Deletes form input of sepcified input field.
+   *
+   * @param attribute - input field name
+   */
   deleteFormInput(attribute: 'name' | 'description' | 'endDate'): void {
     this.surveyForm.controls[attribute].setValue('');
   }
 
+  /**
+   * Adds question to survey form.
+   *
+   */
   addNextQuestion(): void {
     const numberQuestions = this.questionFormArray.controls.length;
     if (numberQuestions >= this.indexLimitQuestions) return;
     this.surveyForm.controls.questions.push([this.createQuestionGroup()]);
   }
 
+  /**
+   * Deletes question from survey form.
+   *
+   * @param index - question index
+   */
   deleteQuestion(index: number): void {
     if (index == 0) {
       this.surveyForm.controls.questions.at(index).controls.text.setValue('');
@@ -124,12 +167,22 @@ export class NewSurveyComponent {
     }
   }
 
+  /**
+   * Sets category of survey form.
+   *
+   * @param category - selectable category
+   */
   setFormCategory(category: Category): void {
     this.surveyForm.controls.category.setValue(category);
     this.surveyForm.controls.category.markAllAsTouched();
     this.surveyForm.controls.category.markAllAsDirty();
   }
 
+  /**
+   * Returns new question form group for survey form.
+   *
+   * @returns question form group
+   */
   createQuestionGroup(): FormGroup<QuestionForm> {
     return new FormGroup<QuestionForm>({
       text: new FormControl('', {
@@ -144,6 +197,11 @@ export class NewSurveyComponent {
     });
   }
 
+  /**
+   * Returns new string form control for question form group in survey form.
+   *
+   * @returns form control for answer
+   */
   createAnswerControl(): FormControl<string> {
     return new FormControl('', {
       nonNullable: true,

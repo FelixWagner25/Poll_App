@@ -5,8 +5,6 @@ import { SurveyModel } from '../models/survey.model';
 import { printPostgrestErrorMsg, unsubscribeDBChannel } from '../utilities/utilities';
 import { SUPABASE_URL, SUPABASE_KEY } from '../constants/constants';
 import { QuestionModel } from '../models/question.model';
-import { Question } from '../interfaces/question';
-import { Answer } from '../interfaces/answer';
 import { AnswerModel } from '../models/answer.model';
 import { SurveyWithResults } from '../interfaces/suvery-with-results';
 

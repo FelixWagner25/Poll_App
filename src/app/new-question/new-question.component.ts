@@ -24,6 +24,10 @@ export class NewQuestionComponent {
     return this.questionForm().controls.text;
   }
 
+  /**
+   * Adds additional answer to question.
+   *
+   */
   addNextAnswer(): void {
     if (this.answers.length >= this.indexLimitAnswers) return;
     this.answers.push(
@@ -34,6 +38,11 @@ export class NewQuestionComponent {
     );
   }
 
+  /**
+   * Deletes answer from question.
+   *
+   * @param index - index of answer
+   */
   deleteAnswer(index: number) {
     if (this.answers.length <= 2) {
       this.answers.at(index).setValue('');

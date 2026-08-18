@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, Renderer2 } from '@angular/core';
+import { Component, inject, signal, computed, Renderer2, WritableSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
 import { Category } from '../shared/types/category';
@@ -51,24 +51,34 @@ export class HomeComponent {
       .slice(0, 3);
   });
 
-  toggleDropdown() {
+  /**
+   * Toggles category dropdown.
+   *
+   */
+  toggleDropdown(): void {
     this.dropdownOpened.update((value) => !value);
   }
 
+  /**
+   * Sets selected category.
+   *
+   * @param value - selectable category
+   */
   setSelectedCategory(value: Category): void {
     this.selectedCategory.set(value);
     this.toggleDropdown();
   }
 
+  /**
+   * Returns remaining days of a survey untill end date is reached.
+   *
+   * @param endDate - survey end date
+   * @returns remaining days untill survey end date
+   */
   getRemainingDaysString(endDate: string): string {
     if (endDate == '') return 'Active';
     const todayStr = getTodaysShortISOString();
-    console.log('getTodaysShortISOString', todayStr);
-
     const diffDays = calcDateDiffDays(todayStr, endDate);
-    console.log('endDate', endDate);
-
-    console.log('diffDays', diffDays);
 
     if (diffDays < 0) {
       return 'Ended';
@@ -81,19 +91,37 @@ export class HomeComponent {
     }
   }
 
-  activeSurveyFilter() {
+  /**
+   * Checks whether user is filtering on acitve surveys.
+   *
+   * @returns true, if survey filter is acitive, otherwise false
+   */
+  activeSurveyFilter(): boolean {
     return this.selectedSurveyStatus() === 'active';
   }
 
-  pastSurveyFilter() {
+  /**
+   * Checks whether user is filtering on past surveys.
+   *
+   * @returns true, if survey filter is past, otherwise false
+   */
+  pastSurveyFilter(): boolean {
     return this.selectedSurveyStatus() === 'past';
   }
 
+  /**
+   * Opens add new survey overlay.
+   *
+   */
   openOverlay(): void {
     this.overlayOpen.set(true);
     this.renderer.addClass(document.body, 'overflow-hidden');
   }
 
+  /**
+   * Closes add new survey overlay.
+   *
+   */
   closeOverlay(): void {
     this.overlayOpen.set(false);
     this.renderer.removeClass(document.body, 'overflow-hidden');

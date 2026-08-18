@@ -16,11 +16,4 @@ export class AnswerModel implements Answer {
     this.positionIndex = data.positionIndex ?? 0;
     this.questionId = data.questionId ?? 'error';
   }
-
-  getCleanAddJson() {
-    return {
-      text: this.text,
-      resultCount: this.resultCount,
-    };
-  }
 }
