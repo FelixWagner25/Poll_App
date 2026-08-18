@@ -35,6 +35,10 @@ export class SurveyResultsComponent {
 
   constructor(private renderer: Renderer2) {}
 
+  /**
+   * Loads survey results of selected survey id and builds the question form for answer submit to backend.
+   *
+   */
   async ngOnInit(): Promise<void> {
     const surveyId = this.route.snapshot.paramMap.get('id');
     if (!surveyId) return;
@@ -43,6 +47,12 @@ export class SurveyResultsComponent {
     this.buildQuestionsForm();
   }
 
+  /**
+   * Converts survey end date to date following german date format convention.
+   *
+   * @param endDate - survey end date
+   * @returns day string in german date format convention
+   */
   convertISOtoGermanDateStr(endDate: string): string {
     if (endDate === '') return '';
     let strArr = endDate.split('-');
@@ -52,6 +62,12 @@ export class SurveyResultsComponent {
     return day + '.' + month + '.' + year;
   }
 
+  /**
+   * Toggles answer selection in survey result form.
+   *
+   * @param questionIndex - index of question
+   * @param answerIndex - index of answer
+   */
   toggleAnswer(questionIndex: number, answerIndex: number): void {
     if (this.surveyHasEnded()) return;
     const questionGroup = this.questionsForm.at(questionIndex);
@@ -60,29 +76,31 @@ export class SurveyResultsComponent {
     answerControl.setValue(!answerControl.value);
   }
 
+  /**
+   * Publishes survey answer selection and pushes data to supabase backend.
+   */
   async publishAnswerSelection(): Promise<void> {
     if (this.surveyHasEnded()) return;
-
     if (this.questionsForm.invalid) {
       this.questionsForm.markAllAsTouched();
       return;
     }
     const selectedAnswerIds: string[] = [];
-
     this.questions().forEach((question, questionIndex) => {
       const selections = this.questionsForm.at(questionIndex).controls.selectedAnswers;
-
       question.answers.forEach((answer, answerIndex) => {
         if (selections.at(answerIndex).value) {
           selectedAnswerIds.push(answer.id);
         }
       });
     });
-
     await this.surveyService.submitSurveyResults(this.surveyId, selectedAnswerIds);
-    //this.router.navigate(['/'], { fragment: 'surveys' });
   }
 
+  /**
+   * Builds question form for survey result form.
+   *
+   */
   buildQuestionsForm(): void {
     this.questionsForm.clear();
     for (let i = 0; i < this.questions().length; i++) {
@@ -105,7 +123,12 @@ export class SurveyResultsComponent {
     }
   }
 
-  surveyHasEnded() {
+  /**
+   * Checks whether survey has expired.
+   *
+   * @returns true if survey has expired, otherwise false
+   */
+  surveyHasEnded(): boolean {
     let survey = this.surveyService.survey();
     if (survey) {
       const todayStr = getTodaysShortISOString();
@@ -116,17 +139,31 @@ export class SurveyResultsComponent {
     }
   }
 
+  /**
+   * Opens new survey overlay.
+   *
+   */
   openOverlay(): void {
     this.overlayOpen.set(true);
     this.renderer.addClass(document.body, 'overflow-hidden');
   }
 
+  /**
+   * Closes new survey overlay.
+   *
+   */
   closeOverlay(): void {
     this.overlayOpen.set(false);
     this.renderer.removeClass(document.body, 'overflow-hidden');
   }
 }
 
+/**
+ * Validator function for answers in survey result form. Checks both wether at least one selection has been made and whether number of selected answers is allowed.
+ *
+ * @param multipleAnswers - multiple answer allowance switch
+ * @returns
+ */
 export function answerSelectionValidator(multipleAnswers: boolean): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const selectedAnswers = control.value as boolean[];
