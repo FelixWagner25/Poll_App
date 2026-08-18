@@ -16,7 +16,7 @@ The project was developed as part of the Developer Akademie Frontend Course.
 
 ## Local Installation
 
-Install anuglar on your local device.
+Install angular on your local device.
 
 Clone this repository:
 
