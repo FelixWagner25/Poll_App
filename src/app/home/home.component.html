@@ -139,11 +139,9 @@
                   <p class="survey-list__card--category">{{ survey.category }}</p>
                   <p class="survey-list__card--title">{{ survey.name }}</p>
                 </div>
-                <div class="width-100 fbox-col-right">
-                  <p class="survey-list__card--days-left">
-                    {{ getRemainingDaysString(survey.endDate) }}
-                  </p>
-                </div>
+                <p class="survey-list__card--days-left">
+                  {{ getRemainingDaysString(survey.endDate) }}
+                </p>
               </div>
             }
           </div>

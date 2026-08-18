@@ -53,6 +53,7 @@ export class SurveyResultsComponent {
   }
 
   toggleAnswer(questionIndex: number, answerIndex: number): void {
+    if (this.surveyHasEnded()) return;
     const questionGroup = this.questionsForm.at(questionIndex);
     const selectedAnswers = questionGroup.controls.selectedAnswers;
     const answerControl = selectedAnswers.at(answerIndex);
