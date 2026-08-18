@@ -1,4 +1,4 @@
-# Memory
+# Poll App
 
 PollApp is an angular based web application to create, share and evaluate polls in realtime. <br>
 The project was developed as part of the Developer Akademie Frontend Course.
