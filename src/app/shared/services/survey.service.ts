@@ -7,6 +7,7 @@ import { SUPABASE_URL, SUPABASE_KEY } from '../constants/constants';
 import { QuestionModel } from '../models/question.model';
 import { AnswerModel } from '../models/answer.model';
 import { SurveyWithResults } from '../interfaces/suvery-with-results';
+import { GET_SURVEY_RESULTS_QUERY } from '../queries/queries';
 
 @Injectable({
   providedIn: 'root',
@@ -30,22 +31,41 @@ export class SurveyService {
     unsubscribeDBChannel(this.surveysAllEventsChannel, this.supabase);
   }
 
+  /**
+   * Pull all surveys from backend and write it to survey list.
+   *
+   */
   async getAllSurveys(): Promise<void> {
     let response = await this.supabase.from('surveys').select('*');
     this.surveyList.set((response.data ?? []) as Survey[]);
   }
 
+  /**
+   * Load results of selected survey.
+   *
+   * @param surveyId - survey id
+   */
   async loadSurveyWithResults(surveyId: string): Promise<void> {
     const survey = await this.getSurveyWithQuestionsAndAnswers(surveyId);
     this.survey.set(survey);
   }
 
+  /**
+   * Inserts survey data to backend table.
+   *
+   * @param survey - survey id
+   */
   async addSurvey(survey: SurveyModel): Promise<void> {
     const surveyData = survey;
     const { data, error } = await this.supabase.from('surveys').insert([surveyData]).select();
     if (error) printPostgrestErrorMsg(error);
   }
 
+  /**
+   * Creates supabase realtime channle on surveys table in backend.
+   *
+   * @returns supabase realtime channel
+   */
   createSurveysDBSubscriptionChannel(): RealtimeChannel {
     const channel = this.supabase
       .channel('custom-all-channel')
@@ -60,18 +80,34 @@ export class SurveyService {
     return channel;
   }
 
+  /**
+   * Inserts question data to question table at supabase backend.
+   *
+   * @param question - question data model
+   */
   async addQuestion(question: QuestionModel): Promise<void> {
     const questionData = question;
     const { data, error } = await this.supabase.from('questions').insert([questionData]).select();
     if (error) printPostgrestErrorMsg(error);
   }
 
+  /**
+   * Inserts answer data to answer table at supabase backend.
+   *
+   * @param answer - answer data model
+   */
   async addAnswer(answer: AnswerModel): Promise<void> {
     const answerData = answer;
     const { data, error } = await this.supabase.from('answers').insert([answerData]).select();
     if (error) printPostgrestErrorMsg(error);
   }
 
+  /**
+   * Returns Answer selector depending on answer number in question.
+   *
+   * @param number - answer number in question
+   * @returns answer selector
+   */
   getSelectorByNumber(number: number): string {
     switch (number) {
       case 0:
@@ -91,33 +127,16 @@ export class SurveyService {
     }
   }
 
+  /**
+   * Selects complete results of selected survey from backend.
+   *
+   * @param surveyId - survey id
+   * @returns
+   */
   async getSurveyWithQuestionsAndAnswers(surveyId: string): Promise<SurveyWithResults> {
     const { data, error } = await this.supabase
       .from('surveys')
-      .select(
-        `
-      id,
-      name,
-      description,
-      category,
-      endDate,
-      participantsCount,
-      questions (
-        id,
-        text,
-        multipleAnswers,
-        positionIndex,
-        surveyId,
-        answers (
-          id,
-          text,
-          resultCount,
-          positionIndex,
-          questionId
-        )
-      )
-    `,
-      )
+      .select(GET_SURVEY_RESULTS_QUERY)
       .eq('id', surveyId)
       .order('positionIndex', {
         referencedTable: 'questions',
@@ -128,20 +147,28 @@ export class SurveyService {
         ascending: true,
       })
       .single();
-
-    if (error) {
-      throw error;
-    }
-
+    if (error) throw error;
     return data as SurveyWithResults;
   }
 
+  /**
+   * Returns relative result of answer in percent.
+   *
+   * @param resultCount - answer result count
+   * @returns relative result of answer in percent
+   */
   getAnswerPercentage(resultCount: number): number {
     const participants = this.participantsCount();
     if (participants == 0) return 0;
     return Math.round((resultCount / participants) * 100);
   }
 
+  /**
+   * Pushes survey answer selections to supabase backend.
+   *
+   * @param surveyId - survey id
+   * @param answerIds - answer ids
+   */
   async submitSurveyResults(surveyId: string, answerIds: string[]): Promise<void> {
     const { error } = await this.supabase.rpc('submit_survey_vote', {
       p_survey_id: surveyId,
