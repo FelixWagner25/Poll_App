@@ -329,6 +329,10 @@ h2 {
     position: absolute;
     top: 23px;
     left: 36px;
+    @include abs.respond(zero, m) {
+      top: 56px;
+      left: 8px;
+    }
   }
 
   &--end-date {

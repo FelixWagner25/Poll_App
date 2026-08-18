@@ -38,6 +38,9 @@ section {
   @include mx.respond(zero, xl) {
     min-width: 0;
   }
+  @include mx.respond(zero, s) {
+    padding: 40px 16px;
+  }
 
   &__date-category-wrap {
     display: flex;
@@ -50,7 +53,10 @@ section {
     font-family: 'Nerko_One';
     color: col.$h2-orange;
     @include mx.font-size-wght(56px, 400);
-    line-height: 50px;
+    line-height: 90%;
+    @include mx.respond(zero, m) {
+      font-size: 40px;
+    }
   }
 
   &__text {
@@ -238,5 +244,15 @@ section {
   gap: 24px;
   @include mx.respond(zero, xl) {
     gap: 48px;
+  }
+}
+
+.survey-ended-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mx.respond(zero, m) {
+    align-items: flex-start;
   }
 }
