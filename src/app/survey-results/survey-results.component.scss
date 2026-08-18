@@ -84,7 +84,7 @@ section {
     }
 
     &--subline {
-      @include mx.font-size-wght(12px, 400);
+      @include mx.font-size-wght(14px, 400);
     }
   }
 
@@ -175,14 +175,14 @@ section {
     }
 
     &--selector {
-      @include mx.font-size-wght(12px, 700);
+      @include mx.font-size-wght(14px, 700);
       color: col.$primary-purple;
       position: absolute;
       left: 0;
     }
 
     &--number {
-      @include mx.font-size-wght(12px, 800);
+      @include mx.font-size-wght(14px, 800);
       color: #d79451;
       position: absolute;
       top: 0;

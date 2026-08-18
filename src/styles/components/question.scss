@@ -24,7 +24,7 @@
 
   &__text {
     font-family: 'Mulish';
-    @include mx.font-size-wght(12px, 400);
+    @include mx.font-size-wght(14px, 400);
     color: col.$bg-default;
   }
 }

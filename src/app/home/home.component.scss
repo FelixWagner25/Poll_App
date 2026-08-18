@@ -260,7 +260,7 @@ section {
     }
 
     &--days-left {
-      @include mx.font-size-wght(12px, 500);
+      @include mx.font-size-wght(14px, 500);
       color: col.$primary-purple;
       background-color: col.$secondary-orange;
       border-top-right-radius: 14px;
@@ -301,6 +301,7 @@ section {
     padding: 2px 10px;
     border-radius: 20px;
     color: col.$primary-purple;
+    font-size: 14px;
 
     &:hover {
       background-color: col.$secondary-orange;
@@ -380,7 +381,7 @@ section {
       position: absolute;
       right: 20px;
       bottom: 12px;
-      @include mx.font-size-wght(12px, 500);
+      @include mx.font-size-wght(14px, 500);
       color: col.$primary-purple;
       background-color: col.$secondary-orange;
       border-top-right-radius: 14px;
