@@ -204,15 +204,15 @@
       </form>
     </section>
   </div>
-</div>
-<div
-  class="published-message-bg"
-  (click)="navigateToPublishedSurvey(this.surveyId)"
-  [class.show]="published()"
-></div>
-<div class="published-message" [class.show]="published()">
-  <div class="fbox-row-space-between gap-64px">
-    <div class="published-message__text">Your survey is now published</div>
-    <div class="published-message__icon" (click)="navigateToPublishedSurvey(this.surveyId)"></div>
+  <div
+    class="published-message-bg"
+    (click)="navigateToPublishedSurvey(this.surveyId)"
+    [class.show]="published()"
+  ></div>
+  <div class="published-message" [class.show]="published()">
+    <div class="fbox-row-space-between gap-64px">
+      <div class="published-message__text">Your survey is now published</div>
+      <div class="published-message__icon" (click)="navigateToPublishedSurvey(this.surveyId)"></div>
+    </div>
   </div>
 </div>
