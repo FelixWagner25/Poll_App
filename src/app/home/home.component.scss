@@ -211,11 +211,12 @@ section {
 
   &__cards-wrap {
     width: 100%;
-    @include mx.d-flex($justify-content: center, $gap: 32px);
+    @include mx.d-flex($justify-content: center, $gap: 40px);
     overflow-x: auto;
     scrollbar-width: none;
-    @include mx.respond(zero, xl) {
+    @include mx.respond(zero, xxl) {
       justify-content: flex-start;
+      gap: 32px;
     }
   }
 
@@ -270,6 +271,7 @@ section {
 }
 
 .survey-list {
+  width: 100%;
   max-width: 1068px;
   @include mx.d-flex(
     $flex-direction: column,
@@ -388,4 +390,15 @@ section {
       padding: 3px 6px;
     }
   }
+}
+
+.no-surveys {
+  font-family: 'Mulish';
+  @include mx.font-size-wght(20px, 400);
+  color: col.$bg-default;
+  min-height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }

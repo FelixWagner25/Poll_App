@@ -67,6 +67,7 @@ export class HomeComponent {
   setSelectedCategory(value: Category): void {
     this.selectedCategory.set(value);
     this.toggleDropdown();
+    console.log(this.yourSurveys());
   }
 
   /**

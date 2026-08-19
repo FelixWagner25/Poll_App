@@ -132,19 +132,25 @@
               </div>
             </div>
           </div>
-          <div class="survey-list__cards-wrap scrollbar">
-            @for (survey of yourSurveys(); track survey.id) {
-              <div [routerLink]="['survey-results', survey.id]" class="survey-list__card">
-                <div class="fbox-col-left gap-8px">
-                  <p class="survey-list__card--category">{{ survey.category }}</p>
-                  <p class="survey-list__card--title">{{ survey.name }}</p>
+          @if (yourSurveys().length == 0) {
+            <div class="no-surveys">
+              <p>No surveys for selected filter</p>
+            </div>
+          } @else {
+            <div class="survey-list__cards-wrap scrollbar">
+              @for (survey of yourSurveys(); track survey.id) {
+                <div [routerLink]="['survey-results', survey.id]" class="survey-list__card">
+                  <div class="fbox-col-left gap-8px">
+                    <p class="survey-list__card--category">{{ survey.category }}</p>
+                    <p class="survey-list__card--title">{{ survey.name }}</p>
+                  </div>
+                  <p class="survey-list__card--days-left">
+                    {{ getRemainingDaysString(survey.endDate) }}
+                  </p>
                 </div>
-                <p class="survey-list__card--days-left">
-                  {{ getRemainingDaysString(survey.endDate) }}
-                </p>
-              </div>
-            }
-          </div>
+              }
+            </div>
+          }
         </div>
       </div>
     </section>
