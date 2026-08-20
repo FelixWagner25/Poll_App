@@ -97,7 +97,7 @@ section {
     font-family: 'Mulish';
     width: 100%;
 
-    &:hover {
+    &:hover.survey-active {
       background-color: col.$tertiary-orange;
       cursor: pointer;
     }
@@ -107,7 +107,7 @@ section {
       padding-right: 8px;
       border: none;
 
-      &:hover {
+      &:hover.survey-active {
         cursor: pointer;
       }
 
@@ -141,9 +141,10 @@ section {
 }
 
 .results {
+  padding-top: 210px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 16px;
 
