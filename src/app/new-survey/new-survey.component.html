@@ -72,6 +72,9 @@
                       @if (surveyForm.controls.endDate.hasError('pattern')) {
                         <div>Date must follow pattern: YYYY-MM-DD.</div>
                       }
+                      @if (surveyForm.controls.endDate.hasError('dateInPast')) {
+                        <div>Date must not be past.</div>
+                      }
                     </div>
                   }
                 </div>

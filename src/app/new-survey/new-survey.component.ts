@@ -7,6 +7,9 @@ import {
   Validators,
   ReactiveFormsModule,
   FormArray,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { SurveyModel } from '../shared/models/survey.model';
 import { Category } from '../shared/types/category';
@@ -15,6 +18,7 @@ import { NewQuestionComponent } from '../new-question/new-question.component';
 import { QuestionForm } from '../shared/interfaces/question-form';
 import { QuestionModel } from '../shared/models/question.model';
 import { AnswerModel } from '../shared/models/answer.model';
+import { getTodaysShortISOString } from '../shared/utilities/utilities';
 
 @Component({
   selector: 'app-new-survey',
@@ -43,7 +47,10 @@ export class NewSurveyComponent {
     }),
     endDate: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/)],
+      validators: [
+        Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/),
+        dateValidator(),
+      ],
     }),
     category: new FormControl<Category>(null, { validators: [Validators.required] }),
     questions: new FormArray<FormGroup<QuestionForm>>([this.createQuestionGroup()]),
@@ -208,4 +215,16 @@ export class NewSurveyComponent {
       validators: [Validators.required, Validators.maxLength(512)],
     });
   }
+}
+
+/**
+ * Validates date form input whether the date is in the past.
+ *
+ */
+export function dateValidator(): ValidatorFn {
+  return (control: AbstractControl<string>): ValidationErrors | null => {
+    if (!control.value) return null;
+    const today = getTodaysShortISOString();
+    return control.value < today ? { dateInPast: true } : null;
+  };
 }
