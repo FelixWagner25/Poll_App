@@ -321,23 +321,23 @@ h2 {
 
   &--question {
     position: absolute;
-    top: 56px;
+    top: 53px;
     left: 12px;
   }
 
   &--answer {
     position: absolute;
-    top: 23px;
+    top: 20px;
     left: 36px;
     @include abs.respond(zero, m) {
-      top: 56px;
+      top: 54px;
       left: 8px;
     }
   }
 
   &--end-date {
     position: absolute;
-    top: 68px;
+    top: 70px;
     left: 0;
   }
 

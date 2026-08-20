@@ -167,7 +167,7 @@ export class NewSurveyComponent {
    * @param index - question index
    */
   deleteQuestion(index: number): void {
-    if (index == 0) {
+    if (index == 0 && this.surveyForm.controls.questions.length == 1) {
       this.surveyForm.controls.questions.at(index).controls.text.setValue('');
     } else {
       this.surveyForm.controls.questions.removeAt(index);
