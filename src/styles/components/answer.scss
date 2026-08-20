@@ -31,3 +31,16 @@
     width: 100%;
   }
 }
+
+.btn-add-answer-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  @include mx.respond(zero, xs) {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
