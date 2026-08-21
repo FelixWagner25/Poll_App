@@ -18,6 +18,7 @@ export class SurveyService {
 
   surveyList = signal<Survey[]>([]);
   survey = signal<SurveyWithResults | null>(null);
+  submittedSurveyIds = signal<string[]>([]);
 
   surveyQuestions = computed(() => this.survey()?.questions ?? []);
   participantsCount = computed(() => this.survey()?.participantsCount ?? 0);

@@ -69,7 +69,7 @@ export class SurveyResultsComponent {
    * @param answerIndex - index of answer
    */
   toggleAnswer(questionIndex: number, answerIndex: number): void {
-    if (this.surveyHasEnded()) return;
+    if (!this.surveyIsSubmittable()) return;
     const questionGroup = this.questionsForm.at(questionIndex);
     const selectedAnswers = questionGroup.controls.selectedAnswers;
     const answerControl = selectedAnswers.at(answerIndex);
@@ -80,11 +80,20 @@ export class SurveyResultsComponent {
    * Publishes survey answer selection and pushes data to supabase backend.
    */
   async publishAnswerSelection(): Promise<void> {
-    if (this.surveyHasEnded()) return;
+    if (!this.surveyIsSubmittable()) return;
     if (this.questionsForm.invalid) {
       this.questionsForm.markAllAsTouched();
       return;
     }
+    await this.addSelectedAnswersToDatabase();
+    this.surveyService.submittedSurveyIds.update((ids) => [...ids, this.surveyId]);
+  }
+
+  /**
+   * Pushes selected answers to backend.
+   *
+   */
+  async addSelectedAnswersToDatabase(): Promise<void> {
     const selectedAnswerIds: string[] = [];
     this.questions().forEach((question, questionIndex) => {
       const selections = this.questionsForm.at(questionIndex).controls.selectedAnswers;
@@ -137,6 +146,27 @@ export class SurveyResultsComponent {
     } else {
       return false;
     }
+  }
+
+  /**
+   * Checks whether user already submitted survey in this session.
+   *
+   * @returns true if survey has already been submitted, otherwise false
+   */
+  surveyWasSubmitted(): boolean {
+    for (let i = 0; i < this.surveyService.submittedSurveyIds().length; i++) {
+      if (this.surveyService.submittedSurveyIds()[i] === this.surveyId) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Checks whether a survey is submittable.
+   *
+   * @returns true if survey is submittable, otherwise false
+   */
+  surveyIsSubmittable(): boolean {
+    return !this.surveyHasEnded() && !this.surveyWasSubmitted();
   }
 
   /**
