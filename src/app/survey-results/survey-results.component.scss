@@ -148,6 +148,10 @@ section {
   align-items: flex-start;
   gap: 16px;
 
+  @include mx.respond(zero, xxl) {
+    padding-top: 0;
+  }
+
   &__headline {
     font-family: 'Nerko_One';
     @include mx.font-size-wght(32px, 400);

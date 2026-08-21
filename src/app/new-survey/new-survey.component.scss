@@ -17,6 +17,7 @@ section {
   @include mx.respond(zero, m) {
     align-items: center;
     padding: 40px 16px;
+    border-radius: 0;
   }
 }
 
