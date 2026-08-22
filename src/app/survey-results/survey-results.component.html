@@ -129,33 +129,50 @@
             <span class="results__headline results__healine--default">Survey results </span>
             <span class="results__headline results__headline--addition">LIVE</span>
           </h3>
-          <div class="fbox-col-left gap-24px">
-            @for (question of questions(); track question.id; let questionIndex = $index) {
-              <div class="fbox-col-left gap-16px">
-                <div class="results__question">{{ question.text }}</div>
-                <div class="fbox-col-left gap-6px width-100">
-                  @for (answer of question.answers; track answer.id; let answerIndex = $index) {
-                    <div class="results__answer">
-                      <div class="results__answer--selector">
-                        {{ surveyService.getSelectorByNumber(answerIndex) }}
-                      </div>
-                      <div class="results__progress-bar">
-                        <div class="results__progress-bar results__progress-bar--bg">
-                          <div
-                            class="results__progress-bar results__progress-bar--progress"
-                            [style.width.%]="surveyService.getAnswerPercentage(answer.resultCount)"
-                          ></div>
+          @let resultPreview = this.resultPreview();
+          @if (resultPreview) {
+            <div class="fbox-col-left gap-24px">
+              @for (
+                question of resultPreview.questions;
+                track question.id;
+                let questionIndex = $index
+              ) {
+                <div class="fbox-col-left gap-16px">
+                  <div class="results__question">{{ question.text }}</div>
+                  <div class="fbox-col-left gap-6px width-100">
+                    @for (answer of question.answers; track answer.id; let answerIndex = $index) {
+                      <div class="results__answer">
+                        <div class="results__answer--selector">
+                          {{ surveyService.getSelectorByNumber(answerIndex) }}
+                        </div>
+                        <div class="results__progress-bar">
+                          <div class="results__progress-bar results__progress-bar--bg">
+                            <div
+                              class="results__progress-bar results__progress-bar--progress"
+                              [style.width.%]="
+                                surveyService.getAnswerPercentage(
+                                  answer.resultCount,
+                                  resultPreview.participantsCount
+                                )
+                              "
+                            ></div>
+                          </div>
+                        </div>
+                        <div class="results__answer--number">
+                          {{
+                            surveyService.getAnswerPercentage(
+                              answer.resultCount,
+                              resultPreview.participantsCount
+                            )
+                          }}%
                         </div>
                       </div>
-                      <div class="results__answer--number">
-                        {{ surveyService.getAnswerPercentage(answer.resultCount) }}%
-                      </div>
-                    </div>
-                  }
+                    }
+                  </div>
                 </div>
-              </div>
-            }
-          </div>
+              }
+            </div>
+          }
         </div>
       </div>
     </section>

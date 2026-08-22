@@ -1,4 +1,4 @@
-import { Component, inject, signal, Renderer2 } from '@angular/core';
+import { Component, inject, signal, Renderer2, computed } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../shared/services/survey.service';
@@ -14,6 +14,8 @@ import {
 import { QuestionSelectionForm } from '../shared/interfaces/question-selection-form';
 import { calcDateDiffDays, getTodaysShortISOString } from '../shared/utilities/utilities';
 import { NewSurveyComponent } from '../new-survey/new-survey.component';
+import { SurveyWithResults } from '../shared/interfaces/suvery-with-results';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-survey-results',
@@ -32,6 +34,36 @@ export class SurveyResultsComponent {
   overlayOpen = signal(false);
 
   questionsForm = new FormArray<FormGroup<QuestionSelectionForm>>([]);
+
+  formValue = toSignal(this.questionsForm.valueChanges, {
+    initialValue: this.questionsForm.value,
+  });
+
+  resultPreview = computed<SurveyWithResults | null>(() => {
+    const survey = this.surveyService.survey();
+    const formValue = this.formValue();
+    if (!survey) return null;
+
+    const hasSelection = formValue.some((question) =>
+      question.selectedAnswers?.some((isSelected) => isSelected),
+    );
+    const participantsCount = survey.participantsCount + (hasSelection ? 1 : 0);
+
+    return {
+      ...survey,
+      participantsCount,
+      questions: survey.questions.map((question, questionIndex) => ({
+        ...question,
+        answers: question.answers.map((answer, answerIndex) => {
+          const isSelected = formValue[questionIndex]?.selectedAnswers?.[answerIndex] ?? false;
+          return {
+            ...answer,
+            resultCount: answer.resultCount + (isSelected ? 1 : 0),
+          };
+        }),
+      })),
+    };
+  });
 
   constructor(private renderer: Renderer2) {}
 

@@ -158,10 +158,9 @@ export class SurveyService {
    * @param resultCount - answer result count
    * @returns relative result of answer in percent
    */
-  getAnswerPercentage(resultCount: number): number {
-    const participants = this.participantsCount();
-    if (participants == 0) return 0;
-    return Math.round((resultCount / participants) * 100);
+  getAnswerPercentage(resultCount: number, participantsCount: number): number {
+    if (participantsCount == 0) return 0;
+    return Math.round((resultCount / participantsCount) * 100);
   }
 
   /**
