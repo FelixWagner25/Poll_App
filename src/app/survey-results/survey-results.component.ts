@@ -74,6 +74,7 @@ export class SurveyResultsComponent {
   async ngOnInit(): Promise<void> {
     const surveyId = this.route.snapshot.paramMap.get('id');
     if (!surveyId) return;
+    if (!this.surveyIsSubmittable) this.questionsForm.markAllAsTouched();
     this.surveyId = surveyId;
     await this.surveyService.loadSurveyWithResults(this.surveyId);
     this.buildQuestionsForm();
@@ -119,6 +120,7 @@ export class SurveyResultsComponent {
     }
     await this.addSelectedAnswersToDatabase();
     this.surveyService.submittedSurveyIds.update((ids) => [...ids, this.surveyId]);
+    this.questionsForm.reset();
   }
 
   /**
