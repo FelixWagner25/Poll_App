@@ -14,8 +14,8 @@ import {
 import { QuestionSelectionForm } from '../shared/interfaces/question-selection-form';
 import { calcDateDiffDays, getTodaysShortISOString } from '../shared/utilities/utilities';
 import { NewSurveyComponent } from '../new-survey/new-survey.component';
-import { SurveyWithResults } from '../shared/interfaces/suvery-with-results';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SurveyResultsPreview } from '../shared/interfaces/survey-result-preview';
 
 @Component({
   selector: 'app-survey-results',
@@ -39,29 +39,30 @@ export class SurveyResultsComponent {
     initialValue: this.questionsForm.value,
   });
 
-  resultPreview = computed<SurveyWithResults | null>(() => {
+  resultPreview = computed<SurveyResultsPreview | null>(() => {
     const survey = this.surveyService.survey();
     const formValue = this.formValue();
     if (!survey) return null;
 
-    const hasSelection = formValue.some((question) =>
-      question.selectedAnswers?.some((isSelected) => isSelected),
-    );
-    const participantsCount = survey.participantsCount + (hasSelection ? 1 : 0);
-
     return {
       ...survey,
-      participantsCount,
-      questions: survey.questions.map((question, questionIndex) => ({
-        ...question,
-        answers: question.answers.map((answer, answerIndex) => {
-          const isSelected = formValue[questionIndex]?.selectedAnswers?.[answerIndex] ?? false;
-          return {
-            ...answer,
-            resultCount: answer.resultCount + (isSelected ? 1 : 0),
-          };
-        }),
-      })),
+      questions: survey.questions.map((question, questionIndex) => {
+        const selectedAnswers = formValue[questionIndex]?.selectedAnswers ?? [];
+        const questionHasSelection = selectedAnswers.some((isSelected) => isSelected);
+        const previewParticipantsCount = survey.participantsCount + (questionHasSelection ? 1 : 0);
+
+        return {
+          ...question,
+          previewParticipantsCount,
+          answers: question.answers.map((answer, answerIndex) => {
+            const isSelected = selectedAnswers[answerIndex] ?? false;
+            return {
+              ...answer,
+              resultCount: answer.resultCount + (isSelected ? 1 : 0),
+            };
+          }),
+        };
+      }),
     };
   });
 
