@@ -67,8 +67,9 @@ h2 {
     gap: 48px;
   }
   @include mx.respond(zero, xs) {
-    padding: 32px 16px;
+    padding: 32px 0px;
     align-items: center;
+    border-top-right-radius: 60px;
   }
 }
 
@@ -155,7 +156,6 @@ h2 {
 
 .survey-info-wrap {
   display: flex;
-  width: 100%;
   gap: 96px;
   @include mx.respond(zero, xxl) {
     flex-direction: column;
@@ -185,7 +185,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  @include mx.respond(zero, m) {
+  @include mx.respond(zero, xs) {
     flex-direction: column-reverse;
     justify-content: flex-start;
     gap: 40px;
@@ -231,7 +231,7 @@ h2 {
     grid-area: delete;
   }
 
-  @include mx.respond(zero, m) {
+  @include mx.respond(zero, xs) {
     align-items: center;
     grid-template-areas:
       'label delete'
@@ -244,4 +244,5 @@ h2 {
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
+  width: 100%;
 }

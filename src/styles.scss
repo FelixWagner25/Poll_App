@@ -140,11 +140,14 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, xs) {
-      width: abs.$input-width-responsive;
+    @include abs.respond(xxs, xs) {
+      width: abs.$input-width-responsive-I;
     }
-    @include abs.respond(zero, xxs) {
-      width: 230px;
+    @include abs.respond(xxxs, xxs) {
+      width: abs.$input-width-responsive-II;
+    }
+    @include abs.respond(zero, xxxs) {
+      width: abs.$input-width-responsive-III;
     }
   }
 
@@ -154,11 +157,14 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, xs) {
-      width: abs.$input-width-responsive;
+    @include abs.respond(xxs, xs) {
+      width: abs.$input-width-responsive-I;
     }
-    @include abs.respond(zero, xxs) {
-      width: 230px;
+    @include abs.respond(xxxs, xxs) {
+      width: abs.$input-width-responsive-II;
+    }
+    @include abs.respond(zero, xxxs) {
+      width: abs.$input-width-responsive-III;
     }
   }
 
@@ -168,21 +174,27 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(zero, xs) {
-      width: abs.$input-width-responsive;
+    @include abs.respond(xxs, xs) {
+      width: abs.$input-width-responsive-I;
     }
-    @include abs.respond(zero, xxs) {
-      width: 230px;
+    @include abs.respond(xxxs, xxs) {
+      width: abs.$input-width-responsive-II;
+    }
+    @include abs.respond(zero, xxxs) {
+      width: abs.$input-width-responsive-III;
     }
   }
 
   &__textarea {
     width: abs.$input-width;
-    @include abs.respond(zero, xs) {
-      width: abs.$input-width-responsive;
+    @include abs.respond(xxs, xs) {
+      width: abs.$input-width-responsive-I;
     }
-    @include abs.respond(zero, xxs) {
-      width: 230px;
+    @include abs.respond(xxxs, xxs) {
+      width: abs.$input-width-responsive-II;
+    }
+    @include abs.respond(zero, xxxs) {
+      width: abs.$input-width-responsive-III;
     }
   }
 
@@ -273,6 +285,10 @@ h2 {
   opacity: 0;
   pointer-events: none;
   transition: opacity 300ms ease-out;
+  @include abs.respond(zero, xs) {
+    width: auto;
+    border: 1px solid abs.$primary-purple;
+  }
 
   &__text {
     padding: 4px;
@@ -329,7 +345,7 @@ h2 {
     position: absolute;
     top: 20px;
     left: 36px;
-    @include abs.respond(zero, m) {
+    @include abs.respond(zero, xs) {
       top: 54px;
       left: 8px;
     }

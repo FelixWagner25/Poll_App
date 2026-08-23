@@ -19,7 +19,7 @@
     grid-area: delete;
   }
 
-  @include mx.respond(zero, m) {
+  @include mx.respond(zero, xs) {
     grid-template-areas:
       'decorator . delete'
       'input input input';
