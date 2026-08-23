@@ -7,6 +7,11 @@ export class AnswerModel implements Answer {
   positionIndex: number;
   questionId: string;
 
+  /**
+   * Initializes the answer model with provided data.
+   *
+   * @param data - input data used to initialize the model.
+   */
   constructor(data: Partial<Answer> = {}) {
     let randomId = crypto.randomUUID();
 

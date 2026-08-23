@@ -9,6 +9,11 @@ export class SurveyModel implements Survey {
   category: Category;
   participantsCount: number;
 
+  /**
+   * Initializes the survey model with the provided data.
+   *
+   * @param data - input data to initialize the survey model.
+   */
   constructor(data: Partial<Survey> = {}) {
     let randomId = crypto.randomUUID();
 

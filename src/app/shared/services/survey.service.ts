@@ -23,6 +23,10 @@ export class SurveyService {
   surveyQuestions = computed(() => this.survey()?.questions ?? []);
   participantsCount = computed(() => this.survey()?.participantsCount ?? 0);
 
+  /**
+   * Creates supabase subscription chanel and initializes survey list.
+   *
+   */
   constructor() {
     this.surveysAllEventsChannel = this.createSurveysDBSubscriptionChannel();
     this.getAllSurveys();

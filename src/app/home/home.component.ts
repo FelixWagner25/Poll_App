@@ -22,6 +22,11 @@ export class HomeComponent {
   selectedSurveyStatus = signal<SurveyStatusFilter>('active');
   overlayOpen = signal(false);
 
+  /**
+   * Initializes renderer to steer overflow properties.
+   *
+   * @param renderer
+   */
   constructor(private renderer: Renderer2) {}
 
   yourSurveys = computed(() => {

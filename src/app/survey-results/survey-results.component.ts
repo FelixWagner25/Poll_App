@@ -66,6 +66,11 @@ export class SurveyResultsComponent {
     };
   });
 
+  /**
+   * Initializes renderer to steer overflow properties.
+   *
+   * @param renderer
+   */
   constructor(private renderer: Renderer2) {}
 
   /**
@@ -107,16 +112,10 @@ export class SurveyResultsComponent {
     const questionGroup = this.questionsForm.at(questionIndex);
     const selectedAnswers = questionGroup.controls.selectedAnswers;
     const answerControl = selectedAnswers.at(answerIndex);
-    if (answerControl.value == false) {
-      if (this.questions()[questionIndex].multipleAnswers == false) {
-        this.questionsForm.at(questionIndex).controls.selectedAnswers.reset();
-      }
-      answerControl.setValue(!answerControl.value);
-    } else {
-      if (this.questions()[questionIndex].multipleAnswers == false) {
-        this.questionsForm.at(questionIndex).controls.selectedAnswers.reset();
-      }
+    if (answerControl.value == false && this.questions()[questionIndex].multipleAnswers == false) {
+      this.questionsForm.at(questionIndex).controls.selectedAnswers.reset();
     }
+    answerControl.setValue(!answerControl.value);
   }
 
   /**

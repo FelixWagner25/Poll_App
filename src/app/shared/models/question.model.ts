@@ -7,6 +7,11 @@ export class QuestionModel implements Question {
   positionIndex: number;
   surveyId: string;
 
+  /**
+   * Initializes question data model with provided data.
+   *
+   * @param data - input data to initialize the question model.
+   */
   constructor(data: Partial<Question> = {}) {
     let randomId = crypto.randomUUID();
 
