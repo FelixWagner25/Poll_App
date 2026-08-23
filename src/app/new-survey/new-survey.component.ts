@@ -40,10 +40,12 @@ export class NewSurveyComponent {
     name: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.minLength(3), Validators.pattern(/^\S.*$/)],
+      updateOn: 'blur',
     }),
     description: new FormControl('', {
       nonNullable: true,
       validators: [Validators.maxLength(1024)],
+      updateOn: 'blur',
     }),
     endDate: new FormControl('', {
       nonNullable: true,
@@ -51,6 +53,7 @@ export class NewSurveyComponent {
         Validators.pattern(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/),
         dateValidator(),
       ],
+      updateOn: 'blur',
     }),
     category: new FormControl<Category>(null, { validators: [Validators.required] }),
     questions: new FormArray<FormGroup<QuestionForm>>([this.createQuestionGroup()]),
@@ -200,6 +203,7 @@ export class NewSurveyComponent {
           Validators.maxLength(1024),
           Validators.pattern(/^\S.*$/),
         ],
+        updateOn: 'blur',
       }),
       multipleAnswers: new FormControl(false, { nonNullable: true }),
       answers: new FormArray<FormControl<string>>([
@@ -218,6 +222,7 @@ export class NewSurveyComponent {
     return new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.maxLength(512), Validators.pattern(/^\S.*$/)],
+      updateOn: 'blur',
     });
   }
 

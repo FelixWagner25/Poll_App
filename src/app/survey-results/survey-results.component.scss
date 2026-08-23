@@ -136,7 +136,7 @@ section {
   @include mx.respond(zero, l) {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 }
 

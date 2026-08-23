@@ -33,10 +33,7 @@
                     (click)="deleteFormInput('name')"
                   ></span>
                 </div>
-                @if (
-                  surveyForm.controls.name.invalid &&
-                  (surveyForm.controls.name.dirty || surveyForm.controls.name.touched)
-                ) {
+                @if (surveyForm.controls.name.invalid && surveyForm.controls.name.touched) {
                   <div class="error error--name">
                     @if (surveyForm.controls.name.hasError('required')) {
                       <div>Name is required.</div>

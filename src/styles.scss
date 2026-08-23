@@ -346,8 +346,8 @@ h2 {
     top: 38px;
     left: 32px;
     @include abs.respond(zero, xs) {
-      top: 4px;
-      left: 24px;
+      top: 72px;
+      left: 4px;
     }
   }
 
