@@ -215,6 +215,10 @@ export class NewSurveyComponent {
       validators: [Validators.required, Validators.maxLength(512)],
     });
   }
+
+  preventEventBubbling(event: Event) {
+    event.stopPropagation();
+  }
 }
 
 /**

@@ -1,6 +1,6 @@
-<div class="section-wrap">
+<div class="section-wrap" (click)="closeOverlayEvent.emit()">
   <div class="fbox-row-center-center min-height-100vh">
-    <section>
+    <section (click)="preventEventBubbling($event)">
       <div class="new-survey-title-wrap">
         <div class="fbox-col-left">
           <p class="status status--secondary">Draft</p>
@@ -12,7 +12,7 @@
         </button>
       </div>
       <form
-        class="fbox-col-left gap-40px"
+        class="survey-form-wrap"
         [formGroup]="surveyForm"
         (ngSubmit)="publishSurvey(this.surveyId)"
       >

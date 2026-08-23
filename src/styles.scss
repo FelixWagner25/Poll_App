@@ -140,11 +140,11 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(xxs, m) {
+    @include abs.respond(zero, xs) {
       width: abs.$input-width-responsive;
     }
     @include abs.respond(zero, xxs) {
-      width: 220px;
+      width: 230px;
     }
   }
 
@@ -154,11 +154,11 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(xxs, m) {
+    @include abs.respond(zero, xs) {
       width: abs.$input-width-responsive;
     }
     @include abs.respond(zero, xxs) {
-      width: 220px;
+      width: 230px;
     }
   }
 
@@ -168,21 +168,21 @@ h2 {
     &:focus {
       @include abs.font-size-wght(18px, 500);
     }
-    @include abs.respond(xxs, m) {
+    @include abs.respond(zero, xs) {
       width: abs.$input-width-responsive;
     }
     @include abs.respond(zero, xxs) {
-      width: 220px;
+      width: 230px;
     }
   }
 
   &__textarea {
     width: abs.$input-width;
-    @include abs.respond(xxs, m) {
+    @include abs.respond(zero, xs) {
       width: abs.$input-width-responsive;
     }
     @include abs.respond(zero, xxs) {
-      width: 220px;
+      width: 230px;
     }
   }
 
@@ -373,6 +373,7 @@ h2 {
 .overlay {
   position: fixed;
   inset: 0;
+  top: 0;
   z-index: 1000;
   opacity: 0;
   visibility: hidden;

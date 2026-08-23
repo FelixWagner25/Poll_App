@@ -66,8 +66,9 @@ h2 {
     width: 100%;
     gap: 48px;
   }
-  @include mx.respond(zero, m) {
+  @include mx.respond(zero, xs) {
     padding: 32px 16px;
+    align-items: center;
   }
 }
 
@@ -148,7 +149,7 @@ h2 {
 .section-wrap {
   min-height: 100vh;
   z-index: 10;
-  background-color: col.$bg-default;
+  background-color: rgba(0, 0, 0, 0.4);
   position: relative;
 }
 
@@ -236,4 +237,11 @@ h2 {
       'label delete'
       'input input';
   }
+}
+
+.survey-form-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
 }
