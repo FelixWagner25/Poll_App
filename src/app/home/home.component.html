@@ -53,7 +53,7 @@
               <div [routerLink]="['survey-results', survey.id]" class="surveys__card">
                 <div>
                   <p class="surveys__card--category">{{ survey.category }}</p>
-                  <p class="surveys__card--title">{{ survey.name }}</p>
+                  <p class="surveys__card--title scrollbar">{{ survey.name }}</p>
                 </div>
                 <p class="surveys__card--days-left">{{ getRemainingDaysString(survey.endDate) }}</p>
               </div>
@@ -142,7 +142,7 @@
                 <div [routerLink]="['survey-results', survey.id]" class="survey-list__card">
                   <div class="fbox-col-left gap-8px">
                     <p class="survey-list__card--category">{{ survey.category }}</p>
-                    <p class="survey-list__card--title">{{ survey.name }}</p>
+                    <p class="survey-list__card--title scrollbar">{{ survey.name }}</p>
                   </div>
                   <p class="survey-list__card--days-left">
                     {{ getRemainingDaysString(survey.endDate) }}

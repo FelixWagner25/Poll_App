@@ -258,6 +258,12 @@ section {
     &--title {
       @include mx.font-size-wght(26px, 700);
       line-height: 120%;
+      height: 200px;
+      line-break: anywhere;
+      overflow: auto;
+      @include mx.respond(zero, xl) {
+        height: 150px;
+      }
     }
 
     &--days-left {
@@ -375,6 +381,7 @@ section {
       color: #ffffff;
       max-height: 72px;
       overflow: auto;
+      line-break: anywhere;
       @include mx.font-size-wght(24px, 700px);
       @include mx.respond(zero, xxl) {
         font-size: 20px;
