@@ -18,7 +18,7 @@
       >
         <div class="form-input-wrap">
           <div class="survey-info-wrap">
-            <div class="fbox-col-left gap-8px">
+            <div class="fbox-col-left gap-24px">
               <div class="fbox-col-left gap-4px p-relative">
                 <div class="form-field">
                   <label class="label label--bold form-fieled__label" for="name">Survey name</label>
@@ -40,9 +40,10 @@
                   <div class="error error--name">
                     @if (surveyForm.controls.name.hasError('required')) {
                       <div>Name is required.</div>
-                    }
-                    @if (surveyForm.controls.name.hasError('minlength')) {
+                    } @else if (surveyForm.controls.name.hasError('minlength')) {
                       <div>Name must have at least 3 characters.</div>
+                    } @else if (surveyForm.controls.name.hasError('pattern')) {
+                      <div>Leading whitespace not allowed.</div>
                     }
                   </div>
                 }
@@ -71,8 +72,7 @@
                     <div class="error error--end-date">
                       @if (surveyForm.controls.endDate.hasError('pattern')) {
                         <div>Date must follow pattern: YYYY-MM-DD.</div>
-                      }
-                      @if (surveyForm.controls.endDate.hasError('dateInPast')) {
+                      } @else if (surveyForm.controls.endDate.hasError('dateInPast')) {
                         <div>Date must not be past.</div>
                       }
                     </div>

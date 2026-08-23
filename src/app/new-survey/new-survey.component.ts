@@ -39,7 +39,7 @@ export class NewSurveyComponent {
   surveyForm = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(3)],
+      validators: [Validators.required, Validators.minLength(3), Validators.pattern(/^\S.*$/)],
     }),
     description: new FormControl('', {
       nonNullable: true,
@@ -194,7 +194,12 @@ export class NewSurveyComponent {
     return new FormGroup<QuestionForm>({
       text: new FormControl('', {
         nonNullable: true,
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(1024)],
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(1024),
+          Validators.pattern(/^\S.*$/),
+        ],
       }),
       multipleAnswers: new FormControl(false, { nonNullable: true }),
       answers: new FormArray<FormControl<string>>([
@@ -212,7 +217,7 @@ export class NewSurveyComponent {
   createAnswerControl(): FormControl<string> {
     return new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.maxLength(512)],
+      validators: [Validators.required, Validators.maxLength(512), Validators.pattern(/^\S.*$/)],
     });
   }
 

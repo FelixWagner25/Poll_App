@@ -14,9 +14,10 @@
     <div class="error error--answer">
       @if (answerControl().hasError('required')) {
         <div>Text required.</div>
-      }
-      @if (answerControl().hasError('maxlength')) {
+      } @else if (answerControl().hasError('maxlength')) {
         <div>Answer too long. Limited to 512 chrachters.</div>
+      } @else if (answerControl().hasError('pattern')) {
+        <div>Leading whitespace not allowed.</div>
       }
     </div>
   }
