@@ -373,6 +373,8 @@ section {
 
     &--title {
       color: #ffffff;
+      max-height: 72px;
+      overflow: clip;
       @include mx.font-size-wght(24px, 700px);
       @include mx.respond(zero, xxl) {
         font-size: 20px;
