@@ -128,7 +128,7 @@ export class SurveyResultsComponent {
       return;
     }
     await this.addSelectedAnswersToDatabase();
-    this.surveyService.submittedSurveyIds.update((ids) => [...ids, this.surveyId]);
+    this.surveyService.addSubmittedSurveyId(this.surveyId);
     this.questionsForm.reset();
   }
 

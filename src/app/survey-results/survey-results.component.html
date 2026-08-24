@@ -14,7 +14,7 @@
           @if (survey !== null) {
             <div class="fbox-col-left gap-16px width-100">
               <div class="status status--secondary">Published</div>
-              <div class="survey__date-category-wrap survey__text">
+              <div class="survey__date-category-wrap survey__text survey__text--date-category">
                 @if (survey.endDate) {
                   <span>Ends on {{ convertISOtoGermanDateStr(survey.endDate) }}</span>
                 } @else {
@@ -23,7 +23,7 @@
                 <span>Category: {{ survey.category }}</span>
               </div>
               <h2 class="survey__headline">{{ survey.name }}</h2>
-              <div class="survey__text">
+              <div class="survey__text survey__text--description">
                 {{ survey.description }}
               </div>
             </div>
@@ -99,7 +99,7 @@
                 }
               }
             </div>
-            <div class="fbox-row-space-between-flex-end width-100">
+            <div class="complete-survey-btn-wrap">
               <span></span>
               <div>
                 <button
@@ -113,11 +113,11 @@
                 @if (this.surveyHasEnded()) {
                   <div class="survey-ended-wrap">
                     <div class="error">Survey has ended.</div>
-                    <div class="error">No submission possible.</div>
+                    <div class="error">Submission disabled.</div>
                   </div>
                 } @else if (this.surveyWasSubmitted()) {
                   <div class="survey-ended-wrap">
-                    <div class="error">You already voted before.</div>
+                    <div class="error">You voted before.</div>
                   </div>
                 }
               </div>

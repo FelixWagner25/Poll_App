@@ -18,7 +18,7 @@ export class SurveyService {
 
   surveyList = signal<Survey[]>([]);
   survey = signal<SurveyWithResults | null>(null);
-  submittedSurveyIds = signal<string[]>([]);
+  submittedSurveyIds = signal<string[]>(this.loadSubmittedSurveyIds());
 
   surveyQuestions = computed(() => this.survey()?.questions ?? []);
   participantsCount = computed(() => this.survey()?.participantsCount ?? 0);
@@ -53,6 +53,25 @@ export class SurveyService {
   async loadSurveyWithResults(surveyId: string): Promise<void> {
     const survey = await this.getSurveyWithQuestionsAndAnswers(surveyId);
     this.survey.set(survey);
+  }
+
+  /**
+   * Loads the surveyIds of already submitted surveys.
+   *
+   */
+  loadSubmittedSurveyIds(): string[] {
+    const ids = localStorage.getItem('submittedSurveyIds');
+    if (!ids) return [];
+    return JSON.parse(ids);
+  }
+
+  /**
+   * Adds survey id of submitted survey to submittedSurveyIds array and pushes array to localstorage.
+   *
+   */
+  addSubmittedSurveyId(surveyId: string) {
+    this.submittedSurveyIds.update((ids) => [...ids, surveyId]);
+    localStorage.setItem('submittedSurveyIds', JSON.stringify(this.submittedSurveyIds()));
   }
 
   /**
