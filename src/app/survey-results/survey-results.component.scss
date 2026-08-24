@@ -3,7 +3,6 @@
 @use '../../styles/abstract/constants' as const;
 
 section {
-  width: min(100%, 1218px);
   padding: 40px 110px;
   display: flex;
   flex-direction: column;
@@ -37,10 +36,6 @@ section {
   background-color: rgba(142, 112, 153, 0.1);
   border-top-right-radius: 160px;
   padding: 40px;
-  // min-width: 702px;
-  // @include mx.respond(zero, xl) {
-  //   min-width: 0;
-  // }
   @include mx.respond(zero, s) {
     padding: 40px 16px;
     border-top-right-radius: 90px;
@@ -241,6 +236,8 @@ section {
 .survey-results-wrap {
   display: flex;
   gap: 42px;
+  justify-content: center;
+  width: 100%;
 
   @include mx.respond(zero, m) {
     flex-direction: column;
@@ -286,9 +283,4 @@ section {
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  // @include mx.respond(zero, m) {
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-self: flex-start;
-  // }
 }
